@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>Agamla'ya Giriş</title>
+        <link href='resources/css/bootstrap.min.css' rel='stylesheet' type='text/css'/>
+        <script src="https://kit.fontawesome.com/41f4fd74e6.js" crossorigin="anonymous"></script>
+        
+       <link href="http://fonts.googleapis.com/css?family=Nunito:100italic,100,300italic,300,400italic,400,700italic,700,900italic,900" rel="stylesheet" type="text/css"/>
+       <link href='resources/css/agamla-sign.css' rel='stylesheet' type='text/css'/>
+    </h:head>
+    <h:body>
+        <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-6 col-md-12 login-left">
+                <div class="container">
+                    <div class="container">
+                        <div class="row mx-5">
+                            <a class="navbar-brand text-light mb-2 marka mx-5"
+                               href="#">AGAMLA</a>
+                        </div>
+                        <div class="row mx-5 marka-aciklama">
+                            <p class="mx-5 text-light marka-aciklama"> Agalarına yakışır bir Aga hesabı oluştur. Agalarını takip et ve gündemi
+                                kaçırma, neler yaşandığını gör. Haydi, durma! Sen de Agamla'da aganla agala! </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 login-right">
+                <div class="">
+                    <div class="d-flex flex-row-reverse margin10 ">
+                        <div class="p-2">
+                            <a href="" class="main-button-unselected">Giriş yap</a>
+                        </div>
+                        <div class="p-2">
+                            <a href="signui.html" class="main-button-selected">Hesabın mı yok?</a>
+                        </div>
+                    </div>
+                    <div class="container altPanel">
+                        <h:form  class="form-group">
+                            <div class="inner-addon left-addon mx-5 textBox my-2 mb-3">
+                                <a href="" id="userLogo" class="changeColorA"><i class="far fa-envelope"></i></a>
+                                
+                                <h:inputText  pt:required="required" value="#{userBean.email}" class="mailClass w-100" id="email" pt:placeholder="Email"></h:inputText>
+                                
+                            </div>
+
+                            <div class="inner-addon left-addon mx-5 textBox my-2 mb-3">
+                                <h:commandLink id="passwordLogo" class="changeColorA"><i class="fas fa-key"></i></h:commandLink>
+                                <h:inputSecret class="mailClass w-100" value="#{userBean.password}" id="password" pt:required="required" pt:placeholder="Şifre"></h:inputSecret>
+                                
+                               
+                            </div>
+                            
+                            <h:commandButton action ="#{userBean.girisKontrol}" value ="Kayıt" class ="btn-grad m-auto"></h:commandButton>
+                            
+                            
+
+                        </h:form>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+        
+        
+    </h:body>
+</html>
+

@@ -1,0 +1,501 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
+}
+
+body {
+    background-color: #F5F6F6;
+}
+
+a {
+    color: darkgray;
+
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.box {
+    display: flex;
+    flex-flow: row;
+    height: 100vh;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.left-Panel {
+    width: 400px;
+    height: 100vh;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    align-items: center;
+    color: darkgray;
+    /*border-right: 1px solid darkgray;*/
+    margin-left: 50px;
+    padding: 75px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+
+}
+
+.marka {
+    font-size: 40px;
+    font-weight: 700;
+    letter-spacing: 10px;
+    color: #3383FF;
+    text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.1);
+    align-self: center;
+
+}
+
+.Menu {
+    width: 100%;
+}
+
+.left-Panel-Menu li {
+    list-style: none;
+    margin-bottom: 30px;
+
+}
+
+.left-Panel-Menu li :nth-last-child(1) {
+    list-style: none;
+    margin-bottom: 0;
+
+}
+
+.left-Panel-Link {
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 13px;
+    font-weight: 600;
+}
+
+.left-Panel-Link:hover {
+    background-color: white;
+    border-radius: 20px;
+    text-align: center;
+    text-decoration: none !important;
+    font-size: 1.5rem;
+    padding: 13px;
+    font-weight: 600;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.09), 0 2px 1px rgba(0, 0, 0, 0);
+}
+
+.left-Panel-Link-Selected {
+    color: #3383FF;
+}
+
+.left-Panel-Agala {
+    background-image: linear-gradient(to left, #56CCF2 0%, #2F80ED 51%, #56CCF2 100%);
+
+}
+
+.left-Panel-Agala {
+    margin: 10px;
+    padding: 15px 45px;
+    text-align: center;
+    transition: .75s;
+    background-size: 200% auto;
+    color: whitesmoke;
+
+    cursor: pointer;
+    border-radius: 20px;
+    width: 100%;
+    display: block;
+    font-size: 1.5rem;
+    border: none;
+    font-weight: 700;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.22), 0 4px 8px rgba(0, 0, 0, 0.11);
+}
+
+.left-Panel-Agala:hover {
+    background-position: right top; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+}
+
+.left-Panel .fas {
+    margin-right: 10px;
+}
+
+.cikisYap {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    padding: 10px;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    font-weight: 700;
+    justify-self: flex-end;
+    align-self: flex-end;
+    width: 100%;
+}
+
+.cikisYap:hover {
+    background-color: white;
+    border-radius: 20px;
+    color: #0056B3;
+    text-decoration: none !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.09), 0 2px 1px rgba(0, 0, 0, 0);
+
+}
+
+.cikisYap-Text {
+    display: flex;
+    flex-flow: column;
+    margin-right: 20px;
+
+}
+
+
+.cikisYap-Foto {
+    text-align: center;
+    align-self: center;
+    margin-right: 10px;
+}
+
+.main-Panel {
+    display: flex;
+    flex-flow: column;
+    width: 50%;
+    margin-left: 450px;
+    /*border-right: 1px solid darkgray;*/
+}
+
+
+.panel-Agala {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+
+    margin-bottom: 15px;
+    padding: 20px 20px;
+
+}
+
+.panel-Agala-Foto {
+    align-self: flex-start;
+}
+
+.panel-Agala-Text {
+
+    margin-left: 10px;
+    width: 100%;
+}
+
+.Agala-Text {
+    font-size: 24px;
+    background-color: #fff;
+    color: black;
+    border: none;
+    outline: 0;
+    overflow: auto;
+    resize: none;
+    width: 85%;
+}
+
+.panel-Main-Agala {
+    background-color: #fff;
+    border-radius: 25px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.09), 0 2px 1px rgba(0, 0, 0, 0);
+    margin-bottom: 15px;
+    margin-top: 20px;
+
+}
+
+.panel-Agala-Gonder {
+    padding-bottom: 10px;
+    display: flex;
+    flex-flow: row;
+    /*border-bottom: 1px solid gray;*/
+}
+
+.Agala-Secenekler {
+    margin-left: 80px;
+}
+
+.Agala-Sec {
+    font-size: 25px;
+    margin-left: 10px;
+}
+
+.btn-agala {
+    font-size: 20px;
+    border-radius: 15px;
+    margin-left: auto;
+    margin-right: 150px;
+}
+
+
+.aga {
+    width: 100%;
+    /*border-bottom: 1px solid gray;*/
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    overflow: auto;
+    padding: 20px 20px;
+    background-color: #fff;
+    border-radius: 25px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.09), 0 2px 1px rgba(0, 0, 0, 0.0);
+}
+
+/*
+        .aga:hover {
+            background-color: white;
+        }
+*/
+.aga-Sol {
+
+    justify-self: flex-start;
+    margin-right: 10px;
+}
+
+.aga-Main {
+    display: flex;
+    flex-flow: column;
+    font-size: 20px;
+
+
+}
+
+.aga-Main-Ust {
+    display: flex;
+    flex-flow: row;
+
+}
+
+.aga-Main-Ust-Isim {
+    font-weight: 700;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.aga-Main-Ust-Isim:hover {
+    text-decoration: underline;
+
+}
+
+.aga-Main-Ust-Kullanıcı {
+    font-size: 18px;
+    color: darkgray;
+    margin-right: 5px;
+}
+
+.aga-Main-Ust-Tarih {
+    font-size: 18px;
+    color: darkgray;
+}
+
+.aga-Main-Icerik {
+    margin-right: 60px;
+    margin-top: 10px;
+}
+
+.aga-Sag {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.aga-Main-Action {
+    display: flex;
+    flex-flow: row;
+    font-size: 22px;
+    justify-content: flex-start;
+    align-items: center;
+
+}
+
+.aga-Main-Action-Like {
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-start;
+    margin-right: 15px;
+    cursor: pointer;
+
+}
+
+.aga-Main-Action-Like-Text {
+    font-size: 18px;
+    margin-left: 5px;
+}
+
+.aga-Main-Action-Comment {
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-start;
+    margin-right: 15px;
+    cursor: pointer;
+
+}
+
+.aga-Main-Action-Comment-Text {
+    font-size: 18px;
+    margin-left: 5px;
+}
+
+
+.aga-Main-Action-Share {
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-start;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.photo-Style {
+
+    border-radius: 4%;
+    max-height: 736px;
+    border: 2px solid gray;
+    transition: 0.5s;
+    cursor: pointer;
+    margin-bottom: 15px;
+    background-repeat: no-repeat;
+    background-position: top;
+}
+
+.photo-Style:hover {
+    opacity: 0.9;
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 70%;
+}
+
+/* Caption of Modal Image */
+
+/* Add Animation */
+
+
+@keyframes zoom {
+    from {
+        transform: scale(0.1)
+    }
+    to {
+        transform: scale(1)
+    }
+}
+
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.right-Panel {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-left: 60px;
+
+}
+
+.search {
+    width: 100%;
+    margin-bottom: auto;
+    margin-top: 20px;
+    height: 50px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px
+}
+
+.search-input {
+    color: white;
+    border: 0;
+    outline: 0;
+    background: none;
+    width: 0;
+    margin-top: 5px;
+    caret-color: transparent;
+    line-height: 20px;
+    transition: width 0.4s linear
+}
+
+.search .search-input {
+    padding: 0 10px;
+    width: 100%;
+    caret-color: #536bf6;
+    font-size: 19px;
+    font-weight: 300;
+    color: black;
+    transition: width 0.4s linear
+}
+
+.search-icon {
+    height: 34px;
+    width: 34px;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: #536bf6;
+    font-size: 10px;
+    bottom: 30px;
+    position: relative;
+    border-radius: 5px
+}
+
+.search-icon:hover {
+    color: #fff !important
+}
+
+@media screen and (max-width: 1250px) {
+    .left-Panel {
+        display: none;
+    }
+
+    .main-Panel {
+        margin-left: 20px;
+        width: 95%;
+    }
+    .right-Panel {
+        display: none;
+    }
+}
+
