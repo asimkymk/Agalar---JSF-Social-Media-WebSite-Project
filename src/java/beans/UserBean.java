@@ -188,11 +188,23 @@ public class UserBean implements Serializable{
             HttpSession session = SessionUtils.getSession();
             session.setAttribute("email", email);
             this.active= false;
+            this.tag = UserDAO.getTag(this.email,this.password);
+            this.userId = UserDAO.getUserId(email, password);
+            this.firstName = UserDAO.getFirstName(email, password);
+            this.lastName = UserDAO.getLastName(email, password);
+            this.birthDate = UserDAO.getBirthDate(email, password);
+            this.sex = UserDAO.getSex(email, password);
+            this.followerCount = UserDAO.getFollowersCount(email, password);
+            this.followingCount = UserDAO.getFollowingCount(email, password);
+            this.profilePictureUri = UserDAO.getProfilePictureUri(email, password);
+            this.coverPictureUri = UserDAO.getCoverPictureUri(email, password);
+            this.isHidden = UserDAO.getIsHidden(email, password);
             return "home?faces-redirect=true";
         }
         else{
             this.active=true;
             this.msg="Hatalı mail veya şifre girişi yapıldı. Lütfen bilgileri kontrol ediniz.";
+            
             return "login?faces-redirect=true";
         }
     }
@@ -205,11 +217,6 @@ public class UserBean implements Serializable{
     public void hataliMailFormatiGirisi(){
         this.active = true;
         this.msg="Hatalı mail formatı girdiniz. Lütfen mail adresini kontrol ediniz.";
-        
-    }
-    public void hataliMailFormatiGirisiKapat(){
-        this.active = false;
-        this.msg="";
         
     }
     

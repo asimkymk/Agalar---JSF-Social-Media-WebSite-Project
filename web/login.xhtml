@@ -64,9 +64,10 @@
                                 </h:commandLink>
                                 
                                 
-                                <h:inputText onclick="maviRenk();" validatorMessage="#{userBean.hataliMailFormatiGirisi()} hatalı giriş oldu." pt:required="required" value="#{userBean.email}" class="mailClass w-100" id="email" pt:placeholder="Email">
+                                <h:inputText onclick="maviRenk();" validatorMessage="#{userBean.hataliMailFormatiGirisi()}" pt:required="required" value="#{userBean.email}" class="mailClass w-100" id="email" pt:placeholder="Email">
                                 <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
                                 </h:inputText>
+                                <h:messages  style="display:none;height:0;width:0;"></h:messages>
                                 
                             </div>
 
