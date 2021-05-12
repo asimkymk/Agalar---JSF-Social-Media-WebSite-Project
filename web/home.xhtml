@@ -4,8 +4,13 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
+        <f:metadata>
+            <f:viewParam name="check" value="#{userBean.userId}"/>
+            <f:viewAction action="#{userBean.userCheck()}"/>
+        </f:metadata>
         <title>Agamla Anasayfa | #{userBean.tag}</title>
         <link href='resources/css/bootstrap.min.css' rel='stylesheet' type='text/css'/>
         <script src="https://kit.fontawesome.com/41f4fd74e6.js" crossorigin="anonymous"></script>
@@ -87,8 +92,11 @@
                                  alt="profilResim" style="border-radius: 30px;"/>
                         </div>
                         <div class="panel-Agala-Text">
+                            <p:inputTextarea rows="2" id="text" cols ="55"  styleClass="Agala-Text" pt:placeholder="Neler oluyor?"
+                                  pt:maxlength="200"></p:inputTextarea>
+                            <!-->
                             <h:inputTextarea rows="2" id="text" class="Agala-Text" pt:placeholder="Neler oluyor?"
-                                  pt:maxlength="200"></h:inputTextarea>
+                                  pt:maxlength="200"></h:inputTextarea></!-->
                         </div>
                     </div>
                     <div class="panel-Agala-Gonder">
@@ -120,6 +128,7 @@
                     HİZMET ŞARTLARI <br></br>
                     İLETİŞİM <br></br>
                     2021 AGALAR <br></br>
+                    #{userBean.isLogged}
                 </div>
 
             </div>
@@ -127,6 +136,10 @@
             
     </div>
         <script>
+        if(#{userBean.isLogged == false}){
+                window.location.href="login.xhtml";
+        }    
+            
             var observe;
         if (window.attachEvent) {
             observe = function (element, event, handler) {
@@ -161,6 +174,7 @@
             text.select();
             resize();
         }
+        
             
         </script>
     </h:body>

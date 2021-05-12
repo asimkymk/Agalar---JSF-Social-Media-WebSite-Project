@@ -14,7 +14,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
-import util.SessionUtils;
 
 /**
  *
@@ -25,7 +24,14 @@ import util.SessionUtils;
 public class UserBean implements Serializable{
     private static final long serialVersionUID = 1094801825228386363L;
     private boolean active = false;
+    private boolean activeRegister = false;
+    private boolean activeSucRegister = false;
+    private boolean isLogged = false;
     private String msg;
+    private String msgSucRegister;
+    private String msgRegister = "";
+    private String msgRegister1 = "";
+    private String msgRegister2 = "";
     private int userId;
     private String tag;
     private String email;
@@ -45,6 +51,47 @@ public class UserBean implements Serializable{
     public boolean isActive() {
         return active;
     }
+
+    public boolean isActiveSucRegister() {
+        return activeSucRegister;
+    }
+
+    public void setActiveSucRegister(boolean activeSucRegister) {
+        this.activeSucRegister = activeSucRegister;
+    }
+
+    public String getMsgSucRegister() {
+        return msgSucRegister;
+    }
+
+    public void setMsgSucRegister(String msgSucRegister) {
+        this.msgSucRegister = msgSucRegister;
+    }
+
+    public boolean isActiveRegister() {
+        return activeRegister;
+    }
+
+    public void setActiveRegister(boolean activeRegister) {
+        this.activeRegister = activeRegister;
+    }
+
+    public boolean isIsLogged() {
+        return isLogged;
+    }
+
+    public void setIsLogged(boolean isLogged) {
+        this.isLogged = isLogged;
+    }
+
+    public String getMsgRegister() {
+        return msgRegister;
+    }
+
+    public void setMsgRegister(String msgRegister) {
+        this.msgRegister = msgRegister;
+    }
+    
 
     public void setActive(boolean active) {
         this.active = active;
@@ -185,9 +232,11 @@ public class UserBean implements Serializable{
     public String girisKontrol(){
         boolean girisDurum = UserDAO.girisYap(this.email,this.password);
         if(girisDurum){
-            HttpSession session = SessionUtils.getSession();
-            session.setAttribute("email", email);
+            setIsLogged(true);
             this.active= false;
+            this.msg = "";
+            this.activeRegister = false;
+            this.msgRegister = "";
             this.tag = UserDAO.getTag(this.email,this.password);
             this.userId = UserDAO.getUserId(email, password);
             this.firstName = UserDAO.getFirstName(email, password);
@@ -199,24 +248,93 @@ public class UserBean implements Serializable{
             this.profilePictureUri = UserDAO.getProfilePictureUri(email, password);
             this.coverPictureUri = UserDAO.getCoverPictureUri(email, password);
             this.isHidden = UserDAO.getIsHidden(email, password);
+            this.activeSucRegister = false;
+            this.msgSucRegister = null;
             return "home?faces-redirect=true";
         }
         else{
+            setIsLogged(false);
             this.active=true;
+            this.activeSucRegister = false;
+            this.msgSucRegister = null;
             this.msg="Hatalı mail veya şifre girişi yapıldı. Lütfen bilgileri kontrol ediniz.";
             
             return "login?faces-redirect=true";
         }
     }
+    
+    public String kayitKontrol(){
+        boolean kayitDurum = UserDAO.kayitOl(this.email,this.tag,this.firstName,this.lastName,this.birthDate,this.sex,this.password,this.isHidden);
+        if(kayitDurum){
+            setIsLogged(false);
+            this.active= false;
+            this.msg = "";
+            this.activeRegister = false;
+            this.msgRegister = "";
+            this.tag = null;
+            this.userId = -1;
+            this.firstName = null;
+            this.lastName = null;
+            this.birthDate = null;
+            this.sex = null;
+            this.followerCount = -1;
+            this.followingCount = -1;
+            this.profilePictureUri = null;
+            this.coverPictureUri = null;
+            this.isHidden = false;
+            this.activeSucRegister = true;
+            this.msgSucRegister = "Başarılı bir şekilde kayıt olundu. Giriş yapabilirsiniz.";
+            return "login?faces-redirect=true";
+        }
+        else{
+            setIsLogged(false);
+            this.activeRegister=true;
+            this.msgRegister="Mail veya kullanıcı adına ait bir hesap zaten var. Lütfen Giriş sayfasından giriş yapınız. Şifrenizi unuttuysanız Şifremi unuttum sayfasını kullanınız.";
+            
+            return "register?faces-redirect=true";
+        }
+    }
+   
+
     public String cikisYap(){
-        HttpSession session = SessionUtils.getSession();
-        session.invalidate();
+        
         return "login?faces-redirect=true";
         
+    }
+
+    public String getMsgRegister1() {
+        return msgRegister1;
+    }
+
+    public void setMsgRegister1(String msgRegister1) {
+        this.msgRegister1 = msgRegister1;
+    }
+
+    public String getMsgRegister2() {
+        return msgRegister2;
+    }
+
+    public void setMsgRegister2(String msgRegister2) {
+        this.msgRegister2 = msgRegister2;
     }
     public void hataliMailFormatiGirisi(){
         this.active = true;
         this.msg="Hatalı mail formatı girdiniz. Lütfen mail adresini kontrol ediniz.";
+        
+    }
+    public void hataliMailFormatiGirisiRegister(){
+        this.activeRegister = true;
+        this.msgRegister="Hatalı mail formatı girdiniz. Lütfen mail adresini kontrol ediniz.";
+        
+    }
+    public void hataliBirthDateGrisiRegister(){
+        this.activeRegister = true;
+        this.msgRegister1 ="Doğum tarihi uygun formatta değil. (GG.AA.YYYY).";
+        
+    }
+    public void hataliParolaUzunluguRegister(){
+        this.activeRegister = true;
+        this.msgRegister2 ="Parolanızın uzunluğu en az 8 en fazla 20 karakter olmalıdır.";
         
     }
     

@@ -173,6 +173,17 @@ a:hover {
 	margin-top: 50px;
 }
 
+.sex-item{
+    margin-left:50px;
+    color: #757575;
+    font-weight:400;
+    letter-spacing: 1px;
+    font-size:1.4rem;
+    display:flex;
+    flex-flow:row;
+    justify-content: space-between;
+}
+
 @media screen and (max-width: 1200px) {
 	body {
 		background-color: #F5F6F6;;

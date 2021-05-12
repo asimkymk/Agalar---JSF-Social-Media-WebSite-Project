@@ -197,13 +197,25 @@ a:hover {
     font-size: 24px;
     background-color: #fff;
     color: black;
-    border: none;
-    outline: 0;
+    border: none !important;
+    outline: none;
     overflow: auto;
     resize: none;
     width: 85%;
+    font-family: 'Nunito', sans-serif !important;
+    box-shadow:none;
+    border-radius: 15px;
 }
-
+.Agala-Text:focus{
+    
+    outline:none;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    
+}
+.Agala-Text:active{
+ box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+   outline:none;
+}
 .panel-Main-Agala {
     background-color: #fff;
     border-radius: 25px;

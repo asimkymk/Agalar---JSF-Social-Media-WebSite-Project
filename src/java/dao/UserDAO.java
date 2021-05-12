@@ -10,6 +10,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import util.DataConnect;
 
@@ -42,6 +44,52 @@ public class UserDAO {
         }
         return false;
     }
+    
+    public static boolean kayitOl(String email, String hashtag, String firstName,String lastName,String birthDate,String sex,String password,boolean isHidden){
+       
+        
+        try {
+            
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.YYYY");
+            LocalDateTime now = LocalDateTime.now();
+            Connection con = DataConnect.getConnection();
+            PreparedStatement ps = con.prepareStatement("Select * from USERS where EMAIL = ? or TAG = ?");
+            ps.setString(1, email);
+            ps.setString(2, hashtag);
+
+            ResultSet rs = ps.executeQuery(); 
+
+            if (rs.next()) {
+                DataConnect.close(con);
+                return false;
+            }
+            else{
+                Connection con1 = DataConnect.getConnection();
+                PreparedStatement ps1 = con.prepareStatement("INSERT INTO USERS (TAG, EMAIL, PASSWORD, FIRSTNAME, LASTNAME,BIRTHDATE,SEX,CREATEDATE,BIO,ISHIDDEN) VALUES (?,?,?,?,?,?,?,?,?,?)");
+                
+                ps1.setString(1,hashtag);
+                ps1.setString(2, email);
+                ps1.setString(3, password);
+                ps1.setString(4, firstName);
+                ps1.setString(5, lastName);
+                ps1.setString(6, birthDate);
+                ps1.setString(7, sex);
+                ps1.setString(8, dtf.format(now));
+                ps1.setString(9, "");
+                ps1.setBoolean(10,isHidden);
+                
+                ResultSet rs1 = ps.executeQuery();
+                DataConnect.close(con);
+                return true;
+            }
+            //buraya kayıt olsun 
+        } catch (SQLException ex) {
+                System.out.println("Giriş hatası");
+                return false;
+        }
+        
+    }
+    
     public static int getUserId(String email, String password){
         
          try {
