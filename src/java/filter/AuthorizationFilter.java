@@ -39,11 +39,11 @@ public class AuthorizationFilter implements Filter {
 
 			HttpServletRequest reqt = (HttpServletRequest) request;
 			HttpServletResponse resp = (HttpServletResponse) response;
-			HttpSession ses = reqt.getSession(true);
+			HttpSession ses = reqt.getSession(false);
 
 			String reqURI = reqt.getRequestURI();
-                        if (reqURI.indexOf("/signup.xhtml") >= 0 && ses.getAttribute("email") == null){
-                            chain.doFilter(request, response);
+			if (reqURI.indexOf("/signup.xhtml") >= 0 && (ses != null && ses.getAttribute("email") != null)){
+                            resp.sendRedirect(reqt.getContextPath() + "/faces/home.xhtml");
                         }
                         else if (reqURI.indexOf("/login.xhtml") >= 0 && (ses != null && ses.getAttribute("email") != null)){
                                 resp.sendRedirect(reqt.getContextPath() + "/faces/home.xhtml");

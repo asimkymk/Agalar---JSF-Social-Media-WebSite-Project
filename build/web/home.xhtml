@@ -13,7 +13,7 @@
        <link href="http://fonts.googleapis.com/css?family=Nunito:100italic,100,300italic,300,400italic,400,700italic,700,900italic,900" rel="stylesheet" type="text/css"/>
        <link href='resources/css/agamla-main.css' rel='stylesheet' type='text/css'/>
     </h:head>
-    <h:body>
+    <h:body onload="init();">
         <div class="">
             <div class="box">
                  <div class="left-Panel">
@@ -30,6 +30,9 @@
                              <h:commandLink action="home" class="left-Panel-Link"><i class="fas fa-envelope"></i>Mesajlar</h:commandLink>
                         </li>
                         <li>
+                            <h:commandLink action="home" class="left-Panel-Link"><i class="fas fa-bell"></i>Bildirimler</h:commandLink>
+                        </li>
+                        <li>
                             <h:commandLink action="home" class="left-Panel-Link"><i class="fas fa-user-alt"></i>Profil</h:commandLink>
                         </li>
                         <li>
@@ -38,6 +41,7 @@
                         <li>
                             <h:commandLink action="home" class="left-Panel-Link"><i class="fas fa-cog"></i>Ayarlar</h:commandLink>
                         </li>
+                        
                     </ul>
                     <div class="left-Panel-Agala">Agala</div>
                     </h:form>
@@ -65,9 +69,100 @@
                 </div>
                 
             </div>
+                
+            <!-->
+            
+            
+                BURAYA RESPONSIVE OLDUĞUNDA SOL PANELİN YAZISIZ HALİ GELECEK
+                css ile olursa ok yoksa yeni panel yaz.
+            </!-->   
+            <div class="main-Panel">
+                <div class="panel-Main-Agala">
+                    <h:form>
+
+                    <div class="panel-Agala">
+                        <div class="panel-Agala-Foto">
+                            <img width="60px"
+                                 src="${userBean.profilePictureUri}"
+                                 alt="profilResim" style="border-radius: 30px;"/>
+                        </div>
+                        <div class="panel-Agala-Text">
+                            <h:inputTextarea rows="2" id="text" class="Agala-Text" pt:placeholder="Neler oluyor?"
+                                  pt:maxlength="200"></h:inputTextarea>
+                        </div>
+                    </div>
+                    <div class="panel-Agala-Gonder">
+                        <div class="Agala-Secenekler">
+                            <h:commandLink class="Agala-Sec"><i class="far fa-image"></i></h:commandLink>
+                            <h:commandLink class="Agala-Sec"><i class="fas fa-video"></i></h:commandLink>
+                        </div>
+                        <h:commandButton class="btn btn-primary btn-agala" value="Agala" action="#{userBean.postGonder}"></h:commandButton>
+                    </div>
+                    </h:form>
+                </div>
+
+
+
+
+            </div>
+            <div class="right-Panel">
+                <div class="search">
+                    <h:form>
+                        
+                    <h:inputText class="search-input" pt:placeholder="Agalarını bul..."></h:inputText> </h:form><a
+                        href="#"
+                        class="search-icon">
+                    <i class="fa fa-search"></i> </a>
+                </div>
+                <div>
+
+                    HAKKINDA <br></br>
+                    HİZMET ŞARTLARI <br></br>
+                    İLETİŞİM <br></br>
+                    2021 AGALAR <br></br>
+                </div>
+
+            </div>
         </div>
             
     </div>
+        <script>
+            var observe;
+        if (window.attachEvent) {
+            observe = function (element, event, handler) {
+                element.attachEvent('on' + event, handler);
+            };
+        } else {
+            observe = function (element, event, handler) {
+                element.addEventListener(event, handler, false);
+            };
+        }
+
+        function init() {
+            var text = document.getElementById('text');
+
+            function resize() {
+                text.style.height = 'auto';
+                text.style.height = text.scrollHeight + 'px';
+            }
+
+            /* 0-timeout to get the already changed text */
+            function delayedResize() {
+                window.setTimeout(resize, 0);
+            }
+
+            observe(text, 'change', resize);
+            observe(text, 'cut', delayedResize);
+            observe(text, 'paste', delayedResize);
+            observe(text, 'drop', delayedResize);
+            observe(text, 'keydown', delayedResize);
+
+            text.focus();
+            text.select();
+            resize();
+        }
+            
+        </script>
     </h:body>
 </html>
 
