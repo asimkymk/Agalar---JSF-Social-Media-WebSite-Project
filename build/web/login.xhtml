@@ -94,6 +94,15 @@
                                         
                                 </div>
                     </c:if>
+                            <c:if test="#{userBean.activeSucRegister}">
+                                 <div class="mx-5 alert alert-success" id ="hata" role="alert">
+                                     <div class="hata-msg">
+                                        #{userBean.msgSucRegister}
+                                     </div>
+                                        
+                                </div>
+                                </c:if>
+                    
                             <h:commandButton action ="#{userBean.girisKontrol}" value ="Giriş" class ="btn-grad m-auto"></h:commandButton>
                             
                             <div class="mx-auto" style="text-align:center;margin-top: 25px;">

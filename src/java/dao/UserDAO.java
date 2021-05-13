@@ -45,7 +45,7 @@ public class UserDAO {
         return false;
     }
     
-    public static boolean kayitOl(String email, String hashtag, String firstName,String lastName,String birthDate,String sex,String password,boolean isHidden){
+    public static String kayitOl(String email, String hashtag, String firstName,String lastName,String birthDate,String sex,String password,boolean isHidden){
        
         
         try {
@@ -61,11 +61,13 @@ public class UserDAO {
 
             if (rs.next()) {
                 DataConnect.close(con);
-                return false;
+                return "Mail veya kullanıcı adına ait bir hesap zaten var. Lütfen Giriş sayfasından giriş yapınız. Şifrenizi unuttuysanız Şifremi unuttum sayfasını kullanınız.";
             }
             else{
+                long millis=System.currentTimeMillis();  
+                java.sql.Date date=new java.sql.Date(millis);  
                 Connection con1 = DataConnect.getConnection();
-                PreparedStatement ps1 = con.prepareStatement("INSERT INTO USERS (TAG, EMAIL, PASSWORD, FIRSTNAME, LASTNAME,BIRTHDATE,SEX,CREATEDATE,BIO,ISHIDDEN) VALUES (?,?,?,?,?,?,?,?,?,?)");
+                PreparedStatement ps1 = con.prepareStatement("INSERT INTO USERS (TAG, EMAIL, PASSWORD, FIRSTNAME, LASTNAME,BIRTHDATE,SEX,CREATEDATE,BIO,PROFILEPICTUREURI,COVERPICTUREURI,ISHIDDEN) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
                 
                 ps1.setString(1,hashtag);
                 ps1.setString(2, email);
@@ -74,18 +76,20 @@ public class UserDAO {
                 ps1.setString(5, lastName);
                 ps1.setString(6, birthDate);
                 ps1.setString(7, sex);
-                ps1.setString(8, dtf.format(now));
+                ps1.setString(8,dtf.format(now));
                 ps1.setString(9, "");
-                ps1.setBoolean(10,isHidden);
+                ps1.setString(10, "imgs/default_pp.jpg");
+                ps1.setString(11, "imgs/default_cp.jpg");
+                ps1.setBoolean(12,isHidden);
                 
-                ResultSet rs1 = ps.executeQuery();
+                ps1.executeUpdate();
                 DataConnect.close(con);
-                return true;
+                return "ok";
             }
             //buraya kayıt olsun 
         } catch (SQLException ex) {
                 System.out.println("Giriş hatası");
-                return false;
+                return ex.getMessage();
         }
         
     }

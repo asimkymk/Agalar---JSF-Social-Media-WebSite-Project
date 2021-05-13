@@ -264,8 +264,8 @@ public class UserBean implements Serializable{
     }
     
     public String kayitKontrol(){
-        boolean kayitDurum = UserDAO.kayitOl(this.email,this.tag,this.firstName,this.lastName,this.birthDate,this.sex,this.password,this.isHidden);
-        if(kayitDurum){
+        String kayitDurum = UserDAO.kayitOl(this.email,this.tag,this.firstName,this.lastName,this.birthDate,this.sex,this.password,this.isHidden);
+        if(kayitDurum.equals("ok")){
             setIsLogged(false);
             this.active= false;
             this.msg = "";
@@ -289,7 +289,8 @@ public class UserBean implements Serializable{
         else{
             setIsLogged(false);
             this.activeRegister=true;
-            this.msgRegister="Mail veya kullanıcı adına ait bir hesap zaten var. Lütfen Giriş sayfasından giriş yapınız. Şifrenizi unuttuysanız Şifremi unuttum sayfasını kullanınız.";
+            //this.msgRegister="";
+            this.msgRegister= kayitDurum;
             
             return "register?faces-redirect=true";
         }
