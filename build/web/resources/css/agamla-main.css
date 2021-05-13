@@ -201,10 +201,11 @@ a:hover {
     outline: none;
     overflow: auto;
     resize: none;
-    width: 85%;
+    width: 100%;
     font-family: 'Nunito', sans-serif !important;
     box-shadow:none;
     border-radius: 15px;
+    padding:10px;
 }
 .Agala-Text:focus{
     
@@ -229,6 +230,7 @@ a:hover {
     padding-bottom: 10px;
     display: flex;
     flex-flow: row;
+    justify-center: space-between;
     /*border-bottom: 1px solid gray;*/
 }
 
@@ -244,8 +246,10 @@ a:hover {
 .btn-agala {
     font-size: 20px;
     border-radius: 15px;
-    margin-left: auto;
-    margin-right: 150px;
+    float:right;
+    margin-left:auto;
+    margin-right: 20px;
+    margin-bottom:15px;
 }
 
 
@@ -509,5 +513,7 @@ a:hover {
     .right-Panel {
         display: none;
     }
+    .panel-
+    
 }
 
