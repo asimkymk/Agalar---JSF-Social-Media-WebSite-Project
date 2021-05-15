@@ -5,6 +5,7 @@
  */
 package dao;
 
+import beans.PostBean;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -355,4 +356,13 @@ public class UserDAO {
         return false;
     }
     
+    public static ArrayList<PostBean> postlariFiltrele(int followerId){
+        ArrayList<PostBean> postlar = new ArrayList<PostBean>();
+        for(int i = 0;i < PostDAO.getPosts().size();i++){
+            if(FollowersDAO.isFollowing(followerId, PostDAO.getPosts().get(i).getUserId()) || PostDAO.getPosts().get(i).getUserId() == followerId){
+                postlar.add(PostDAO.getPosts().get(i));
+            }
+        }
+        return postlar;
+    }
 }

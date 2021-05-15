@@ -14,6 +14,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+import util.DataConnect;
 
 /**
  *
@@ -338,6 +339,5 @@ public class UserBean implements Serializable{
         this.msgRegister2 ="Parolanızın uzunluğu en az 8 en fazla 20 karakter olmalıdır.";
         
     }
-    
     
 }
