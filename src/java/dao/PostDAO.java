@@ -25,14 +25,16 @@ public class PostDAO {
                 PreparedStatement ps = con.prepareStatement("Select * from POSTS");
                 
                 ResultSet rs = ps.executeQuery();
-                while (rs.next()) {
-                    PostBean post = new PostBean(rs.getInt("POSTID"),rs.getInt("USERID"),rs.getString("CONTENT"),rs.getInt("LIKECOUNT"),rs.getInt("COMMENTCOUNT"),rs.getString("CREATEDATE"),rs.getString("PHOTOURL"),rs.getString("VIDEOURL"));
-                    postlar.add(post);
-                    DataConnect.close(con);
-                }            
+                while(rs.next()) {
+                    postlar.add(new PostBean(rs.getInt("USERID"),rs.getInt("POSTID"),rs.getString("CONTENT"),rs.getInt("LIKECOUNT"),rs.getInt("COMMENTCOUNT"),rs.getString("CREATEDATE"),rs.getString("PHOTOURI"),rs.getString("VIDEOURI")));
+                   
+                }
+                DataConnect.close(con);
+                 
         } catch (SQLException ex) {
                 System.out.println("Giriş hatası");
         }
+        
         return postlar;
     }
     

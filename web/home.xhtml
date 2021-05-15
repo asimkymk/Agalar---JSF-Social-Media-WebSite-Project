@@ -5,14 +5,15 @@
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         
         <title>Agamla Anasayfa | #{userBean.tag}</title>
         <link href='resources/css/bootstrap.min.css' rel='stylesheet' type='text/css'/>
         <script src="https://kit.fontawesome.com/41f4fd74e6.js" crossorigin="anonymous"></script>
         <script src="https://unpkg.com/ionicons@5.5.1/dist/ionicons.js"></script>
-        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
        <link href="http://fonts.googleapis.com/css?family=Nunito:100italic,100,300italic,300,400italic,400,700italic,700,900italic,900" rel="stylesheet" type="text/css"/>
        <link href='resources/css/agamla-main.css' rel='stylesheet' type='text/css'/>
     </h:head>
@@ -110,9 +111,64 @@
                     </a>
                     
                 </div>
+                <ui:repeat value="#{userBean.postlariGoster()}" var="item">
+                    <div class="aga">
+                    <div class="aga-Sol">
+                        <img src="#{userBean.postUserPictureUri(item.userId)}"
+                             width="60px" style="border-radius: 30px;" alt=""/>
+                    </div>
+                    <div class="aga-Main">
+                        <div class="aga-Main-Ust">
+                            <div class="aga-Main-Ust-Isim">
+                                #{userBean.postUserFirstName(item.userId)} #{userBean.postUserLastName(item.userId)}
+                            </div>
+                            <div class="aga-Main-Ust-Kullanıcı">
+                                @#{userBean.postUserTag(item.userId)}
+                            </div>
+                            <div class="aga-Main-Ust-Tarih">
+                                #{item.createDate}
+                            </div>
+                        </div>
+                        <div class="aga-Main-Icerik">
+                            
+                            <p>#{item.content}</p>
+                           
 
-            
 
+                        </div>
+                        <div class="aga-Main-Action">
+
+                            <div class="aga-Main-Action-Like">
+                                <i class="far fa-heart"></i>
+                                <div class="aga-Main-Action-Like-Text">#{item.likeCount}</div>
+                            </div>
+                            <div class="aga-Main-Action-Comment">
+                                <i class="far fa-comment"></i>
+                                <div class="aga-Main-Action-Comment-Text">#{item.commentCount}</div>
+                            </div>
+                            <div class="aga-Main-Action-Share">
+                                <i class="bi bi-share"></i>
+                            </div>
+                            <div class="aga-Main-Action-Save">
+                                <i class="far fa-save"></i>
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+                   <div class="aga-Sag">
+                        ...
+                    </div>
+
+                    </div>
+                     
+                </ui:repeat>
+                
+                
+                
+                
 
             </div>
             <div class="right-Panel">

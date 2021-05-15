@@ -115,13 +115,12 @@ public class UserDAO {
         }
         return -1;
     }
-    public static String getTag(String email,String password){
+    public static String getTag(int userid){
         
         try {
                 Connection con = DataConnect.getConnection();
-                PreparedStatement ps = con.prepareStatement("Select TAG from USERS where EMAIL = ? and PASSWORD = ?");
-                ps.setString(1, email);
-                ps.setString(2, password);
+                PreparedStatement ps = con.prepareStatement("Select TAG from USERS where USERID = ?");
+                ps.setInt(1, userid);
 
                 ResultSet rs = ps.executeQuery();
 
@@ -135,13 +134,12 @@ public class UserDAO {
         }
         return "";
     }
-    public static String getFirstName(String email,String password){
+    public static String getFirstName(int userid){
         
-        try {
+       try {
                 Connection con = DataConnect.getConnection();
-                PreparedStatement ps = con.prepareStatement("Select FIRSTNAME from USERS where EMAIL = ? and PASSWORD = ?");
-                ps.setString(1, email);
-                ps.setString(2, password);
+                PreparedStatement ps = con.prepareStatement("Select FIRSTNAME from USERS where USERID = ?");
+                ps.setInt(1, userid);
 
                 ResultSet rs = ps.executeQuery();
 
@@ -155,13 +153,12 @@ public class UserDAO {
         }
         return "";
     }
-    public static String getLastName(String email,String password){
+    public static String getLastName(int userid){
         
         try {
                 Connection con = DataConnect.getConnection();
-                PreparedStatement ps = con.prepareStatement("Select LASTNAME from USERS where EMAIL = ? and PASSWORD = ?");
-                ps.setString(1, email);
-                ps.setString(2, password);
+                PreparedStatement ps = con.prepareStatement("Select LASTNAME from USERS where USERID = ?");
+                ps.setInt(1, userid);
 
                 ResultSet rs = ps.executeQuery();
 
@@ -175,13 +172,12 @@ public class UserDAO {
         }
         return "";
     }
-    public static String getBirthDate(String email,String password){
+    public static String getBirthDate(int userid){
         
         try {
                 Connection con = DataConnect.getConnection();
-                PreparedStatement ps = con.prepareStatement("Select BIRTHDATE from USERS where EMAIL = ? and PASSWORD = ?");
-                ps.setString(1, email);
-                ps.setString(2, password);
+                PreparedStatement ps = con.prepareStatement("Select BIRTHDATE from USERS where USERID = ?");
+                ps.setInt(1, userid);
 
                 ResultSet rs = ps.executeQuery();
 
@@ -195,13 +191,12 @@ public class UserDAO {
         }
         return "";
     }
-    public static String getSex(String email,String password){
+    public static String getSex(int userid){
         
         try {
                 Connection con = DataConnect.getConnection();
-                PreparedStatement ps = con.prepareStatement("Select SEX from USERS where EMAIL = ? and PASSWORD = ?");
-                ps.setString(1, email);
-                ps.setString(2, password);
+                PreparedStatement ps = con.prepareStatement("Select SEX from USERS where USERID = ?");
+                ps.setInt(1, userid);
 
                 ResultSet rs = ps.executeQuery();
 
@@ -215,13 +210,12 @@ public class UserDAO {
         }
         return "";
     }
-    public static String getCreateDate(String email,String password){
+    public static String getCreateDate(int userid){
         
-        try {
+       try {
                 Connection con = DataConnect.getConnection();
-                PreparedStatement ps = con.prepareStatement("Select CREATEDATE from USERS where EMAIL = ? and PASSWORD = ?");
-                ps.setString(1, email);
-                ps.setString(2, password);
+                PreparedStatement ps = con.prepareStatement("Select CREATEDATE from USERS where USERID = ?");
+                ps.setInt(1, userid);
 
                 ResultSet rs = ps.executeQuery();
 
@@ -235,13 +229,12 @@ public class UserDAO {
         }
         return "";
     }
-    public static String getBio(String email,String password){
+    public static String getBio(int userid){
         
         try {
                 Connection con = DataConnect.getConnection();
-                PreparedStatement ps = con.prepareStatement("Select BIO from USERS where EMAIL = ? and PASSWORD = ?");
-                ps.setString(1, email);
-                ps.setString(2, password);
+                PreparedStatement ps = con.prepareStatement("Select BIO from USERS where USERID = ?");
+                ps.setInt(1, userid);
 
                 ResultSet rs = ps.executeQuery();
 
@@ -255,13 +248,12 @@ public class UserDAO {
         }
         return "";
     }
-    public static int getFollowersCount(String email,String password){
+    public static int getFollowersCount(int userid){
         
         try {
                 Connection con = DataConnect.getConnection();
-                PreparedStatement ps = con.prepareStatement("Select FOLLOWERSCOUNT from USERS where EMAIL = ? and PASSWORD = ?");
-                ps.setString(1, email);
-                ps.setString(2, password);
+                PreparedStatement ps = con.prepareStatement("Select FOLLOWERSCOUNT from USERS where USERID = ?");
+                ps.setInt(1, userid);
 
                 ResultSet rs = ps.executeQuery();
 
@@ -275,19 +267,18 @@ public class UserDAO {
         }
         return -1;
     }
-    public static int getFollowingCount(String email,String password){
+    public static int getFollowingCount(int userid){
         
         try {
                 Connection con = DataConnect.getConnection();
-                PreparedStatement ps = con.prepareStatement("Select FOLLOWINGSCOUNT from USERS where EMAIL = ? and PASSWORD = ?");
-                ps.setString(1, email);
-                ps.setString(2, password);
+                PreparedStatement ps = con.prepareStatement("Select FOLLOWINGSID from USERS where USERID = ?");
+                ps.setInt(1, userid);
 
                 ResultSet rs = ps.executeQuery();
 
                 if (rs.next()) {
                     
-                    return rs.getInt("FOLLOWINGSCOUNT");
+                    return rs.getInt("FOLLOWINGSID");
                 }
         } catch (SQLException ex) {
                 System.out.println("Giriş hatası");
@@ -295,13 +286,12 @@ public class UserDAO {
         }
         return -1;
     }
-    public static String getProfilePictureUri(String email,String password){
+    public static String getProfilePictureUri(int userid){
         
-        try {
+       try {
                 Connection con = DataConnect.getConnection();
-                PreparedStatement ps = con.prepareStatement("Select PROFILEPICTUREURI from USERS where EMAIL = ? and PASSWORD = ?");
-                ps.setString(1, email);
-                ps.setString(2, password);
+                PreparedStatement ps = con.prepareStatement("Select PROFILEPICTUREURI from USERS where USERID = ?");
+                ps.setInt(1, userid);
 
                 ResultSet rs = ps.executeQuery();
 
@@ -315,13 +305,12 @@ public class UserDAO {
         }
         return "";
     }
-    public static String getCoverPictureUri(String email,String password){
+    public static String getCoverPictureUri(int userid){
         
         try {
                 Connection con = DataConnect.getConnection();
-                PreparedStatement ps = con.prepareStatement("Select COVERPICTUREURI from USERS where EMAIL = ? and PASSWORD = ?");
-                ps.setString(1, email);
-                ps.setString(2, password);
+                PreparedStatement ps = con.prepareStatement("Select COVERPICTUREURI from USERS where USERID = ?");
+                ps.setInt(1, userid);
 
                 ResultSet rs = ps.executeQuery();
 
@@ -335,13 +324,12 @@ public class UserDAO {
         }
         return "";
     }
-    public static boolean getIsHidden(String email,String password){
+    public static boolean getIsHidden(int userid){
         
         try {
                 Connection con = DataConnect.getConnection();
-                PreparedStatement ps = con.prepareStatement("Select ISHIDDEN from USERS where EMAIL = ? and PASSWORD = ?");
-                ps.setString(1, email);
-                ps.setString(2, password);
+                PreparedStatement ps = con.prepareStatement("Select ISHIDDEN from USERS where USERID = ?");
+                ps.setInt(1, userid);
 
                 ResultSet rs = ps.executeQuery();
 
@@ -357,12 +345,12 @@ public class UserDAO {
     }
     
     public static ArrayList<PostBean> postlariFiltrele(int followerId){
-        ArrayList<PostBean> postlar = new ArrayList<PostBean>();
-        for(int i = 0;i < PostDAO.getPosts().size();i++){
+        ArrayList<PostBean> postlar1 = new ArrayList<PostBean>();
+        for(int i = PostDAO.getPosts().size()-1;i >=0 ;i--){
             if(FollowersDAO.isFollowing(followerId, PostDAO.getPosts().get(i).getUserId()) || PostDAO.getPosts().get(i).getUserId() == followerId){
-                postlar.add(PostDAO.getPosts().get(i));
+                postlar1.add(PostDAO.getPosts().get(i));
             }
         }
-        return postlar;
+        return postlar1;
     }
 }

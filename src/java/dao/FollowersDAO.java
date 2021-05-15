@@ -28,7 +28,9 @@ public class FollowersDAO {
                 ResultSet rs = ps.executeQuery();
 
                 if (rs.next()) {
+                    con.close();
                     return true;
+                    
                 }
         } catch (SQLException ex) {
 

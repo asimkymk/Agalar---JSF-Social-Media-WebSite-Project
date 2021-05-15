@@ -258,8 +258,8 @@ a:hover {
     /*border-bottom: 1px solid gray;*/
     display: flex;
     flex-flow: row;
-    justify-content: flex-start;
-    align-items: flex-start;
+    
+    
     overflow: auto;
     padding: 20px 20px;
     background-color: #fff;
@@ -275,7 +275,7 @@ a:hover {
 */
 .aga-Sol {
 
-    justify-self: flex-start;
+    align-self: flex-start;
     margin-right: 10px;
 }
 
@@ -283,6 +283,7 @@ a:hover {
     display: flex;
     flex-flow: column;
     font-size: 20px;
+    align-self:flex-start;
 
 
 }
@@ -323,6 +324,7 @@ a:hover {
 .aga-Sag {
     font-size: 20px;
     cursor: pointer;
+    margin-left:auto;
 }
 
 .aga-Main-Action {

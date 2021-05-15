@@ -7,6 +7,7 @@ package beans;
 
 import dao.UserDAO;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 
 import javax.faces.application.FacesMessage;
@@ -238,17 +239,18 @@ public class UserBean implements Serializable{
             this.msg = "";
             this.activeRegister = false;
             this.msgRegister = "";
-            this.tag = UserDAO.getTag(this.email,this.password);
             this.userId = UserDAO.getUserId(email, password);
-            this.firstName = UserDAO.getFirstName(email, password);
-            this.lastName = UserDAO.getLastName(email, password);
-            this.birthDate = UserDAO.getBirthDate(email, password);
-            this.sex = UserDAO.getSex(email, password);
-            this.followerCount = UserDAO.getFollowersCount(email, password);
-            this.followingCount = UserDAO.getFollowingCount(email, password);
-            this.profilePictureUri = UserDAO.getProfilePictureUri(email, password);
-            this.coverPictureUri = UserDAO.getCoverPictureUri(email, password);
-            this.isHidden = UserDAO.getIsHidden(email, password);
+            this.tag = UserDAO.getTag(this.userId);
+            
+            this.firstName = UserDAO.getFirstName(this.userId);
+            this.lastName = UserDAO.getLastName(this.userId);
+            this.birthDate = UserDAO.getBirthDate(this.userId);
+            this.sex = UserDAO.getSex(this.userId);
+            this.followerCount = UserDAO.getFollowersCount(this.userId);
+            this.followingCount = UserDAO.getFollowingCount(this.userId);
+            this.profilePictureUri = UserDAO.getProfilePictureUri(this.userId);
+            this.coverPictureUri = UserDAO.getCoverPictureUri(this.userId);
+            this.isHidden = UserDAO.getIsHidden(this.userId);
             this.activeSucRegister = false;
             this.msgSucRegister = null;
             return "home?faces-redirect=true";
@@ -337,6 +339,25 @@ public class UserBean implements Serializable{
     public void hataliParolaUzunluguRegister(){
         this.activeRegister = true;
         this.msgRegister2 ="Parolanızın uzunluğu en az 8 en fazla 20 karakter olmalıdır.";
+        
+    }
+    public ArrayList<PostBean> postlariGoster(){
+        return UserDAO.postlariFiltrele(this.userId);
+    }
+    public String postUserPictureUri(int userid){
+        return UserDAO.getProfilePictureUri(userid);
+        
+    }
+    public String postUserFirstName(int userid){
+        return UserDAO.getFirstName(userid);
+        
+    }
+    public String postUserLastName(int userid){
+        return UserDAO.getLastName(userid);
+        
+    }
+    public String postUserTag(int userid){
+        return UserDAO.getTag(userid);
         
     }
     
