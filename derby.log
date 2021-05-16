@@ -95,3 +95,9 @@ org.apache.derby.impl.drda.DRDAProtocolException: Execution failed because of a 
 	at org.apache.derby.impl.drda.DRDAConnThread.exchangeServerAttributes(Unknown Source)
 	at org.apache.derby.impl.drda.DRDAConnThread.sessionInitialState(Unknown Source)
 	at org.apache.derby.impl.drda.DRDAConnThread.run(Unknown Source)
+----------------------------------------------------------------
+Sun May 16 20:09:30 EET 2021: Shutting down Derby engine
+----------------------------------------------------------------
+Sun May 16 20:09:30 EET 2021:
+Shutting down instance a816c00e-0179-75db-1157-00003388d8bf on database directory C:\Users\user\Documents\GitHub\Agalar\agalar with class loader sun.misc.Launcher$AppClassLoader@49476842 
+----------------------------------------------------------------
