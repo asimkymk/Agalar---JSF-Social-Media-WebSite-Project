@@ -94,7 +94,7 @@
                         </div>
                         <div class="panel-Agala-Text">
                             <p:inputTextarea rows="2" id="text" cols ="75"  styleClass="Agala-Text" pt:placeholder="Neler oluyor?"
-                                  pt:maxlength="280"></p:inputTextarea>
+                                  pt:maxlength="280" value="#{userBean.postContent}"></p:inputTextarea>
                             <!-->
                             <h:inputTextarea rows="2" id="text" class="Agala-Text" pt:placeholder="Neler oluyor?"
                                   pt:maxlength="200"></h:inputTextarea></!-->
@@ -104,8 +104,16 @@
                         <div class="Agala-Secenekler">
                             <h:commandLink class="Agala-Sec"><i class="far fa-image"></i></h:commandLink>
                             <h:commandLink class="Agala-Sec"><i class="fas fa-video"></i></h:commandLink>
+                            <c:if test="#{not empty userBean.postHata}">
+                                <p style="color:red;margin:0;padding:0;">#{userBean.postHata}</p>
+                             </c:if>
                         </div>
-                        <h:commandButton class="btn btn-primary btn-agala" value="Agala" action="#{userBean.postGonder}"></h:commandButton>
+                        <h:commandButton class="btn btn-primary btn-agala" value="Agala" action="#{userBean.postGonder()}">
+                        
+                           
+                        
+                        
+                        </h:commandButton>
                     </div>
                     </h:form>
                     <a>

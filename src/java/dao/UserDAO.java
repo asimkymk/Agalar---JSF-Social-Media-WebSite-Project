@@ -353,4 +353,25 @@ public class UserDAO {
         }
         return postlar1;
     }
+    public static String postOlustur(int userid,String content,String photoUri, String videoUri){
+         try {
+                Connection con = DataConnect.getConnection();
+                PreparedStatement ps = con.prepareStatement("INSERT INTO POSTS (USERID,CONTENT,LIKECOUNT,COMMENTCOUNT,CREATEDATE,PHOTOURI,VIDEOURI) VALUES(?,?,0,0,?,?,?)");
+                ps.setInt(1, userid);
+                ps.setString(2,content);
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.YYYY");
+                LocalDateTime now = LocalDateTime.now();
+                ps.setString(3,dtf.format(now));
+                ps.setString(4,photoUri);
+                ps.setString(5,videoUri);
+
+
+                ps.executeUpdate();
+                DataConnect.close(con);
+                return "ok";
+        } catch (SQLException ex) {
+                return "Post gönderilirken bir hata oluştu";
+        }
+        
+    }
 }

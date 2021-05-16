@@ -49,6 +49,43 @@ public class UserBean implements Serializable{
     private String profilePictureUri;
     private String coverPictureUri;
     private boolean isHidden;
+    private String postContent;
+    private String postPhotoUri="empty";
+    private String postVideoUri="empty";
+    private String postHata;
+
+    public String getPostHata() {
+        return postHata;
+    }
+
+    public void setPostHata(String postHata) {
+        this.postHata = postHata;
+    }
+    
+    public String getPostPhotoUri() {
+        return postPhotoUri;
+    }
+
+    public void setPostPhotoUri(String postPhotoUri) {
+        this.postPhotoUri = postPhotoUri;
+    }
+
+    public String getPostVideoUri() {
+        return postVideoUri;
+    }
+
+    public void setPostVideoUri(String postVideoUri) {
+        this.postVideoUri = postVideoUri;
+    }
+    
+    public String getPostContent() {
+        return postContent;
+    }
+
+    public void setPostContent(String postContent) {
+        this.postContent = postContent;
+    }
+    
 
     public boolean isActive() {
         return active;
@@ -358,6 +395,22 @@ public class UserBean implements Serializable{
     }
     public String postUserTag(int userid){
         return UserDAO.getTag(userid);
+        
+    }
+    public String postGonder(){
+        
+        String durum = UserDAO.postOlustur(this.userId, this.postContent, this.postPhotoUri, this.postVideoUri);
+        if (durum.equals("ok")){
+            
+            this.postContent ="";
+            this.postPhotoUri = "empty";
+            this.postVideoUri = "empty";
+            this.postHata = "";
+        }
+        else{
+            this.postHata = durum;
+        }
+        return "home.xhtml?faces-redirect=true";
         
     }
     
