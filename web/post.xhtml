@@ -7,6 +7,11 @@
     </h:head>
     <h:body>
         Hello from Facelets
+        <script>
+        if(#{userBean.isLogged == false}){
+                window.location.href="login.xhtml";
+        }     
+        </script>
     </h:body>
 </html>
 
