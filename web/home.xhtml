@@ -19,60 +19,60 @@
     </h:head>
     <h:body onload="init();">
         <div class="">
-            <div class="box">
-                 <div class="left-Panel">
-                <div class="marka">
-                    AGAMLA
-                </div>
-                <div class="Menu">
-                    <h:form>
-                    <ul class="left-Panel-Menu">
-                        <li>
-                            <h:commandLink action="home" class="left-Panel-Link left-Panel-Link-Selected"><i class="fas fa-home"></i>Anasayfa</h:commandLink>
-                        </li>
-                        <li>
-                             <h:commandLink action="home" class="left-Panel-Link"><i class="fas fa-envelope"></i>Mesajlar</h:commandLink>
-                        </li>
-                        <li>
-                            <h:commandLink action="home" class="left-Panel-Link"><i class="fas fa-bell"></i>Bildirimler</h:commandLink>
-                        </li>
-                        <li>
-                            <h:commandLink action="home" class="left-Panel-Link"><i class="fas fa-user-alt"></i>Profil</h:commandLink>
-                        </li>
-                        <li>
-                            <h:commandLink action="home" class="left-Panel-Link"><i class="fas fa-save"></i>Kaydedilenler</h:commandLink>
-                        </li>
-                        <li>
-                            <h:commandLink action="home" class="left-Panel-Link"><i class="fas fa-cog"></i>Ayarlar</h:commandLink>
-                        </li>
-                        
-                    </ul>
-                    <div class="left-Panel-Agala">Agala</div>
-                    </h:form>
-                </div>
-
-                <div class="cikisYap">
-                    <div class="cikisYap-Foto">
-                        <img width="40px"
-                             src="${userBean.profilePictureUri}"
-                             alt="profilResim" style="border-radius: 20px;"/>
+            <div class="row-main box row ">
+                 <div class="left-Panel col-3 d-none d-md-block ">
+                    <div class="marka">
+                        AGAMLA
                     </div>
-                    <div class="cikisYap-Text">
-                        <div class="cikisYap-Profil-Ismi">
-                            ${userBean.firstName} #{userBean.lastName}
+                    <div class="Menu">
+                        <h:form>
+                        <ul class="left-Panel-Menu">
+                            <li>
+                                <h:commandLink action="home" class="left-Panel-Link left-Panel-Link-Selected"><i class="fas fa-home"></i>Anasayfa</h:commandLink>
+                            </li>
+                            <li>
+                                 <h:commandLink action="home" class="left-Panel-Link"><i class="fas fa-envelope"></i>Mesajlar</h:commandLink>
+                            </li>
+                            <li>
+                                <h:commandLink action="home" class="left-Panel-Link"><i class="fas fa-bell"></i>Bildirimler</h:commandLink>
+                            </li>
+                            <li>
+                                <h:commandLink action="home" class="left-Panel-Link"><i class="fas fa-user-alt"></i>Profil</h:commandLink>
+                            </li>
+                            <li>
+                                <h:commandLink action="home" class="left-Panel-Link"><i class="fas fa-save"></i>Kaydedilenler</h:commandLink>
+                            </li>
+                            <li>
+                                <h:commandLink action="home" class="left-Panel-Link"><i class="fas fa-cog"></i>Ayarlar</h:commandLink>
+                            </li>
+
+                        </ul>
+                            <h:commandButton class="left-Panel-Agala" action="www.google.com" value="Agala" ></h:commandButton>
+                        </h:form>
+                    </div>
+
+                    <div class="cikisYap">
+                        <div class="cikisYap-Foto">
+                            <img width="40px"
+                                 src="${userBean.profilePictureUri}"
+                                 alt="profilResim" style="border-radius: 20px;"/>
                         </div>
-                        <div class="cikisYap-Profil-Username">
-                            @#{userBean.tag}
+                        <div class="cikisYap-Text">
+                            <div class="cikisYap-Profil-Ismi">
+                                ${userBean.firstName} #{userBean.lastName}
+                            </div>
+                            <div class="cikisYap-Profil-Username">
+                                @#{userBean.tag}
+                            </div>
+
+                        </div>
+                        <div class="cikisYap-Cikis">
+                            ...
                         </div>
 
                     </div>
-                    <div class="cikisYap-Cikis">
-                        ...
-                    </div>
-
-                </div>
                 
-            </div>
+                </div>
                 
             <!-->
             
@@ -80,7 +80,7 @@
                 BURAYA RESPONSIVE OLDUĞUNDA SOL PANELİN YAZISIZ HALİ GELECEK
                 css ile olursa ok yoksa yeni panel yaz.
             </!-->   
-            <div class="main-Panel">
+            <div class="main-Panel col-12 col-md-6">
                 <div class="panel-Main-Agala">
                     <h:form>
 
@@ -171,7 +171,7 @@
                 
 
             </div>
-            <div class="right-Panel">
+            <div class="right-Panel col-3 d-none d-md-block">
                 <div class="search">
                     <h:form>
                         
@@ -181,12 +181,23 @@
                     <i class="fa fa-search"></i> </a>
                 </div>
                 <div>
-
-                    HAKKINDA <br></br>
-                    HİZMET ŞARTLARI <br></br>
-                    İLETİŞİM <br></br>
-                    2021 AGALAR <br></br>
-                    #{userBean.isLogged}
+                    <h:form>
+                        <ul>
+                            <li> 
+                                 <h:commandLink action="home" class="right-Panel-out-link">Hakkinda</h:commandLink>
+                            </li>
+                            <li> 
+                                 <h:commandLink action="home" class="right-Panel-out-link">Hizmet Sartlari</h:commandLink>
+                            </li>
+                            <li> 
+                                 <h:commandLink action="home" class="right-Panel-out-link">Iletisim</h:commandLink>
+                            </li>
+                            <li> 
+                                 <h:commandLink action="home" class="right-Panel-out-link">2021 Agalar</h:commandLink>
+                            </li>
+                        </ul>
+                        
+                    </h:form>
                 </div>
 
             </div>

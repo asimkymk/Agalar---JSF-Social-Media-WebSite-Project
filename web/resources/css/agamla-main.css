@@ -27,22 +27,21 @@ a:hover {
 }
 
 .left-Panel {
-    width: 400px;
-    height: 100vh;
+    /*width: 400px;*/
+    /*height: 100vh;*/
     display: flex;
     flex-flow: column;
     justify-content: space-between;
     align-items: center;
     color: darkgray;
     /*border-right: 1px solid darkgray;*/
-    margin-left: 50px;
-    padding: 75px;
-    position: fixed;
+/*    margin-left: 50px;
+    padding: 75px;*/
+    /*position: fixed;*/
     z-index: 1;
     top: 0;
     left: 0;
     overflow: hidden;
-
 }
 
 .marka {
@@ -108,7 +107,7 @@ a:hover {
 
     cursor: pointer;
     border-radius: 20px;
-    width: 100%;
+    width: 80%;
     display: block;
     font-size: 1.5rem;
     border: none;
@@ -137,7 +136,7 @@ a:hover {
     font-weight: 700;
     justify-self: flex-end;
     align-self: flex-end;
-    width: 100%;
+    width: 85%;
 }
 
 .cikisYap:hover {
@@ -163,11 +162,17 @@ a:hover {
     margin-right: 10px;
 }
 
+.row-main{
+    padding:80px 0 0 0;
+    width:75%;
+    margin:auto;
+}
+
 .main-Panel {
     display: flex;
     flex-flow: column;
-    width: 50%;
-    margin-left: 450px;
+/*    width: 50%;*/
+    /*margin-left: 450px;*/
     /*border-right: 1px solid darkgray;*/
 }
 
@@ -327,6 +332,20 @@ a:hover {
     margin-left:auto;
 }
 
+.right-Panel ul{
+    list-style:none;
+    padding-top:30px;
+}
+
+.right-Panel-out-link{
+    color:darkgray;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+
+
+
 .aga-Main-Action {
     display: flex;
     flex-flow: row;
@@ -447,8 +466,8 @@ a:hover {
     flex-flow: column;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
-    margin-left: 60px;
+/*    margin-top: 20px;
+    margin-left: 60px;*/
 
 }
 
@@ -503,8 +522,8 @@ a:hover {
     color: #fff !important
 }
 
-@media screen and (max-width: 1250px) {
-    .left-Panel {
+@media screen and (max-width: 768px) {
+/*    .left-Panel {
         display: none;
     }
 
@@ -514,7 +533,11 @@ a:hover {
     }
     .right-Panel {
         display: none;
+    }*/
+    .row-main{
+        margin:0;
+        width:100%;
+        padding:0;
     }
-    
 }
 
