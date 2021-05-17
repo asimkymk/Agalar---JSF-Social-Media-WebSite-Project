@@ -362,9 +362,6 @@ public class UserDAO {
                 PreparedStatement ps = con.prepareStatement("INSERT INTO POSTS (USERID,CONTENT,LIKECOUNT,COMMENTCOUNT,CREATEDATE,PHOTOURI,VIDEOURI) VALUES(?,?,0,0,?,?,?)");
                 ps.setInt(1, userid);
                 ps.setString(2,content);
-                //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy.HH.mm.ss");
-                //LocalDateTime now = LocalDateTime.now();
-               //String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date());
                 ps.setTimestamp(3,new Timestamp(System.currentTimeMillis()));
                 ps.setString(4,photoUri);
                 ps.setString(5,videoUri);
