@@ -43,6 +43,12 @@ a:hover {
     left: 0;
     overflow: hidden;
     padding-bottom:50px;
+
+}
+
+.stick-top{
+    position: fixed;
+    top:80px;
 }
 
 .marka {
@@ -62,6 +68,7 @@ a:hover {
 .left-Panel-Menu{
     margin-top:50px;
 }
+
 
 .left-Panel-Menu li {
     list-style: none;
@@ -176,7 +183,7 @@ a:hover {
 
 
 .row-main{
-    padding:80px 0 0 0;
+    padding:15px 0 0 0;
     width:75%;
     margin:auto;
 }
