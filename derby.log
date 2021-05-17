@@ -160,3 +160,9 @@ java.lang.NullPointerException
 	at org.apache.derby.impl.drda.DRDAConnThread.processCommands(Unknown Source)
 	at org.apache.derby.impl.drda.DRDAConnThread.run(Unknown Source)
 Cleanup action completed
+----------------------------------------------------------------
+Mon May 17 22:10:16 EET 2021: Shutting down Derby engine
+----------------------------------------------------------------
+Mon May 17 22:10:16 EET 2021:
+Shutting down instance a816c00e-0179-7bb9-bb5c-ffff874dfd26 on database directory C:\Users\asimk\Documents\Agalar\agalar with class loader sun.misc.Launcher$AppClassLoader@49476842 
+----------------------------------------------------------------
