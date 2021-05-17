@@ -74,7 +74,11 @@
                                 <a href="" id="birthLogo" class="changeColorA"><i class="fas fa-birthday-cake"></i></a>
                                 
                                 <h:inputText validatorMessage="#{userBean.hataliBirthDateGrisiRegister()}" pt:required="required" value="#{userBean.birthDate}" class="mailClass w-100" id="birthDate" pt:placeholder="Doğum Tarihi">
+                                    
+                                    
+                                    
                                 </h:inputText>
+                                
                                 
                             </div>
                             
@@ -102,6 +106,7 @@
                                 <f:validateLength minimum="8" maximum="20"></f:validateLength>
                                 
                                 </h:inputSecret>
+                                <h:messages  style="display:none;height:0;width:0;"></h:messages>
                                 
                                
                             </div>

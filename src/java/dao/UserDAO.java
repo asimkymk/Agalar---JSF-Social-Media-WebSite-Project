@@ -11,6 +11,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -348,6 +350,7 @@ public class UserDAO {
         ArrayList<PostBean> postlar1 = new ArrayList<PostBean>();
         for(int i = PostDAO.getPosts().size()-1;i >=0 ;i--){
             if(FollowersDAO.isFollowing(followerId, PostDAO.getPosts().get(i).getUserId()) || PostDAO.getPosts().get(i).getUserId() == followerId){
+                
                 postlar1.add(PostDAO.getPosts().get(i));
             }
         }
@@ -359,9 +362,10 @@ public class UserDAO {
                 PreparedStatement ps = con.prepareStatement("INSERT INTO POSTS (USERID,CONTENT,LIKECOUNT,COMMENTCOUNT,CREATEDATE,PHOTOURI,VIDEOURI) VALUES(?,?,0,0,?,?,?)");
                 ps.setInt(1, userid);
                 ps.setString(2,content);
-                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.YYYY");
-                LocalDateTime now = LocalDateTime.now();
-                ps.setString(3,dtf.format(now));
+                //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy.HH.mm.ss");
+                //LocalDateTime now = LocalDateTime.now();
+               //String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date());
+                ps.setTimestamp(3,new Timestamp(System.currentTimeMillis()));
                 ps.setString(4,photoUri);
                 ps.setString(5,videoUri);
 
@@ -370,7 +374,7 @@ public class UserDAO {
                 DataConnect.close(con);
                 return "ok";
         } catch (SQLException ex) {
-                return "Post gönderilirken bir hata oluştu";
+                return ex.getMessage();
         }
         
     }

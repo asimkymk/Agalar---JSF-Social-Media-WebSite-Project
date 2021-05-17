@@ -10,6 +10,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import util.DataConnect;
 
@@ -26,7 +29,18 @@ public class PostDAO {
                 
                 ResultSet rs = ps.executeQuery();
                 while(rs.next()) {
-                    postlar.add(new PostBean(rs.getInt("USERID"),rs.getInt("POSTID"),rs.getString("CONTENT"),rs.getInt("LIKECOUNT"),rs.getInt("COMMENTCOUNT"),rs.getString("CREATEDATE"),rs.getString("PHOTOURI"),rs.getString("VIDEOURI")));
+                    String tarih = rs.getString("CREATEDATE");
+                    tarih = tarih.substring(0,16);
+                    String bugun = String.valueOf(new Timestamp(System.currentTimeMillis()));
+                    if(tarih.substring(0,10).equals(bugun.substring(0,10))){
+                        if(tarih.substring(11,13).equals(bugun.substring(11,13))){
+                            tarih = String.valueOf(Integer.valueOf(bugun.substring(14,16)) - Integer.valueOf(tarih.substring(14,16))) + " dk";
+                        }
+                        else{
+                            tarih = String.valueOf(Integer.valueOf(bugun.substring(11,13)) - Integer.valueOf(tarih.substring(11,13))) + " saat";
+                        }
+                    }
+                    postlar.add(new PostBean(rs.getInt("USERID"),rs.getInt("POSTID"),rs.getString("CONTENT"),rs.getInt("LIKECOUNT"),rs.getInt("COMMENTCOUNT"),tarih,rs.getString("PHOTOURI"),rs.getString("VIDEOURI")));
                    
                 }
                 DataConnect.close(con);
