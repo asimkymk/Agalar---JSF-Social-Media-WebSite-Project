@@ -452,7 +452,8 @@ a:hover {
 .modal-content {
     margin: auto;
     display: block;
-    width: 70%;
+    width:auto;
+    height:100%;
 }
 
 /* Caption of Modal Image */
