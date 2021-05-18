@@ -149,33 +149,40 @@
 
                         </div>
                         <div class="aga-Main-Action">
-                            <c:if test="#{userBean.gonderiyiBegenmisMi(item.postId) == 1}">
+                            
+                            
                                  <div class="aga-Main-Action-Like">
-                               <h:commandLink class="aga-Main-Action-Like-Text" style="color:#0056b3;" action="#{userBean.gonderiyiBegenme(item.postId, item.likeCount)}"><i class="fas fa-heart">&nbsp;#{item.likeCount}</i></h:commandLink>
-                                </div>
-                             </c:if>
-                            <c:if test="#{userBean.gonderiyiBegenmemisMi(item.postId) == 1}">
-                                 <div class="aga-Main-Action-Like">
+                                     <h:commandLink rendered="#{userBean.gonderiyiBegenmisMi(item.postId) eq 1}" class="aga-Main-Action-Like-Text" style="color:#0056b3;" action="#{userBean.gonderiyiBegenme(item.postId, item.likeCount)}"><i class="fas fa-heart"></i>&nbsp;#{item.likeCount}</h:commandLink>
+                             
+                                    
+                                
                                      
-                                     <h:commandLink class="aga-Main-Action-Like-Text"  action="#{userBean.gonderiyiBegen(item.postId, item.likeCount)}"><i class="far fa-heart">&nbsp;#{item.likeCount}</i></h:commandLink>
-                                </div>
-                             </c:if>
+                                    <h:commandLink rendered="#{userBean.gonderiyiBegenmemisMi(item.postId) eq 1}" class="aga-Main-Action-Like-Text"  action="#{userBean.gonderiyiBegen(item.postId, item.likeCount)}"><i class="far fa-heart"></i>&nbsp;#{item.likeCount}</h:commandLink>
+                               
                             
-                            
-                            
+                               </div>
                             <div class="aga-Main-Action-Comment">
-                                <i class="far fa-comment"></i>
-                                <div class="aga-Main-Action-Comment-Text">#{item.commentCount}</div>
+                                <h:commandLink class="aga-Main-Action-Comment-Text">
+                                    <i class="far fa-comment"></i>&nbsp;#{item.commentCount}
+                                </h:commandLink>
+                                
                             </div>
                             <div class="aga-Main-Action-Share">
-                                <i class="bi bi-share"></i>
+                                <h:commandLink>
+                                    <i class="bi bi-share"></i>
+                                </h:commandLink>
+                                
                             </div>
                             <div class="aga-Main-Action-Save">
-                                <i class="far fa-save"></i>
+                                <h:commandLink>
+                                    <i class="far fa-save"></i>
+                                </h:commandLink>
+                                
                             </div>
-                            <div class="aga-Main-Ust-Tarih">
+                            <h:commandLink class="aga-Main-Ust-Tarih">
                                 #{item.createDate}
-                            </div>
+                            </h:commandLink>
+                            
 
                         </div>
 

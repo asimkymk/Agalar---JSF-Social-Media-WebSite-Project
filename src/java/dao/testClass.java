@@ -15,7 +15,7 @@ public class testClass {
     public static void main(String[] args) {
         UserBean ub = new UserBean();
         ub.setUserId(2);
-        //System.out.println(UserBean.gonderiyiBegenmisMi(2,13));
+       System.out.println(ub.gonderiyiBegenmemisMi(13));
     }
     
 }
