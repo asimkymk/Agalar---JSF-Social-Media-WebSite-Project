@@ -5,6 +5,7 @@
  */
 package beans;
 
+import dao.LikesDAO;
 import dao.UserDAO;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -53,7 +54,7 @@ public class UserBean implements Serializable{
     private String postPhotoUri="empty";
     private String postVideoUri="empty";
     private String postHata;
-
+    
     public String getPostHata() {
         return postHata;
     }
@@ -412,6 +413,26 @@ public class UserBean implements Serializable{
         }
         return "home.xhtml?faces-redirect=true";
         
+    }
+    public String gonderiyiBegen(int postId,int activeLikeNumber){
+        
+        UserDAO.LikeCountArtir(this.userId, postId, activeLikeNumber);
+        return "home.xhtml?faces-redirect=true";
+        
+    }
+    public String gonderiyiBegenme(int postId,int activeLikeNumber){
+        
+        UserDAO.LikeCountAzalt(this.userId, postId, activeLikeNumber);
+        return "home.xhtml?faces-redirect=true";
+        
+    }
+    public int gonderiyiBegenmisMi(int postId){
+        if (LikesDAO.isLiked(userId, postId)) return 1;
+        else return -1;
+    }
+    public int gonderiyiBegenmemisMi(int postId){
+        if(LikesDAO.isLiked(userId, postId))return -1;
+        else return 1;
     }
     
 }

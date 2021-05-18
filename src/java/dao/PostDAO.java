@@ -68,4 +68,7 @@ public class PostDAO {
         return postlar;
     }
     
+    
+        
+    
 }

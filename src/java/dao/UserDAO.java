@@ -378,4 +378,53 @@ public class UserDAO {
         }
         
     }
+    public static boolean LikeCountArtir(int userId,int postId,int activeLikeCount){
+       
+        if(!LikesDAO.isLiked(userId, postId)){
+            boolean durum = LikesDAO.Like(userId, postId);
+            if(durum){
+                 try {
+                    Connection con = DataConnect.getConnection();
+                    PreparedStatement ps = con.prepareStatement("UPDATE POSTS SET LIKECOUNT = ? WHERE USERID=? AND POSTID = ?");
+                    ps.setInt(1, ++activeLikeCount);
+                    ps.setInt(2, userId);
+                    ps.setInt(3, postId);
+                    ps.executeUpdate();
+                    con.close();
+                    return true;
+                } catch (SQLException ex) {
+
+                    return false;
+                }
+
+            }
+           return false; 
+        }
+        return false;
+    }
+    public static boolean LikeCountAzalt(int userId,int postId,int activeLikeCount){
+        if(LikesDAO.isLiked(userId, postId)){
+            boolean durum = LikesDAO.unLike(userId, postId);
+        if(durum){
+             try {
+                Connection con = DataConnect.getConnection();
+                PreparedStatement ps = con.prepareStatement("UPDATE POSTS SET LIKECOUNT = ? WHERE USERID=? AND POSTID = ?");
+                ps.setInt(1, --activeLikeCount);
+                ps.setInt(2, userId);
+                ps.setInt(3, postId);
+                ps.executeUpdate();
+                con.close();
+                return true;
+            } catch (SQLException ex) {
+
+                return false;
+            }
+            
+        }
+       return false; 
+        }
+        return false;
+        
+    }
+    
 }

@@ -125,6 +125,7 @@
                     
                 </div>
                 <ui:repeat value="#{userBean.postlariGoster()}" var="item">
+                    <h:form>
                     <div class="aga">
                     <div class="aga-Sol">
                         <img src="#{userBean.postUserPictureUri(item.userId)}"
@@ -148,11 +149,20 @@
 
                         </div>
                         <div class="aga-Main-Action">
-
-                            <div class="aga-Main-Action-Like">
-                                <i class="far fa-heart"></i>
-                                <div class="aga-Main-Action-Like-Text">#{item.likeCount}</div>
-                            </div>
+                            <c:if test="#{userBean.gonderiyiBegenmisMi(item.postId) == 1}">
+                                 <div class="aga-Main-Action-Like">
+                               <h:commandLink class="aga-Main-Action-Like-Text" style="color:#0056b3;" action="#{userBean.gonderiyiBegenme(item.postId, item.likeCount)}"><i class="fas fa-heart">&nbsp;#{item.likeCount}</i></h:commandLink>
+                                </div>
+                             </c:if>
+                            <c:if test="#{userBean.gonderiyiBegenmemisMi(item.postId) == 1}">
+                                 <div class="aga-Main-Action-Like">
+                                     
+                                     <h:commandLink class="aga-Main-Action-Like-Text"  action="#{userBean.gonderiyiBegen(item.postId, item.likeCount)}"><i class="far fa-heart">&nbsp;#{item.likeCount}</i></h:commandLink>
+                                </div>
+                             </c:if>
+                            
+                            
+                            
                             <div class="aga-Main-Action-Comment">
                                 <i class="far fa-comment"></i>
                                 <div class="aga-Main-Action-Comment-Text">#{item.commentCount}</div>
@@ -176,7 +186,7 @@
                     </div>
 
                     </div>
-                     
+                     </h:form>
                 </ui:repeat>
                 
                 
