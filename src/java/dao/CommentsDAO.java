@@ -34,6 +34,56 @@ public class CommentsDAO {
         this.likeCount = likeCount;
         this.createDate = createDate;
     }
+
+    public int getCommentId() {
+        return commentId;
+    }
+
+    public void setCommentId(int commentId) {
+        this.commentId = commentId;
+    }
+
+    public int getPostId() {
+        return postId;
+    }
+
+    public void setPostId(int postId) {
+        this.postId = postId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public int getLikeCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(int likeCount) {
+        this.likeCount = likeCount;
+    }
+
+    public String getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
+    }
+    
+    
     
    public static ArrayList<CommentsDAO> getComments(int postid){
        ArrayList<CommentsDAO> commentlar = new ArrayList<CommentsDAO>();
@@ -71,12 +121,12 @@ public class CommentsDAO {
                             }
                         }
                     }
-                    commentlar.add(new CommentsDAO(rs.getInt("COMMENTID"),rs.getInt("POSTID"),rs.getInt("USERID"),rs.getString("CONTENT"),rs.getInt("LIKECOUNT"),rs.getString("CREATEDATE")));
+                    commentlar.add(new CommentsDAO(rs.getInt("COMMENTID"),rs.getInt("POSTID"),rs.getInt("USERID"),rs.getString("CONTENT"),rs.getInt("LIKECOUNT"),tarih));
                 }
                 con.close(); 
         } catch (SQLException ex) {
             System.out.println("Listeleme hatası");
         }
-       return commentlar;
+        return commentlar;
    }
 }

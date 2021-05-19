@@ -421,8 +421,18 @@ public class UserDAO {
         }
        return false; 
         }
-        return false;
-        
+        return false; 
     }
-    
+    public static boolean mesajlasmisMı(int firstid, int secondid){
+         if(FollowersDAO.isFollowing(firstid,secondid)){
+            if(MessagesDAO.getPrivateMessages(firstid, secondid).size() > 0){
+                return true;
+            }
+            else{
+               return false;
+            }
+        }else{
+             return false;
+        }
+    }
 }
