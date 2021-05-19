@@ -5,14 +5,11 @@
  */
 package dao;
 
-import beans.PostBean;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import util.DataConnect;
 
@@ -20,15 +17,32 @@ import util.DataConnect;
  *
  * @author Sirac
  */
-public class PostDAO {
-    public static ArrayList<PostBean> getPosts(){
-        ArrayList<PostBean> postlar = new ArrayList<PostBean>();
-        try {
+public class CommentsDAO {
+    
+    private int commentId;
+    private int postId;
+    private int userId;
+    private String content;
+    private int likeCount;
+    private String createDate;
+
+    public CommentsDAO(int commentId, int postId, int userId, String content, int likeCount, String createDate) {
+        this.commentId = commentId;
+        this.postId = postId;
+        this.userId = userId;
+        this.content = content;
+        this.likeCount = likeCount;
+        this.createDate = createDate;
+    }
+    
+   public static ArrayList<CommentsDAO> getComments(int postid){
+       ArrayList<CommentsDAO> commentlar = new ArrayList<CommentsDAO>();
+       try {
                 Connection con = DataConnect.getConnection();
-                PreparedStatement ps = con.prepareStatement("Select * from POSTS");
-                
+                PreparedStatement ps = con.prepareStatement("Select * from COMMENTS where POSTID = ?");       
+                ps.setInt(1, postid);
                 ResultSet rs = ps.executeQuery();
-                while(rs.next()) {
+                while (rs.next()) {
                     String tarih = rs.getString("CREATEDATE");
                     tarih = tarih.substring(0,16);
                     String bugun = String.valueOf(new Timestamp(System.currentTimeMillis()));
@@ -57,20 +71,12 @@ public class PostDAO {
                             }
                         }
                     }
-                    String photouri = rs.getString("PHOTOURI");
-                    if (photouri.equals("empty")){
-                        photouri = null;
-                    }
-                    postlar.add(new PostBean(rs.getInt("USERID"),rs.getInt("POSTID"),rs.getString("CONTENT"),rs.getInt("LIKECOUNT"),rs.getInt("COMMENTCOUNT"),tarih,photouri,rs.getString("VIDEOURI")));
-                   
+                    commentlar.add(new CommentsDAO(rs.getInt("COMMENTID"),rs.getInt("POSTID"),rs.getInt("USERID"),rs.getString("CONTENT"),rs.getInt("LIKECOUNT"),rs.getString("CREATEDATE")));
                 }
-                DataConnect.close(con);
-                 
+                con.close(); 
         } catch (SQLException ex) {
-                System.out.println("Giriş hatası");
+            System.out.println("Listeleme hatası");
         }
-        
-        return postlar;
-    }
-   
+       return commentlar;
+   }
 }
