@@ -4,11 +4,7 @@
  * and open the template in the editor.
  */
 package beans;
-import dao.PostDAO;
 import java.io.Serializable;
-import java.util.Vector;
-import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 

@@ -7,6 +7,7 @@
 
 body {
     background-color: #F5F6F6;
+    font-size:16px;
 }
 
 a {
@@ -52,7 +53,7 @@ a:hover {
 }
 
 .marka {
-    font-size: 40px;
+    font-size: 3rem;
     font-weight: 700;
     letter-spacing: 10px;
     color: #3383FF;
@@ -269,7 +270,7 @@ a:hover {
 }
 
 .btn-agala {
-    font-size: 20px;
+    font-size: 1.4rem;
     border-radius: 15px;
     float:right;
     margin-left:auto;
@@ -307,7 +308,7 @@ a:hover {
 .aga-Main {
     display: flex;
     flex-flow: column;
-    font-size: 20px;
+    font-size: 1.25rem;
     align-self:flex-start;
 
 
@@ -331,14 +332,14 @@ a:hover {
 }
 
 .aga-Main-Ust-Kullanıcı {
-    font-size: 18px;
+    font-size: 1.125rem;
     color: darkgray;
     margin-right: 5px;
 }
 
 .aga-Main-Ust-Tarih {
-    font-size: 16px;
-    color: darkgray;
+    font-size: 1rem;
+    color: gray;
     padding-left: 15px;
 }
 
@@ -375,7 +376,7 @@ a:hover {
 .aga-Main-Action {
     display: flex;
     flex-flow: row;
-    font-size: 22px;
+    font-size: 1rem;
     justify-content: flex-start;
     align-items: center;
 
@@ -391,7 +392,7 @@ a:hover {
 }
 
 .aga-Main-Action-Like-Text {
-    font-size: 18px;
+    font-size: 1rem;
     margin-left: 5px;
 }
 
@@ -405,7 +406,7 @@ a:hover {
 }
 
 .aga-Main-Action-Comment-Text {
-    font-size: 18px;
+    font-size: 1rem;
     margin-left: 5px;
 }
 
@@ -566,5 +567,10 @@ a:hover {
         width:100%;
         padding:0;
     }
+    body {
+    background-color: #F5F6F6;
+    font-size:11px;
+    }
+    
 }
 

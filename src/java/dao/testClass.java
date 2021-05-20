@@ -15,7 +15,9 @@ public class testClass {
     public static void main(String[] args) {
         UserBean ub = new UserBean();
         ub.setUserId(2);
-       System.out.println(PostDAO.getPosts().get(PostDAO.getPosts().size()-1).getPhotoUrl());
+        ub.setAra("asd");
+        System.out.println(ub.postAra());
+       //System.out.println(ub.kullaniciAra().get(0).getFirstName());
     }
     
 }

@@ -7,6 +7,7 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Agamla'ya Kayıt</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
         <link href='resources/css/bootstrap.min.css' rel='stylesheet' type='text/css'/>
         <script src="https://kit.fontawesome.com/41f4fd74e6.js" crossorigin="anonymous"></script>
         
@@ -34,10 +35,10 @@
                 <div class="">
                     <div class="d-flex flex-row-reverse margin10 ">
                         <div class="p-2">
-                            <a href="" class="main-button-unselected">Giriş yap</a>
+                            <h:link value ="Giriş yap" class ="main-button-unselected" outcome ="login"/>
                         </div>
                         <div class="p-2">
-                            <a href="signui.html" class="main-button-selected">Hesabın mı yok?</a>
+                            <h:link value ="Hesabın mı yok?" class ="main-button-selected" outcome ="signup"/>
                         </div>
                     </div>
                     <div class="container altPanel">

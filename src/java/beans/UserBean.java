@@ -5,18 +5,15 @@
  */
 package beans;
 
+import dao.FollowersDAO;
 import dao.LikesDAO;
 import dao.UserDAO;
 import java.io.Serializable;
 import java.util.ArrayList;
 
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
-import util.DataConnect;
 
 /**
  *
@@ -54,6 +51,15 @@ public class UserBean implements Serializable{
     private String postPhotoUri="empty";
     private String postVideoUri="empty";
     private String postHata;
+    private String ara;
+
+    public String getAra() {
+        return ara;
+    }
+
+    public void setAra(String ara) {
+        this.ara = ara;
+    }
     
     public String getPostHata() {
         return postHata;
@@ -433,6 +439,30 @@ public class UserBean implements Serializable{
     public int gonderiyiBegenmemisMi(int postId){
         if(LikesDAO.isLiked(userId, postId))return -1;
         else return 1;
+    }
+    public ArrayList<UserBean> kullaniciAra(){
+        return UserDAO.kullaniciyiAra(userId, this.ara);
+        
+    }
+    public ArrayList<PostBean> postAra(){
+        ArrayList<Integer>uids = new ArrayList<Integer>();
+        for(int i = 0;i<UserDAO.kullaniciyiAra(userId, this.ara).size();i++){
+            if(!UserDAO.kullaniciyiAra(userId, this.ara).get(i).isHidden) uids.add(UserDAO.kullaniciyiAra(userId, this.ara).get(i).getUserId());
+        }
+        ArrayList<PostBean> postlar=new ArrayList<PostBean>();
+        for(int i = UserDAO.postuAra(this.userId, this.ara, uids).size()-1;i>=0;i--){
+            postlar.add(UserDAO.postuAra(this.userId, this.ara, uids).get(i));
+        }
+        return postlar;
+        
+    }
+    public String aramaYap(){
+        
+        return "search.xhtml?faces-redirect=true";
+    }
+    public boolean takiplesiyorMu(int searchId){
+        return FollowersDAO.isFollowing(userId, searchId);
+        
     }
     
 }
