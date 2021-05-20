@@ -4,9 +4,157 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
         <title>Facelet Title</title>
+        <link href='resources/css/bootstrap.min.css' rel='stylesheet' type='text/css'/>
+        <script src="https://kit.fontawesome.com/41f4fd74e6.js" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/ionicons@5.5.1/dist/ionicons.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+       <link href="http://fonts.googleapis.com/css?family=Nunito:100italic,100,300italic,300,400italic,400,700italic,700,900italic,900" rel="stylesheet" type="text/css"/>
+       <link href='resources/css/agamla-main.css' rel='stylesheet' type='text/css'/>
+       <link href='resources/css/agamla-messages.css' rel='stylesheet' type='text/css'/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"/>
     </h:head>
     <h:body>
         Hello from Facelets
+        <div class="">
+            <div class="row-main box row ">
+                 <div class="left-Panel col-3 d-none d-md-block ">
+                     <div class="stick-top">
+                        <div class="marka">
+                            AGAMLA
+                        </div>
+                        <div class="Menu">
+                            <h:form>
+                            <ul class="left-Panel-Menu">
+                                <li>
+                                    <h:commandLink action="home" class="left-Panel-Link left-Panel-Link-Selected"><i class="fas fa-home"></i>Anasayfa</h:commandLink>
+                                </li>
+                                <li>
+                                     <h:commandLink action="messages" class="left-Panel-Link"><i class="fas fa-envelope"></i>Mesajlar</h:commandLink>
+                                </li>
+                                <li>
+                                    <h:commandLink action="notifications" class="left-Panel-Link"><i class="fas fa-bell"></i>Bildirimler</h:commandLink>
+                                </li>
+                                <li>
+                                    <h:commandLink action="profile" class="left-Panel-Link"><i class="fas fa-user-alt"></i>Profil</h:commandLink>
+                                </li>
+                                <li>
+                                    <h:commandLink action="saves" class="left-Panel-Link"><i class="fas fa-save"></i>Kaydedilenler</h:commandLink>
+                                </li>
+                                <li>
+                                    <h:commandLink action="settings" class="left-Panel-Link"><i class="fas fa-cog"></i>Ayarlar</h:commandLink>
+                                </li>
+
+                            </ul>
+                                <h:commandButton class="left-Panel-Agala" action="home" value="Agala" ></h:commandButton>
+                            </h:form>
+                        </div>
+                    </div>
+                    
+
+                    <div class="cikisYap">
+                        <div class="cikisYap-Foto">
+                            <img width="40px"
+                                 src="${userBean.profilePictureUri}"
+                                 alt="profilResim" style="border-radius: 20px;"/>
+                        </div>
+                        <div class="cikisYap-Text">
+                            <div class="cikisYap-Profil-Ismi">
+                                ${userBean.firstName} #{userBean.lastName}
+                            </div>
+                            <div class="cikisYap-Profil-Username">
+                                @#{userBean.tag}
+                            </div>
+
+                        </div>
+                        <div class="cikisYap-Cikis">
+                            ...
+                        </div>
+
+                    </div>
+                
+                </div>
+                
+            <!-->
+            
+            
+                BURAYA RESPONSIVE OLDUĞUNDA SOL PANELİN YAZISIZ HALİ GELECEK
+                css ile olursa ok yoksa yeni panel yaz.
+            </!-->   
+            <div class="main-Panel col-12 col-md-4">
+                <div class="panel-Main-Agala">
+                    <div class="messages-card">
+                        <div>
+                            <div class="aga-Sol">
+                                <div class="panel-Agala-Foto">
+                                    <img width="60px"
+                                     src="${userBean.profilePictureUri}"
+                                     alt="profilResim" style="border-radius: 30px;"/>
+                                </div>
+                            </div>
+                           <div class="aga-Main">
+                               <div class="aga-Main-Ust">
+                                   <div class="aga-Main-Ust-Isim">
+                                       emre taskin
+                                   </div>
+                                   <div class="aga-Main-Ust-Kullanıcı" style="color:gray;">
+                                       emretskn
+                                   </div>
+
+                               </div>
+                               <div class="aga-Main-Icerik">
+
+                                   <p>#{item.content}</p>
+
+
+                               </div>
+                               
+
+
+                           </div>
+                          <div class="aga-Sag">
+                               ...
+                           </div>
+
+                        </div>
+                    </div>
+  
+                </div>
+                   
+            </div>
+            <div class="col-md-2">
+                
+            </div>
+            
+            <div class="right-Panel col-3 d-none d-md-block">
+                <div class="stick-top">
+                    <div class="search">
+
+                    </div>
+                    <div>
+                        <h:form>
+                            <ul class="right-Panel-menu">
+                                <li> 
+                                     <h:commandLink action="home" class="right-Panel-out-link">Hakkinda</h:commandLink>
+                                </li>
+                                <li> 
+                                     <h:commandLink action="home" class="right-Panel-out-link">Hizmet Sartlari</h:commandLink>
+                                </li>
+                                <li> 
+                                     <h:commandLink action="home" class="right-Panel-out-link">Iletisim</h:commandLink>
+                                </li>
+                                <li> 
+                                     <h:commandLink action="home" class="right-Panel-out-link">2021 Agalar</h:commandLink>
+                                </li>
+                            </ul>
+
+                        </h:form>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+            
+    </div>
         <script>
         if(#{userBean.isLogged == false}){
                 window.location.href="login.xhtml";
