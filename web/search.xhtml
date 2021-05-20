@@ -86,45 +86,56 @@
                 css ile olursa ok yoksa yeni panel yaz.
             </!-->   
             <div class="main-Panel col-12 col-md-6">
-                <div class="panel-Main-Agala">
-                    <h:form>
-
-                    <div class="panel-Agala">
-                        <div class="panel-Agala-Foto">
-                            <img width="60px"
-                                 src="${userBean.profilePictureUri}"
-                                 alt="profilResim" style="border-radius: 30px;"/>
-                        </div>
-                        <div class="panel-Agala-Text">
-                            <p:inputTextarea rows="2" id="text" cols ="75"  styleClass="Agala-Text" pt:placeholder="Neler oluyor?"
-                                  pt:maxlength="280" value="#{userBean.postContent}"></p:inputTextarea>
-                            <!-->
-                            <h:inputTextarea rows="2" id="text" class="Agala-Text" pt:placeholder="Neler oluyor?"
-                                  pt:maxlength="200"></h:inputTextarea></!-->
-                        </div>
-                    </div>
-                    <div class="panel-Agala-Gonder">
-                        <div class="Agala-Secenekler">
-                            <h:commandLink class="Agala-Sec"><i class="far fa-image"></i></h:commandLink>
-                            <h:commandLink class="Agala-Sec"><i class="fas fa-video"></i></h:commandLink>
-                            <c:if test="#{not empty userBean.postHata}">
-                                <p style="color:red;margin:0;padding:0;">#{userBean.postHata}</p>
-                             </c:if>
-                        </div>
-                        <h:commandButton class="btn btn-primary btn-agala" value="Agala" action="#{userBean.postGonder()}">
-                        
-                           
-                        
-                        
-                        </h:commandButton>
-                    </div>
-                    </h:form>
-                    <a>
-                        <ion-icon name="share-outline"></ion-icon>
-                    </a>
-                    
+                <div style="font-size: 1.5rem;color: darkgray;padding: 15px 15px;font-weight: 600;">
+                    Bulunan Agalar
                 </div>
-                <ui:repeat value="#{userBean.postlariGoster()}" var="item">
+                <h:outputText style="font-size:1.2rem; padding:20px 20px;" rendered="#{userBean.kullaniciAra() == null or userBean.kullaniciAra().size() == 0}" value="Aradığın Aga'yı bulamadık. Ama üzülme çünkü Agamla'ya kayıt olmak ücretsiz. Hemen Aga'nı çağır!">
+                    
+                    
+                </h:outputText>
+                <ui:repeat value="#{userBean.kullaniciAra()}" var="item">
+                    <h:form>
+                    <div class="aga">
+                    <div class="aga-Sol">
+                        <img src="#{item.profilePictureUri}"
+                             width="100px" style="border-radius: 50px;" alt=""/>
+                    </div>
+                    <div class="aga-Main">
+                        <div class="aga-Main-Ust-Isim">
+                            #{item.firstName} #{item.lastName}
+                        </div>
+                        <div class="aga-Main-Ust-Kullanıcı" style="color:gray;">
+                            @#{item.getTag()}
+                        </div>
+                        <div class="aga-Main-Icerik">
+                            
+                            <p>#{item.bio}</p>
+                        </div>
+                    </div>
+                   <div  style="margin-left:auto">
+                       <h:commandButton rendered="#{userBean.takiplesiyorMu(item.userId)}" class="btn btn-secondary btn-agala" value="Takip ediliyor">
+                           
+                       </h:commandButton>
+                       <h:commandButton rendered="#{!userBean.takiplesiyorMu(item.userId)}" class="btn btn-primary btn-agala" value="Takip et">
+                           
+                       </h:commandButton>
+                       
+                    </div>
+
+                    </div>
+                     </h:form>
+                    
+                </ui:repeat>
+                
+                <hr></hr>
+                <div style="font-size: 1.5rem;color: darkgray;padding: 15px 15px;font-weight: 600;">
+                    Bulunan Paylaşımlar
+                </div>
+                <h:outputText style="font-size:1.2rem; padding:20px 20px;" rendered="#{userBean.postAra() == null or userBean.postAra().size() == 0}" value="Aradığın paylaşımı bulamadık. Üzgünüz ama belki bununla ilgili bir şeyler Agalamak istersin?">
+                    
+                    
+                </h:outputText>
+                <ui:repeat value="#{userBean.postAra()}" var="item">
                     <h:form>
                     <div class="aga">
                     <div class="aga-Sol">
@@ -215,16 +226,14 @@
                 </ui:repeat>
                 
                 
-                
-                
-
+#{userBean.ara = null}
             </div>
             <div class="right-Panel col-3 d-none d-md-block">
                 <div class="stick-top">
                     <div class="search">
                         <h:form >
 
-                            <h:inputText pt:required="required" class="search-input" pt:placeholder="Agalarını bul..." value="#{userBean.ara}"></h:inputText> <h:commandLink
+                           <h:inputText pt:required="required" class="search-input" pt:placeholder="Agalarını bul..." value="#{userBean.ara}"></h:inputText> <h:commandLink
                             action="#{userBean.aramaYap()}"
                             class="search-icon">
                                  <i class="fa fa-search"></i>
@@ -233,8 +242,6 @@
                                 
                             </h:commandButton>
                         </h:form>
-                    </div>
-                    <div>
                         <h:form>
                             <ul class="right-Panel-menu">
                                 <li> 

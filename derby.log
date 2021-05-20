@@ -1,20 +1,17 @@
-Mon May 17 23:19:05 EET 2021 : Apache Derby Network Server - 10.10.2.0 - (1582446) started and ready to accept connections on port 1527
+Thu May 20 01:33:31 EET 2021 : Apache Derby Network Server - 10.9.1.0 - (1344872) started and ready to accept connections on port 1527
 ----------------------------------------------------------------
-Mon May 17 23:19:05 EET 2021:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0179-7bfb-5afb-00003388d8bf 
-on database directory C:\Users\user\Documents\GitHub\Agalar\agalar with class loader sun.misc.Launcher$AppClassLoader@49476842 
-Loaded from file:/C:/Users/user/GlassFish_Server/javadb/lib/derby.jar
+Thu May 20 01:33:32 EET 2021:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.9.1.0 - (1344872): instance a816c00e-0179-86c3-3979-ffff874dfd26 
+on database directory C:\Users\asimk\Documents\Agalar\agalar  with class loader sun.misc.Launcher$AppClassLoader@49476842 
+Loaded from file:/C:/Users/asimk/GlassFish_Server/javadb/lib/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_291-b10
-user.dir=C:\Users\user\GlassFish_Server\javadb
-os.name=Windows 10
-os.arch=amd64
-os.version=10.0
-derby.system.home=C:\Users\user\Documents\GitHub\Agalar
+user.dir=C:\Users\asimk\GlassFish_Server\javadb
+derby.system.home=C:\Users\asimk\Documents\Agalar
 Database Class Loader started - derby.database.classpath=''
 ----------------------------------------------------------------
-Mon May 17 23:25:19 EET 2021: Shutting down Derby engine
+Thu May 20 06:19:09 EET 2021: Shutting down Derby engine
 ----------------------------------------------------------------
-Mon May 17 23:25:19 EET 2021:
-Shutting down instance a816c00e-0179-7bfb-5afb-00003388d8bf on database directory C:\Users\user\Documents\GitHub\Agalar\agalar with class loader sun.misc.Launcher$AppClassLoader@49476842 
+Thu May 20 06:19:09 EET 2021:
+Shutting down instance a816c00e-0179-86c3-3979-ffff874dfd26 on database directory C:\Users\asimk\Documents\Agalar\agalar with class loader sun.misc.Launcher$AppClassLoader@49476842 
 ----------------------------------------------------------------
