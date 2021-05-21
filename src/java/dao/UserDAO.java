@@ -587,6 +587,24 @@ public class UserDAO {
         }
         return bulunanlar;
     }
+    public static boolean postKaydet(int userId ,int postId) {
+
+        if (!SavesDAO.isSaved(userId, postId)) {
+            boolean durum = SavesDAO.Save(userId, postId);
+            return durum;
+        }
+        return false;
+    }
+
+    public static boolean postKaydetme(int userId, int postId) {
+        if (SavesDAO.isSaved(userId, postId)) {
+            boolean durum = SavesDAO.unSave(userId, postId);
+            
+            return durum;
+        }
+        return false;
+    }
+
 }
 
     

@@ -50,7 +50,6 @@
                                 </li>
 
                             </ul>
-                                <h:commandButton class="left-Panel-Agala" action="home" value="Agala" ></h:commandButton>
                             </h:form>
                         </div>
                     </div>
@@ -192,9 +191,12 @@
                                 
                             </div>
                             <div class="aga-Main-Action-Save">
-                                <h:commandLink>
-                                    <i class="far fa-save"></i>
-                                </h:commandLink>
+                                <h:commandLink rendered="#{userBean.gonderiyiKaydetmisMi(item.postId) eq 1}" class="aga-Main-Action-Save-Text" style="color:#0056b3;" action="#{userBean.gonderiyiKaydetme(item.postId)}"><i class="fas fa-save"></i>&nbsp;</h:commandLink>
+                             
+                                    
+                                
+                                     
+                                <h:commandLink rendered="#{userBean.gonderiyiKaydetmemisMi(item.postId) eq 1}" class="aga-Main-Action-Save-Text"  action="#{userBean.gonderiyiKaydet(item.postId)}"><i class="far fa-save"></i>&nbsp;</h:commandLink>
                                 
                             </div>
                             <h:commandLink class="aga-Main-Ust-Tarih">

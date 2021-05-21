@@ -17,7 +17,8 @@ public class testClass {
         ub.setUserId(2);
         ub.setAra("asd");
         System.out.println(ub.postAra());
-       //System.out.println(ub.kullaniciAra().get(0).getFirstName());
+        System.out.println(ub.kaydedilenPostlariListele().size());
+        System.out.println(ub.gonderiyiKaydetmemisMi(22));
     }
     
 }

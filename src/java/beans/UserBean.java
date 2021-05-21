@@ -7,6 +7,7 @@ package beans;
 
 import dao.FollowersDAO;
 import dao.LikesDAO;
+import dao.SavesDAO;
 import dao.UserDAO;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -14,6 +15,8 @@ import java.util.ArrayList;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -423,14 +426,18 @@ public class UserBean implements Serializable{
     public String gonderiyiBegen(int postId,int activeLikeNumber){
         
         UserDAO.LikeCountArtir(this.userId, postId, activeLikeNumber);
-        return "home.xhtml?faces-redirect=true";
-        
+        HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        String url = req.getRequestURL().toString();
+        return url+"?faces-redirect=true";
+
     }
     public String gonderiyiBegenme(int postId,int activeLikeNumber){
         
         UserDAO.LikeCountAzalt(this.userId, postId, activeLikeNumber);
-        return "home.xhtml?faces-redirect=true";
-        
+        HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        String url = req.getRequestURL().toString();
+        return url+"?faces-redirect=true";
+ 
     }
     public int gonderiyiBegenmisMi(int postId){
         if (LikesDAO.isLiked(userId, postId)) return 1;
@@ -463,6 +470,33 @@ public class UserBean implements Serializable{
     public boolean takiplesiyorMu(int searchId){
         return FollowersDAO.isFollowing(userId, searchId);
         
+    }
+    
+    public ArrayList<PostBean> kaydedilenPostlariListele(){
+        return SavesDAO.getSavedPosts(this.userId);
+    }
+    
+    public int gonderiyiKaydetmisMi(int postId){
+        if (SavesDAO.isSaved(userId, postId)) return 1;
+        else return -1;
+    }
+    public int gonderiyiKaydetmemisMi(int postId){
+        if(SavesDAO.isSaved(userId, postId))return -1;
+        else return 1;
+    }
+    public String gonderiyiKaydet(int postId){
+        
+        UserDAO.postKaydet(this.userId, postId);
+        HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        String url = req.getRequestURL().toString();
+        return url+"?faces-redirect=true";
+    }
+    public String gonderiyiKaydetme(int postId){
+        
+        UserDAO.postKaydetme(this.userId, postId);
+        HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        String url = req.getRequestURL().toString();
+        return url+"?faces-redirect=true";
     }
     
 }
