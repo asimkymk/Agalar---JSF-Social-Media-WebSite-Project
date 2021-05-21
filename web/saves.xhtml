@@ -31,22 +31,22 @@
                             <h:form>
                             <ul class="left-Panel-Menu">
                                 <li>
-                                    <h:commandLink action="home" class="left-Panel-Link left-Panel-Link-Selected"><i class="fas fa-home"></i>Anasayfa</h:commandLink>
+                                    <h:commandLink action="home.xhtml?faces-redirect=true" class="left-Panel-Link"><i class="fas fa-home"></i>Anasayfa</h:commandLink>
                                 </li>
                                 <li>
-                                     <h:commandLink action="messages" class="left-Panel-Link"><i class="fas fa-envelope"></i>Mesajlar</h:commandLink>
+                                     <h:commandLink action="messages.xhtml?faces-redirect=true" class="left-Panel-Link"><i class="fas fa-envelope"></i>Mesajlar</h:commandLink>
                                 </li>
                                 <li>
-                                    <h:commandLink action="notifications" class="left-Panel-Link"><i class="fas fa-bell"></i>Bildirimler</h:commandLink>
+                                    <h:commandLink action="notifications.xhtml?faces-redirect=true" class="left-Panel-Link"><i class="fas fa-bell"></i>Bildirimler</h:commandLink>
                                 </li>
                                 <li>
-                                    <h:commandLink action="profile" class="left-Panel-Link"><i class="fas fa-user-alt"></i>Profil</h:commandLink>
+                                    <h:commandLink action="profile.xhtml?faces-redirect=true" class="left-Panel-Link"><i class="fas fa-user-alt"></i>Profil</h:commandLink>
                                 </li>
                                 <li>
-                                    <h:commandLink action="saves" class="left-Panel-Link"><i class="fas fa-save"></i>Kaydedilenler</h:commandLink>
+                                    <h:commandLink action="saves.xhtml?faces-redirect=true" class="left-Panel-Link left-Panel-Link-Selected"><i class="fas fa-save"></i>Kaydedilenler</h:commandLink>
                                 </li>
                                 <li>
-                                    <h:commandLink action="settings" class="left-Panel-Link"><i class="fas fa-cog"></i>Ayarlar</h:commandLink>
+                                    <h:commandLink action="settings.xhtml?faces-redirect=true" class="left-Panel-Link"><i class="fas fa-cog"></i>Ayarlar</h:commandLink>
                                 </li>
 
                             </ul>
@@ -85,13 +85,14 @@
                 css ile olursa ok yoksa yeni panel yaz.
             </!-->   
             <div class="main-Panel col-12 col-md-6">
-                <div style="font-size: 1.5rem;color: darkgray;padding: 15px 15px;font-weight: 600;">
+               <div style="font-size: 1.5rem;color: darkgray;padding:50px 20px 20px 20px;font-weight: 600;">
                     Kaydedilen Paylaşımlar
                 </div>
                 <h:outputText style="font-size:1.2rem; padding:20px 20px;" rendered="#{userBean.kaydedilenPostlariListele().size() == 0 or userBean.kaydedilenPostlariListele() == null}" value="Henüz bir gönderi kaydetmedin. Hemen bir aganın gönderisini kaydet!">
                     
                     
                 </h:outputText>
+                
                 <ui:repeat value="#{userBean.kaydedilenPostlariListele()}" var="item">
                     <h:form>
                     <div class="aga">
@@ -136,17 +137,28 @@
                         </div>
                         <div class="aga-Main-Action">
                             
+                            <h:panelGroup id="begeniler">
+                                
                             
-                                 <div class="aga-Main-Action-Like">
-                                     <h:commandLink rendered="#{userBean.gonderiyiBegenmisMi(item.postId) eq 1}" class="aga-Main-Action-Like-Text" style="color:#0056b3;" action="#{userBean.gonderiyiBegenme(item.postId, item.likeCount)}"><i class="fas fa-heart"></i>&nbsp;#{item.likeCount}</h:commandLink>
+                                 <div class="aga-Main-Action-Like" id="guncelle">
+                                     <h:commandLink id="begenmemis" rendered="#{userBean.gonderiyiBegenmisMi(item.postId) eq 1}" class="aga-Main-Action-Like-Text" style="color:#0056b3;" action="#{userBean.gonderiyiBegenme(item.postId, item.likeCount)}">
+                                         
+                                         
+                                         <i class="fas fa-heart"></i>&nbsp;#{item.likeCount}
+                                         <f:ajax render="begeniler" />
+                                     </h:commandLink>
                              
                                     
                                 
                                      
-                                    <h:commandLink rendered="#{userBean.gonderiyiBegenmemisMi(item.postId) eq 1}" class="aga-Main-Action-Like-Text"  action="#{userBean.gonderiyiBegen(item.postId, item.likeCount)}"><i class="far fa-heart"></i>&nbsp;#{item.likeCount}</h:commandLink>
-                               
+                                    <h:commandLink  id="begenmis" rendered="#{userBean.gonderiyiBegenmemisMi(item.postId) eq 1}" class="aga-Main-Action-Like-Text"  action="#{userBean.gonderiyiBegen(item.postId, item.likeCount)}"><i class="far fa-heart"></i>&nbsp;#{item.likeCount}
+                                    
+                                    <f:ajax render="begeniler" />
+                                    </h:commandLink>
+                              
                             
                                </div>
+                                 </h:panelGroup>
                             <div class="aga-Main-Action-Comment">
                                 <h:commandLink class="aga-Main-Action-Comment-Text">
                                     <i class="far fa-comment"></i>&nbsp;#{item.commentCount}
@@ -159,7 +171,9 @@
                                 </h:commandLink>
                                 
                             </div>
+                            
                             <div class="aga-Main-Action-Save">
+                               
                                 <h:commandLink rendered="#{userBean.gonderiyiKaydetmisMi(item.postId) eq 1}" class="aga-Main-Action-Save-Text" style="color:#0056b3;" action="#{userBean.gonderiyiKaydetme(item.postId)}"><i class="fas fa-save"></i>&nbsp;</h:commandLink>
                              
                                     
@@ -168,6 +182,7 @@
                                 <h:commandLink rendered="#{userBean.gonderiyiKaydetmemisMi(item.postId) eq 1}" class="aga-Main-Action-Save-Text"  action="#{userBean.gonderiyiKaydet(item.postId)}"><i class="far fa-save"></i>&nbsp;</h:commandLink>
                                 
                             </div>
+                            
                             <h:commandLink class="aga-Main-Ust-Tarih">
                                 #{item.createDate}
                             </h:commandLink>
@@ -184,6 +199,7 @@
                     </div>
                      </h:form>
                 </ui:repeat>
+                    
                 
                 
                 
