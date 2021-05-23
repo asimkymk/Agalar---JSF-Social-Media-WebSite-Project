@@ -16,9 +16,10 @@ public class testClass {
         UserBean ub = new UserBean();
         ub.setUserId(2);
         ub.setAra("asd");
-        System.out.println(ub.postAra());
-        System.out.println(ub.kaydedilenPostlariListele().size());
-        System.out.println(ub.gonderiyiKaydetmemisMi(22));
+        ub.setEmail("emremre@gmail.com");
+        ub.setPassword("Kanarya10");
+        ub.girisKontrol();
+        System.out.println(ub.getFollowerCount());
     }
     
 }

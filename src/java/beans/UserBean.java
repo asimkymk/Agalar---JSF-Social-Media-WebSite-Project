@@ -288,7 +288,7 @@ public class UserBean implements Serializable{
             this.msgRegister = "";
             this.userId = UserDAO.getUserId(email, password);
             this.tag = UserDAO.getTag(this.userId);
-            
+            this.bio = UserDAO.getBio(this.userId);
             this.firstName = UserDAO.getFirstName(this.userId);
             this.lastName = UserDAO.getLastName(this.userId);
             this.birthDate = UserDAO.getBirthDate(this.userId);
@@ -297,6 +297,7 @@ public class UserBean implements Serializable{
             this.followingCount = UserDAO.getFollowingCount(this.userId);
             this.profilePictureUri = UserDAO.getProfilePictureUri(this.userId);
             this.coverPictureUri = UserDAO.getCoverPictureUri(this.userId);
+            this.createDate = UserDAO.getCreateDate(this.userId);
             this.isHidden = UserDAO.getIsHidden(this.userId);
             this.activeSucRegister = false;
             this.msgSucRegister = null;
@@ -390,6 +391,9 @@ public class UserBean implements Serializable{
     }
     public ArrayList<PostBean> postlariGoster(){
         return UserDAO.postlariFiltrele(this.userId);
+    }
+    public ArrayList<PostBean> kendipostlarimiGoster(){
+        return UserDAO.postlariFiltreleUser(this.userId);
     }
     public String postUserPictureUri(int userid){
         return UserDAO.getProfilePictureUri(userid);

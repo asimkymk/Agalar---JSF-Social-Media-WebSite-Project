@@ -278,14 +278,14 @@ public class UserDAO {
 
         try {
             Connection con = DataConnect.getConnection();
-            PreparedStatement ps = con.prepareStatement("Select FOLLOWINGSID from USERS where USERID = ?");
+            PreparedStatement ps = con.prepareStatement("Select FOLLOWINGSCOUNT from USERS where USERID = ?");
             ps.setInt(1, userid);
 
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
 
-                return rs.getInt("FOLLOWINGSID");
+                return rs.getInt("FOLLOWINGSCOUNT");
             }
         } catch (SQLException ex) {
             System.out.println("Giriş hatası");
@@ -603,6 +603,16 @@ public class UserDAO {
             return durum;
         }
         return false;
+    }
+    public static ArrayList<PostBean> postlariFiltreleUser(int userId){
+        ArrayList<PostBean> postlar1 = new ArrayList<PostBean>();
+        for (int i = PostDAO.getPosts().size() - 1; i >= 0; i--) {
+            if (PostDAO.getPosts().get(i).getUserId() == userId) {
+
+                postlar1.add(PostDAO.getPosts().get(i));
+            }
+        }
+        return postlar1;
     }
 
 }
