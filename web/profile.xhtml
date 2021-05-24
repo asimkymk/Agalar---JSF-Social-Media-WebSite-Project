@@ -9,7 +9,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         
-        <title>Agamla #{userBean.tag}'nin Profili</title>
+        <title>Agamla | #{userBean.tag}'nin Profili</title>
         <link href='resources/css/bootstrap.min.css' rel='stylesheet' type='text/css'/>
         <script src="https://kit.fontawesome.com/41f4fd74e6.js" crossorigin="anonymous"></script>
         <script src="https://unpkg.com/ionicons@5.5.1/dist/ionicons.js"></script>
@@ -117,7 +117,7 @@
                         
 
                         <div class="text-left " style="font-size:16px;color:darkgray;">
-                            #{userBean.tag}
+                            @#{userBean.tag}
                         </div>
                         <div class="text-left " style="font-size:18px;color:black">
                             #{userBean.bio}

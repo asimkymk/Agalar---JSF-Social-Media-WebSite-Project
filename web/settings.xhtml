@@ -1,17 +1,186 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <title>Facelet Title</title>
+        
+        <title>Agamla Anasayfa | #{userBean.tag}</title>
+        
+        <link href='resources/css/bootstrap.min.css' rel='stylesheet' type='text/css'/>
+        <script src="https://kit.fontawesome.com/41f4fd74e6.js" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/ionicons@5.5.1/dist/ionicons.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+       <link href="http://fonts.googleapis.com/css?family=Nunito:100italic,100,300italic,300,400italic,400,700italic,700,900italic,900" rel="stylesheet" type="text/css"/>
+       <link href='resources/css/agamla-main.css' rel='stylesheet' type='text/css'/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"/>
+       
     </h:head>
-    <h:body>
-        Hello from Facelets
-        <script>
-        if(#{userBean.isLogged == false}){
-                window.location.href="login.xhtml";
-        }     
-        </script>
+    <h:body onload="init();">
+        <div class="">
+            <div class="row-main box row ">
+                 <div class="left-Panel col-3 d-none d-md-block ">
+                     <div class="stick-top">
+                        <div class="marka">
+                            AGAMLA
+                        </div>
+                        <div class="Menu">
+                            <h:form>
+                            <ul class="left-Panel-Menu">
+                                <li>
+                                    <h:commandLink action="home" class="left-Panel-Link "><i class="fas fa-home"></i>Anasayfa</h:commandLink>
+                                </li>
+                                <li>
+                                     <h:commandLink action="messages.xhtml?faces-redirect=true" class="left-Panel-Link"><i class="fas fa-envelope"></i>Mesajlar</h:commandLink>
+                                </li>
+                                <li>
+                                    <h:commandLink action="notifications.xhtml?faces-redirect=true" class="left-Panel-Link"><i class="fas fa-bell"></i>Bildirimler</h:commandLink>
+                                </li>
+                                <li>
+                                    <h:commandLink action="profile.xhtml?faces-redirect=true" class="left-Panel-Link"><i class="fas fa-user-alt"></i>Profil</h:commandLink>
+                                </li>
+                                <li>
+                                    <h:commandLink action="saves.xhtml?faces-redirect=true" class="left-Panel-Link"><i class="fas fa-save"></i>Kaydedilenler</h:commandLink>
+                                </li>
+                                <li>
+                                    <h:commandLink action="settings.xhtml?faces-redirect=true" class="left-Panel-Link left-Panel-Link-Selected"><i class="fas fa-cog"></i>Ayarlar</h:commandLink>
+                                </li>
+
+                            </ul>
+                            </h:form>
+                        </div>
+                    </div>
+                    
+
+                    <div class="cikisYap">
+                        <div class="cikisYap-Foto">
+                            <img width="40px"
+                                 src="${userBean.profilePictureUri}"
+                                 alt="profilResim" style="border-radius: 20px;"/>
+                        </div>
+                        <div class="cikisYap-Text">
+                            <div class="cikisYap-Profil-Ismi">
+                                ${userBean.firstName} #{userBean.lastName}
+                            </div>
+                            <div class="cikisYap-Profil-Username">
+                                @#{userBean.tag}
+                            </div>
+
+                        </div>
+                        <div class="cikisYap-Cikis">
+                            ...
+                        </div>
+
+                    </div>
+                
+                </div>
+                
+            <!-->
+            
+            
+                BURAYA RESPONSIVE OLDUĞUNDA SOL PANELİN YAZISIZ HALİ GELECEK
+                css ile olursa ok yoksa yeni panel yaz.
+            </!-->   
+            <div class="main-Panel col-12 col-md-6">
+                
+                <div class="container my-5">
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
+                   aria-controls="pills-home" aria-selected="true">Profili düzenle</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
+                   aria-controls="pills-profile" aria-selected="false">Güvenlik</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                
+               <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Adınız ve soyadınız</span>
+                    </div>
+                    
+                   <h:inputText label="First name" class="form-control" value="#{userBean.firstName}" pt:placeholder=""></h:inputText>
+                        <h:inputText label="Last name" class="form-control" value="#{userBean.lastName}"></h:inputText>
+                </div>
+                
+                <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="addon-wrapping">@</span>
+                    </div>
+                     <h:inputText label="First name" class="form-control" value="#{userBean.tag}" pt:placeholder="Kullanıcı Tag"></h:inputText>
+              </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroup-sizing-default">Default</span>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+              </div>
+                
+            </div>
+            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">dsds</div>
+        </div>
+    </div>
+                
+                
+                
+
+            </div>
+            <div class="right-Panel col-3 d-none d-md-block">
+                <div class="stick-top">
+                    <div class="search">
+                        <h:form >
+
+                            <h:inputText pt:required="required" class="search-input" pt:placeholder="Agalarını bul..." value="#{userBean.ara}"></h:inputText> <h:commandLink
+                            action="#{userBean.aramaYap()}"
+                            class="search-icon">
+                                 <i class="fa fa-search"></i>
+                               </h:commandLink>
+                            <h:commandButton action="#{userBean.aramaYap()}" style="display:none;">
+                                
+                            </h:commandButton>
+                        </h:form>
+                    </div>
+                    <div>
+                        <h:form>
+                            <ul class="right-Panel-menu">
+                                <li> 
+                                     <h:commandLink action="home" class="right-Panel-out-link">Hakkinda</h:commandLink>
+                                </li>
+                                <li> 
+                                     <h:commandLink action="home" class="right-Panel-out-link">Hizmet Sartlari</h:commandLink>
+                                </li>
+                                <li> 
+                                     <h:commandLink action="home" class="right-Panel-out-link">Iletisim</h:commandLink>
+                                </li>
+                                <li> 
+                                     <h:commandLink action="home" class="right-Panel-out-link">2021 Agalar</h:commandLink>
+                                </li>
+                            </ul>
+
+                        </h:form>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+            
+    </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+            integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+            integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+            crossorigin="anonymous"></script>
     </h:body>
 </html>
 
