@@ -550,6 +550,12 @@ a:hover {
     color: #fff !important
 }
 
+.mesaj-gonder{
+    position:fixed; 
+    bottom:27px; 
+    width:100%;
+}
+
 @media screen and (max-width: 768px) {
 /*    .left-Panel {
         display: none;
@@ -570,6 +576,9 @@ a:hover {
     body {
     background-color: #F5F6F6;
     font-size:11px;
+    }
+    .mesaj-gonder{
+        width:100%;
     }
     
 }

@@ -13,3 +13,9 @@
     margin-bottom: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.09), 0 2px 1px rgba(0, 0, 0, 0.0);
 }
+
+@media screen and (max-width: 768px){
+    .emre{
+        padding-left: 15px;
+    }
+}
