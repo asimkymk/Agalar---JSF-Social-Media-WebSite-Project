@@ -87,15 +87,18 @@
                 css ile olursa ok yoksa yeni panel yaz.
             </!-->   
             <div class="main-Panel col-12 col-md-6">
-                <div style="font-size: 1.5rem;color: darkgray;padding:50px 20px 20px 20px;font-weight: 600;">
+                <div class="header-txt">
                     #{userBean.postUserFirstName(param["uid"])} #{userBean.postUserLastName(param["uid"])} ile Mesajların
                     <hr></hr>
+                    #{messageBean.contentHata}
                 </div>
+                   
                 <h:panelGroup id="mesajlarim">
-                    <h:form>
-               
-                <div class="chat">
                     
+                
+                
+                <div class="chat">
+                   
                 
                 <ui:repeat value="#{messageBean.chatEkrani(userBean.userId,param['uid'])}" var="item">
                     
@@ -110,7 +113,7 @@
                                     <div class="col-10 emre" style="padding:0px;">
                                         <div class="messages-card" style="padding:12px 0 12px 13px;background-color:white;color:dark;margin-bottom:0;">
                                             <div>
-                                                <p style="margin:0;">#{item.content}</p>
+                                                <h:outputText class="chat-content-text" value="#{item.content}"></h:outputText>
                                             </div>
                                         </div>
                                         <div class="message-tarih" style="text-align: left;margin-top:2px; padding-right: 11px;color:darkgray;">
@@ -134,7 +137,7 @@
                                     <div class="col-10"  style="padding:0 8px 0 0;">
                                         <div class="messages-card" style="padding:12px 0 12px 13px;background-color:#3e6fa7;color:white;margin-bottom:0;">
                                             <div>
-                                                <p style="margin:0;">#{item.content}</p>
+                                                <h:outputText class="chat-content-text" value="#{item.content}"></h:outputText>
                                             </div>
                                         </div>
                                         <div class="message-tarih" style="text-align: right;margin-top:2px; padding-right: 11px;color:darkgray;">
@@ -154,27 +157,30 @@
                     </div>
                </ui:repeat>
                     </div>
+                    </h:panelGroup>
                          
                 
                 
                 
-                
+                <h:form>
                 <div class="mesaj-gonder container">
                     
                     <div class="row">
                         
-                        <div class="col-10 text-right">
-                           <p:inputTextarea autoResize="false" rows="2" id="text" cols ="75"  styleClass="message-text" pt:placeholder="Agana bir şeyler yaz" pt:required="required"
+                        <div class="col-10">
+                            <p:inputTextarea autoResize="false" rows="2" id="text" cols ="75"  styleClass="message-text" pt:placeholder="Agana bir şeyler yaz" pt:required="required"
                                             pt:maxlength="280" value="#{messageBean.content}"></p:inputTextarea>
+                           
+                            
+                                            
                         </div>
                         <div class="col-2 text-left">
                             
-
-
-                            <h:commandLink style="" class="btn btn-primary btn-agala btn-mesajGonder" action="#{messageBean.mesajiGonder(userBean.userId,param['uid'])}">
+                             
+                            <h:commandLink class="btn btn-primary btn-agala btn-mesajGonder" action="#{messageBean.mesajiGonder(userBean.userId)}">
                             <i class="far fa-paper-plane"></i>
-                            
                         </h:commandLink>
+                            
                         
                         </div>
                         <c:if test="#{not empty messageBean.contentHata}">
@@ -186,7 +192,7 @@
                    
                 </div>
                         </h:form>
-                     </h:panelGroup>
+                 
                 
             </div>
   
@@ -234,6 +240,7 @@
         if(#{userBean.isLogged == false}){
                 window.location.href="login.xhtml";
         }     
+        window.scrollTo(0,document.body.scrollHeight);
         </script>
     </h:body>
 </html>

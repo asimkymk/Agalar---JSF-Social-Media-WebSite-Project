@@ -29,7 +29,12 @@ public class testClass {
         System.out.println(MessagesDAO.getPrivateMessages(2, 1).size());
         
         MessageBean mb = new MessageBean();
-        //System.out.println(mb.mesajiGonder(2,);
+        mb.setContent("ee naber");
+        System.out.println("hmmmm");
+        String test = "http://localhost:8080/Agalar/faces/messages_show_message.xhtml?uid=1";
+        System.out.println(test.split("uid=")[1]);
+        System.out.println(mb.mesajAnaSayfaArr(2).size());
+        //System.out.println(mb.mesajiGonder(2,1));
     }
     
 }

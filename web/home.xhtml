@@ -114,7 +114,7 @@
                         <h:commandButton class="btn btn-primary btn-agala" value="Agala" action="#{userBean.postGonder()}">
                         
                         
-                        
+                         
                         
                         </h:commandButton>
                     </div>
@@ -124,6 +124,9 @@
                     </a>
                     
                 </div>
+                <h:panelGroup id="postlar">
+                    
+                
                 <ui:repeat value="#{userBean.postlariGoster()}" var="item">
                     <h:form>
                     <div class="aga">
@@ -226,7 +229,7 @@
                     </div>
                      </h:form>
                 </ui:repeat>
-                
+                </h:panelGroup>
                 
                 
                 

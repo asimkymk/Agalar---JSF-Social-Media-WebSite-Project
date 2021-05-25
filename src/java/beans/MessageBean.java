@@ -7,15 +7,15 @@ package beans;
 
 import dao.MessagesDAO;
 import java.util.ArrayList;
-import javax.inject.Named;
-import javax.enterprise.context.Dependent;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 /**
  *
  * @author asimk
  */
-@Named(value = "messageBean")
-@Dependent
+@ManagedBean(name = "messageBean")
+@SessionScoped
 public class MessageBean {
     
 
@@ -88,24 +88,33 @@ public class MessageBean {
         return MessagesDAO.getDistinctMessage(userid);
     }
     public String mesajlariGosterSayfasi(int targetid){
+        this.receiverId = targetid;
         return "messages_show_message?faces-redirect=trueuid="+targetid;
         
     }
     public ArrayList<MessageBean> chatEkrani(int userid,int targetid){
         return MessagesDAO.getPrivateMessages(userid, targetid);
     }
-    public String mesajiGonder(int senderId,int receiverId){
+   
+    public String mesajiGonder(int senderIdpost){
         
-        String durum = MessagesDAO.mesajGonder(senderId, receiverId, this.content);
+        
+        
+        /*int receiverIdpost = Integer.valueOf(url.split("uid=?")[0]);*/
+        String durum = MessagesDAO.mesajGonder(senderIdpost, receiverId, this.content);
+        
         if (durum.equals("ok")){
             
             
             this.contentHata= "";
+            
         }
         else{
             this.contentHata = durum;
         }
-        return "messages_show_message?faces-redirect=trueuid="+receiverId;
+        this.content = "";
+        return "messages_show_message?faces-redirect=trueuid="+String.valueOf(receiverId);
+        
         
     }
     
