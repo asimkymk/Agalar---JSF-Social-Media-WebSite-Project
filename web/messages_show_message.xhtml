@@ -3,22 +3,26 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+       <title>Facelet Title</title>
+       <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
         <link href='resources/css/bootstrap.min.css' rel='stylesheet' type='text/css'/>
         <script src="https://kit.fontawesome.com/41f4fd74e6.js" crossorigin="anonymous"></script>
         <script src="https://unpkg.com/ionicons@5.5.1/dist/ionicons.js"></script>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+        
+       <link href="http://fonts.googleapis.com/css?family=Nunito:100italic,100,300italic,300,400italic,400,700italic,700,900italic,900" rel="stylesheet" type="text/css"/>
        <link href='resources/css/agamla-main.css' rel='stylesheet' type='text/css'/>
-       <link href='resources/css/agamla-messages.css' rel='stylesheet' type='text/css'/>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"/>
+      <link href='resources/css/agamla-messages.css' rel='stylesheet' type='text/css'/>
 
     </h:head>
     <h:body>
+
         <div class="">
+            
             <div class="row-main box row ">
                  <div class="left-Panel col-3 d-none d-md-block ">
                      <div class="stick-top">
@@ -83,70 +87,123 @@
                 css ile olursa ok yoksa yeni panel yaz.
             </!-->   
             <div class="main-Panel col-12 col-md-6">
-                
-                <div class="row">
-                    <div class="col-8" >
-                        <div class="row">
-                            <div class="col-2">
-                                <img width="40px"
-                                 src="${userBean.profilePictureUri}"
-                                 alt="profilResim" style="border-radius: 20px;"/>
-                            </div>
-                            <div class="col-10 emre" style="padding:0px;">
-                                <div class="messages-card" style="padding:12px 0 12px 13px;background-color:#3e6fa7;color:white;margin-bottom:0;">
-                                    <div>
-                                        <p style="margin:0;">Asim salaksin ya :D</p>
-                                    </div>
-                                </div>
-                                <div style="text-align: left;margin-top:2px; padding-right: 11px;">
-                                    10.03.2000
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-4">
-
-                    </div>
+                <div style="font-size: 1.5rem;color: darkgray;padding:50px 20px 20px 20px;font-weight: 600;">
+                    #{userBean.postUserFirstName(param["uid"])} #{userBean.postUserLastName(param["uid"])} ile Mesajların
+                    <hr></hr>
                 </div>
-                <div class="row">
-                    <div class="col-4">
-
-                    </div>
-                    <div class="col-8" >
-                        <div class="row">
-                            <div class="col-10"  style="padding:0 8px 0 0;">
-                                <div class="messages-card" style="padding:12px 0 12px 13px;background-color:#36495d;color:white;margin-bottom:0;">
-                                    <div>
-                                        <p style="margin:0;">Asim salaksin ya :D</p>
+                <h:panelGroup id="mesajlarim">
+                    <h:form>
+               
+                <div class="chat">
+                    
+                
+                <ui:repeat value="#{messageBean.chatEkrani(userBean.userId,param['uid'])}" var="item">
+                    
+               
+                    <div class="row">
+                       <h:panelGroup rendered="#{item.senderId == param['uid']}">
+                            <div class="col-8" >
+                                <div class="row">
+                                    <div class="col-2">
+                                        <img width="40px" src="${userBean.postUserPictureUri(param['uid'])}" alt="profilResim" style="border-radius: 20px;"/>
+                                    </div>
+                                    <div class="col-10 emre" style="padding:0px;">
+                                        <div class="messages-card" style="padding:12px 0 12px 13px;background-color:white;color:dark;margin-bottom:0;">
+                                            <div>
+                                                <p style="margin:0;">#{item.content}</p>
+                                            </div>
+                                        </div>
+                                        <div class="message-tarih" style="text-align: left;margin-top:2px; padding-right: 11px;color:darkgray;">
+                                            #{item.createDate}
+                                        </div>
                                     </div>
                                 </div>
-                                <div style="text-align: right;margin-top:2px; padding-right: 11px;">
-                                    10.03.2000
+                            </div>
+
+                            <div class="col-4">
+
+                            </div>
+
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{item.senderId == userBean.userId}">
+                            <div class="col-4">
+
+                            </div>
+                            <div class="col-8" >
+                                <div class="row">
+                                    <div class="col-10"  style="padding:0 8px 0 0;">
+                                        <div class="messages-card" style="padding:12px 0 12px 13px;background-color:#3e6fa7;color:white;margin-bottom:0;">
+                                            <div>
+                                                <p style="margin:0;">#{item.content}</p>
+                                            </div>
+                                        </div>
+                                        <div class="message-tarih" style="text-align: right;margin-top:2px; padding-right: 11px;color:darkgray;">
+                                            #{item.createDate}
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <img width="40px"
+                                         src="${userBean.profilePictureUri}"
+                                         alt="profilResim" style="border-radius: 20px;"/>
+                                    </div>
                                 </div>
+
                             </div>
-                            <div class="col-2">
-                                <img width="40px"
-                                 src="${userBean.profilePictureUri}"
-                                 alt="profilResim" style="border-radius: 20px;"/>
-                            </div>
+                        </h:panelGroup>
+                    
+                    </div>
+               </ui:repeat>
+                    </div>
+                         
+                
+                
+                
+                
+                <div class="mesaj-gonder container">
+                    
+                    <div class="row">
+                        
+                        <div class="col-10 text-right">
+                           <p:inputTextarea autoResize="false" rows="2" id="text" cols ="75"  styleClass="message-text" pt:placeholder="Agana bir şeyler yaz" pt:required="required"
+                                            pt:maxlength="280" value="#{messageBean.content}"></p:inputTextarea>
                         </div>
+                        <div class="col-2 text-left">
+                            
+
+
+                            <h:commandLink style="" class="btn btn-primary btn-agala btn-mesajGonder" action="#{messageBean.mesajiGonder(userBean.userId,param['uid'])}">
+                            <i class="far fa-paper-plane"></i>
+                            
+                        </h:commandLink>
+                        
+                        </div>
+                        <c:if test="#{not empty messageBean.contentHata}">
+                                <p style="color:red;margin:0;padding:0;">#{messageBean.contentHata}</p>
+                        </c:if>
+                            
                         
                     </div>
+                   
                 </div>
-                <div class="mesaj-gonder">
-                    <p:inputTextarea rows="2" id="text" cols ="75"  styleClass="Agala-Text" pt:placeholder="Neler oluyor?"
-                                  pt:maxlength="280" value="#{userBean.postContent}"></p:inputTextarea>
-                    <h:commandButton style="margin-top:10px;" class="btn btn-primary btn-agala" value="Agala" action="#{userBean.postGonder()}"/>
-
-                </div>
+                        </h:form>
+                     </h:panelGroup>
                 
             </div>
   
             <div class="right-Panel col-3 d-none d-md-block">
                 <div class="stick-top">
                     <div class="search">
+                        <h:form >
 
+                            <h:inputText pt:required="required" class="search-input" pt:placeholder="Agalarını bul..." value="#{userBean.ara}"></h:inputText> <h:commandLink
+                            action="#{userBean.aramaYap()}"
+                            class="search-icon">
+                                 <i class="fa fa-search"></i>
+                               </h:commandLink>
+                            <h:commandButton action="#{userBean.aramaYap()}" style="display:none;">
+                                
+                            </h:commandButton>
+                        </h:form>
                     </div>
                     <div>
                         <h:form>

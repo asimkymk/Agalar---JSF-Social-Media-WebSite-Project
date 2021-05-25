@@ -1,7 +1,10 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <title>Facelet Title</title>
         <link href='resources/css/bootstrap.min.css' rel='stylesheet' type='text/css'/>
@@ -79,34 +82,93 @@
                 css ile olursa ok yoksa yeni panel yaz.
             </!-->   
             <div class="main-Panel col-12 col-md-6">
+                <div style="font-size: 1.5rem;color: darkgray;padding:50px 20px 20px 20px;font-weight: 600;">
+                    Mesajlar
+                </div>
+                
+                <h:outputText style="font-size:1.2rem; padding:20px 20px;" rendered="#{messageBean.mesajAnaSayfaArr(userBean.userId) == null or messageBean.mesajAnaSayfaArr(userBean.userId).size()==0}" value="Şimdiye dek bir aganla özel konuşmamışsın. Hemen bir agana mesaj gönder!">
+                    
+                    
+                </h:outputText>
+                
+                <ui:repeat value="#{messageBean.mesajAnaSayfaArr(userBean.userId)}" var="item">
                 
                     <div class="messages-card"> 
                         
                         <div class="row" style="width:100%;">
-                            <div class="col-2">
-                                <img src="#{userBean.profilePictureUri}"
-                             width="60px" style="border-radius: 30px;" alt=""/>
-                            </div>
-                            <div class="col-8">
-                                <div class="aga-Main-Ust-Isim">
-                                Emre Taşkın
-                            </div>
-                                <p>Emre yaziEmre yaziEmre yaziEmre yaziEmre yaziEmre yaziEmre yaziEmre yaziEmre yaziEmre yaziEmre yazi</p>
-                            </div>
-                            <div class="col-2" style="text-align: right;">
-                                10/03/2000
-                            </div>
+                            <h:panelGroup  rendered="#{item.senderId != userBean.userId}">
+                               
+                                    
+                                
+                                    <div class="col-2 text-center">
+                                        <img src="#{userBean.postUserPictureUri(item.senderId)}"
+                                     width="60px" style="border-radius: 30px;" alt=""/>
+                                    </div>
+                                    <div class="col-6 text-left">
+                                        <div class="aga-Main-Ust-Isim">
+                                            <h:form>
+                                                <h:commandLink style="color:black;" action="#{messageBean.mesajlariGosterSayfasi(item.senderId)}">
+                                                #{userBean.postUserFirstName(item.senderId)} #{userBean.postUserLastName(item.senderId)}
+                                            </h:commandLink>
+                                                </h:form>
+                                            
+                                        </div>
+                                        
+                                        <p>#{item.content}</p>
+                                    </div>
+                                    <div class="col-4" style="text-align: right;color:darkgray;">
+                                        #{item.createDate}
+                                    </div>
+                                
+                            </h:panelGroup>
+                            <h:panelGroup  rendered="#{item.receiverId != userBean.userId}">
+                                <div class="col-2 text-center">
+                                        <img src="#{userBean.postUserPictureUri(item.receiverId)}"
+                                     width="60px" style="border-radius: 30px;" alt=""/>
+                                    </div>
+                                    <div class="col-6 text-left">
+                                        <div class="aga-Main-Ust-Isim">
+                                            <h:form>
+                                                <h:commandLink style="color:black;" action="#{messageBean.mesajlariGosterSayfasi(item.receiverId)}">
+                                                #{userBean.postUserFirstName(item.receiverId)} #{userBean.postUserLastName(item.receiverId)}
+                                            </h:commandLink>
+                                                </h:form>
+                                            
+                                        </div>
+                                        
+                                        <p>#{item.content}</p>
+                                    </div>
+                                    <div class="col-4" style="text-align: right;color:darkgray;">
+                                        #{item.createDate}
+                                    </div>
+                            </h:panelGroup>
+                               
+                                    
+                            
                         </div>
                         
                     </div>
-  
+                
+                
+                </ui:repeat>
+                    
                    
             </div>
   
             <div class="right-Panel col-3 d-none d-md-block">
                 <div class="stick-top">
                     <div class="search">
+                        <h:form >
 
+                            <h:inputText pt:required="required" class="search-input" pt:placeholder="Agalarını bul..." value="#{userBean.ara}"></h:inputText> <h:commandLink
+                            action="#{userBean.aramaYap()}"
+                            class="search-icon">
+                                 <i class="fa fa-search"></i>
+                               </h:commandLink>
+                            <h:commandButton action="#{userBean.aramaYap()}" style="display:none;">
+                                
+                            </h:commandButton>
+                        </h:form>
                     </div>
                     <div>
                         <h:form>

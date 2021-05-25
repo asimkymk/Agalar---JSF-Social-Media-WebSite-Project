@@ -19,7 +19,6 @@ public class DataConnect {
 			
 			Connection con = DriverManager.getConnection(
 					"jdbc:derby://localhost:1527/agalar", "agalar", "agalar123");
-                        System.out.println("ok");
 			return con;
 		} catch (Exception ex) {
 			System.out.println("Database.getConnection() Hatası =" + ex.getMessage());

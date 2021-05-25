@@ -1,3 +1,13 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 25.May.2021, 05:09:23
+    Author     : asimk
+*/
+
 .messages-card{
 
     width: 100%;
@@ -13,9 +23,59 @@
     margin-bottom: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.09), 0 2px 1px rgba(0, 0, 0, 0.0);
 }
+.mesaj-gonder{
+    position:fixed; 
+    bottom: 0;
+    width:40%;
+    padding-bottom: 25px;
+    background-color: #F5F6F6;
+    padding-top:10px;
+    
+}
+.message-text {
+    font-size: 20px;
+    background-color: #fff;
+    color: black;
+    border: none !important;
+    outline: none;
+    overflow: auto;
+    resize: none;
+    width: 100%;
+    font-family: 'Nunito', sans-serif !important;
+    box-shadow:none;
+    border-radius: 15px;
+    padding:10px;
+}
+.message-text:focus{
+    
+    outline:none;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    
+}
+.message-textt:active{
+ box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+   outline:none;
+}
+.chat{
+    
+    width:100%;
+    margin-bottom: 135px;
+}
+.btn-mesajGonder{
+    padding:10px !important;
+}
 
 @media screen and (max-width: 768px){
-    .emre{
-        padding-left: 15px;
+    .mesaj-gonder{
+        width:100%;
+    }
+    .messages-card{
+        margin-left:15px;
+        margin-top:5px;
+        margin-bottom:5px;
+    }
+    .message-tarih{
+        margin-left:15px;
+        padding-top:5px;
     }
 }

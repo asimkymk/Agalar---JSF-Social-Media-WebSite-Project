@@ -7,6 +7,7 @@ package beans;
 
 import dao.FollowersDAO;
 import dao.LikesDAO;
+import dao.MessagesDAO;
 import dao.SavesDAO;
 import dao.UserDAO;
 import java.io.Serializable;
@@ -502,5 +503,7 @@ public class UserBean implements Serializable{
         String url = req.getRequestURL().toString();
         return url+"?faces-redirect=true";
     }
+    
+    
     
 }

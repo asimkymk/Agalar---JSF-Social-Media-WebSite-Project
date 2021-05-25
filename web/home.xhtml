@@ -20,6 +20,7 @@
        
     </h:head>
     <h:body onload="init();">
+        
         <div class="">
             <div class="row-main box row ">
                  <div class="left-Panel col-3 d-none d-md-block ">
@@ -95,7 +96,7 @@
                                  alt="profilResim" style="border-radius: 30px;"/>
                         </div>
                         <div class="panel-Agala-Text">
-                            <p:inputTextarea rows="2" id="text" cols ="75"  styleClass="Agala-Text" pt:placeholder="Neler oluyor?"
+                            <p:inputTextarea rows="2" id="text" cols ="75"  styleClass="Agala-Text" pt:placeholder="Neler oluyor?" pt:required="required"
                                   pt:maxlength="280" value="#{userBean.postContent}"></p:inputTextarea>
                             <!-->
                             <h:inputTextarea rows="2" id="text" class="Agala-Text" pt:placeholder="Neler oluyor?"
