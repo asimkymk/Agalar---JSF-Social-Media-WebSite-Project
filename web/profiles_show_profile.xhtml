@@ -113,9 +113,12 @@
                                     <i class="fas fa-lock"></i>
                                 </h:outputLabel>
                             </div>
+                            
                             <div class="col-4">
-                                <h:commandButton class="btn btn-primary btn-agala mx-0 mb-0" value="Takip et" rendered="#{userBean.takiplesiyorMu(userBean.lookId)==false}"/>
-                                <h:commandButton class="btn btn-secondary btn-agala mx-0 mb-0" value="Takip ediliyor" rendered="#{userBean.takiplesiyorMu(userBean.lookId)==true}"/>
+                                <h:form>
+                                <h:commandLink class="btn btn-primary btn-agala mx-0 mb-0"  action="#{userBean.takipEt(userBean.lookId, userBean.postUserFollowerCount(userBean.lookId))}" value="Takip et" rendered="#{userBean.takiplesiyorMu(userBean.lookId)==false}"/>
+                                <h:commandLink class="btn btn-secondary btn-agala mx-0 mb-0"  action="#{userBean.takipEtme(userBean.lookId, userBean.postUserFollowerCount(userBean.lookId))}" value="Takip ediliyor" rendered="#{userBean.takiplesiyorMu(userBean.lookId)==true}"/>
+                                </h:form>
                             </div>
                         </div>
                         

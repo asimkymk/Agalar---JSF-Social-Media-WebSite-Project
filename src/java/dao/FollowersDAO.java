@@ -38,6 +38,51 @@ public class FollowersDAO {
         }
         return false;
     }
-    
+    public static boolean Follow(int firstId, int secondId, int followingCount, int followerCount){
+        
+        try {
+                Connection con = DataConnect.getConnection();
+                PreparedStatement ps = con.prepareStatement("INSERT INTO FOLLOWERS (FOLLOWERID,FOLLOWINGID) VALUES (?,?)");
+                ps.setInt(1, firstId);
+                ps.setInt(2, secondId);
+                ps.executeUpdate();
+                ps = con.prepareStatement("UPDATE USERS SET FOLLOWINGSCOUNT = ? where USERID = ?");
+                ps.setInt(1,++followingCount);
+                ps.setInt(2, firstId);
+                ps.executeUpdate();
+                ps = con.prepareStatement("UPDATE USERS SET FOLLOWERSCOUNT = ? where USERID = ?");
+                ps.setInt(1,++followerCount);
+                ps.setInt(2, secondId);
+                ps.executeUpdate();
+                con.close();
+                return true;
+        } catch (SQLException ex) {
+
+                return false;
+        }
+    }
+    public static boolean unFollow(int firstId, int secondId, int followingCount, int followerCount){
+        
+        try {
+                Connection con = DataConnect.getConnection();
+                PreparedStatement ps = con.prepareStatement("DELETE FROM FOLLOWERS WHERE FOLLOWERID=? AND FOLLOWINGID=?");
+                ps.setInt(1, firstId);
+                ps.setInt(2, secondId);
+                ps.executeUpdate();
+                ps = con.prepareStatement("UPDATE USERS SET FOLLOWINGSCOUNT = ? where USERID = ?");
+                ps.setInt(1,--followingCount);
+                ps.setInt(2, firstId);
+                ps.executeUpdate();
+                ps = con.prepareStatement("UPDATE USERS SET FOLLOWERSCOUNT = ? where USERID = ?");
+                ps.setInt(1,--followerCount);
+                ps.setInt(2, secondId);
+                ps.executeUpdate();
+                con.close();
+                return true;
+        } catch (SQLException ex) {
+
+                return false;
+        }
+    }
     
 }

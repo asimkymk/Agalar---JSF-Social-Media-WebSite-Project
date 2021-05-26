@@ -494,7 +494,6 @@ public class UserBean implements Serializable{
         HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String url = req.getRequestURL().toString();
         return url+"?faces-redirect=true";
- 
     }
     public int gonderiyiBegenmisMi(int postId){
         if (LikesDAO.isLiked(userId, postId)) return 1;
@@ -555,7 +554,27 @@ public class UserBean implements Serializable{
         String url = req.getRequestURL().toString();
         return url+"?faces-redirect=true";
     }
-    
+    public String takipEt(int followingId,int followerCount){
+        
+        boolean durum = FollowersDAO.Follow(this.userId, followingId, this.followingCount,followerCount);
+        if(durum){
+            this.followingCount++;
+        }
+        HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        String url = req.getRequestURL().toString();
+        return url+"?faces-redirect=true";
+
+    }
+    public String takipEtme(int followingId,int followerCount){
+        
+        boolean durum = FollowersDAO.unFollow(this.userId, followingId, this.followingCount,followerCount);
+        if(durum){
+            this.followingCount--;
+        }
+        HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        String url = req.getRequestURL().toString();
+        return url+"?faces-redirect=true";
+    }
     
     
 }

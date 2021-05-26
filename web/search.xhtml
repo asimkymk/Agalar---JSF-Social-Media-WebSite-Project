@@ -114,12 +114,9 @@
                         </div>
                     </div>
                    <div  style="margin-left:auto">
-                       <h:commandButton rendered="#{userBean.takiplesiyorMu(item.userId)}" class="btn btn-secondary btn-agala" value="Takip ediliyor">
-                           
-                       </h:commandButton>
-                       <h:commandButton rendered="#{!userBean.takiplesiyorMu(item.userId)}" class="btn btn-primary btn-agala" value="Takip et">
-                           
-                       </h:commandButton>
+                
+                        <h:commandLink class="btn btn-primary btn-agala mx-0 mb-0" style="width: 100%" action="#{userBean.takipEt(item.userId, userBean.postUserFollowerCount(item.userId))}" value="Takip et" rendered="#{userBean.takiplesiyorMu(item.userId)==false}"/>
+                        <h:commandLink class="btn btn-secondary btn-agala mx-0 mb-0" style="width: 100%" action="#{userBean.takipEtme(item.userId, userBean.postUserFollowerCount(item.userId))}" value="Takip ediliyor" rendered="#{userBean.takiplesiyorMu(item.userId)==true}"/>
                        
                     </div>
 
