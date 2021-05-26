@@ -22,7 +22,7 @@ public class testClass {
         ub.setEmail("emremre@gmail.com");
         ub.setPassword("Kanarya10");
         ub.girisKontrol();
-        ub.takipEt(3,0);
+        ub.bildirimGonder(2,"asimkaymak sizi takip etmeye basladi");
         //System.out.println(mb.mesajiGonder(2,1));
     }
     

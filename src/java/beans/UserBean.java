@@ -8,6 +8,7 @@ package beans;
 import dao.FollowersDAO;
 import dao.LikesDAO;
 import dao.MessagesDAO;
+import dao.NotificationDAO;
 import dao.SavesDAO;
 import dao.UserDAO;
 import java.io.Serializable;
@@ -575,6 +576,15 @@ public class UserBean implements Serializable{
         String url = req.getRequestURL().toString();
         return url+"?faces-redirect=true";
     }
-    
-    
+    public ArrayList<NotificationDAO> bildirimleriGoster(int userid){
+        ArrayList<NotificationDAO> bildirimler = new ArrayList<NotificationDAO>();
+        bildirimler = NotificationDAO.getNotifications(userid);
+        return bildirimler;
+    }
+    public void bildirimGonder(int userid, String content){
+        boolean durum = NotificationDAO.addNotifications(userid, content);
+        if(durum){
+            System.out.println("bildirim gonderildi");
+        }
+    }
 }
