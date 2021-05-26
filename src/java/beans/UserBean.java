@@ -56,6 +56,16 @@ public class UserBean implements Serializable{
     private String postVideoUri="empty";
     private String postHata;
     private String ara;
+    private int lookId;
+
+    public int getLookId() {
+        return lookId;
+    }
+
+    public void setLookId(int lookId) {
+        this.lookId = lookId;
+    }
+    
 
     public String getAra() {
         return ara;
@@ -396,21 +406,63 @@ public class UserBean implements Serializable{
     public ArrayList<PostBean> kendipostlarimiGoster(){
         return UserDAO.postlariFiltreleUser(this.userId);
     }
+    public ArrayList<PostBean> profilSayfasiPostlariGoster(){
+        return UserDAO.postlariFiltreleUser(this.lookId);
+    }
     public String postUserPictureUri(int userid){
         return UserDAO.getProfilePictureUri(userid);
         
     }
+    public String postUserCoverUri(int userid){
+        return UserDAO.getCoverPictureUri(userid);
+        
+    }
+    public int postUserFollowerCount(int userid){
+        return UserDAO.getFollowersCount(userid);
+        
+    }
+    public int postUserFollowingCount(int userid){
+        return UserDAO.getFollowingCount(userid);
+        
+    }
+    
     public String postUserFirstName(int userid){
         return UserDAO.getFirstName(userid);
+        
+    }
+    public String postUserBio(int userid){
+        return UserDAO.getBio(userid);
+        
+    }
+    public String postUserCreateDate(int userid){
+        return UserDAO.getCreateDate(userid);
+        
+    }
+    public String postUserBirthDate(int userid){
+        return UserDAO.getBirthDate(userid);
         
     }
     public String postUserLastName(int userid){
         return UserDAO.getLastName(userid);
         
     }
+    public boolean postUserisHidden(int userid){
+        return UserDAO.getIsHidden(userid);
+        
+    }
     public String postUserTag(int userid){
         return UserDAO.getTag(userid);
         
+    }
+    public String profilSayfasiGoster(int id){
+        if(id == this.userId){
+            return "profile?faces-redirect=true";
+        }
+        else{
+             this.lookId = id;
+            return "profiles_show_profile?faces-redirect=true";
+        }
+       
     }
     public String postGonder(){
         

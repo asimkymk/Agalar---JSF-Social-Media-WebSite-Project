@@ -25,7 +25,7 @@ public class MessagesDAO {
        ArrayList<MessageBean> messagelar = new ArrayList<MessageBean>();
        try {
                 Connection con = DataConnect.getConnection();
-                PreparedStatement ps = con.prepareStatement("Select DISTINCT * from MESSAGES where (SENDERID = ? and RECEIVERID = ?) or (SENDERID = ? and RECEIVERID = ?)");       
+                PreparedStatement ps = con.prepareStatement("Select DISTINCT * from MESSAGES where (SENDERID = ? and RECEIVERID = ?) or (SENDERID = ? and RECEIVERID = ?) ORDER BY CREATEDATE");       
                 ps.setInt(1, firstid);
                 ps.setInt(2, secondid);
                 ps.setInt(3, secondid);
@@ -61,7 +61,7 @@ public class MessagesDAO {
        ArrayList<MessageBean> messagelar = new ArrayList<MessageBean>();
        try {
                 Connection con = DataConnect.getConnection();
-                PreparedStatement ps = con.prepareStatement("Select * from MESSAGES where SENDERID = ? or RECEIVERID = ?");
+                PreparedStatement ps = con.prepareStatement("Select * from MESSAGES where SENDERID = ? or RECEIVERID = ? ORDER BY CREATEDATE ASC");
                 ps.setInt(1,userId);
                 ps.setInt(2,userId);
                 ResultSet rs = ps.executeQuery();

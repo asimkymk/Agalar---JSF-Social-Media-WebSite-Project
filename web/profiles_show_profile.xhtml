@@ -9,7 +9,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         
-        <title>Agamla Anasayfa | #{userBean.tag}</title>
+        <title>Agamla | #{userBean.tag}'nin Profili</title>
         <link href='resources/css/bootstrap.min.css' rel='stylesheet' type='text/css'/>
         <script src="https://kit.fontawesome.com/41f4fd74e6.js" crossorigin="anonymous"></script>
         <script src="https://unpkg.com/ionicons@5.5.1/dist/ionicons.js"></script>
@@ -31,7 +31,7 @@
                             <h:form>
                             <ul class="left-Panel-Menu">
                                 <li>
-                                    <h:commandLink action="home.xhtml?faces-redirect=true" class="left-Panel-Link"><i class="fas fa-home"></i>Anasayfa</h:commandLink>
+                                    <h:commandLink action="home" class="left-Panel-Link "><i class="fas fa-home"></i>Anasayfa</h:commandLink>
                                 </li>
                                 <li>
                                      <h:commandLink action="messages.xhtml?faces-redirect=true" class="left-Panel-Link"><i class="fas fa-envelope"></i>Mesajlar</h:commandLink>
@@ -40,7 +40,7 @@
                                     <h:commandLink action="notifications.xhtml?faces-redirect=true" class="left-Panel-Link"><i class="fas fa-bell"></i>Bildirimler</h:commandLink>
                                 </li>
                                 <li>
-                                    <h:commandLink action="profile.xhtml?faces-redirect=true" class="left-Panel-Link"><i class="fas fa-user-alt"></i>Profil</h:commandLink>
+                                    <h:commandLink action="profile.xhtml?faces-redirect=true" class="left-Panel-Link left-Panel-Link-Selected"><i class="fas fa-user-alt"></i>Profil</h:commandLink>
                                 </li>
                                 <li>
                                     <h:commandLink action="saves.xhtml?faces-redirect=true" class="left-Panel-Link"><i class="fas fa-save"></i>Kaydedilenler</h:commandLink>
@@ -85,58 +85,67 @@
                 css ile olursa ok yoksa yeni panel yaz.
             </!-->   
             <div class="main-Panel col-12 col-md-6">
-                <div style="font-size: 1.5rem;color: darkgray;padding:50px 20px 20px 20px;font-weight: 600;">
-                    Bulunan Agalar
-                </div>
-                <h:outputText style="font-size:1.2rem; padding:20px 20px;" rendered="#{userBean.kullaniciAra() == null or userBean.kullaniciAra().size() == 0}" value="Aradığın Aga'yı bulamadık. Ama üzülme çünkü Agamla'ya kayıt olmak ücretsiz. Hemen Aga'nı çağır!">
-                    
-                    
-                </h:outputText>
-                <ui:repeat value="#{userBean.kullaniciAra()}" var="item">
-                    <h:form>
-                    <div class="aga">
-                    <div class="aga-Sol">
-                        <img src="#{item.profilePictureUri}"
-                             width="100px" style="border-radius: 50px;" alt=""/>
-                    </div>
-                    <div class="aga-Main">
-                        <div class="aga-Main-Ust-Isim">
-                             <h:commandLink style="color:black;" action="#{userBean.profilSayfasiGoster(item.userId)}">
-                                    #{item.firstName} #{item.lastName}
-                                </h:commandLink>
+                
+                <div class="container mt-5 mb-5 p-3"
+                     style="background-color:white;border-radius: 30px;box-shadow: 0 20px 40px rgba(0, 0, 0, 0.11), 0 0px 0px rgba(0, 0, 0, 0.11);">
+
+                    <div class="cover" style="overflow: hidden;">
+                        <div class="">
+
+
+                            <img src="#{userBean.postUserCoverUri(userBean.lookId)}" alt=""
+                                 width="100%" style="border-radius: 20px;"/></div>
+                        <div class="container" style="height: 50px;">
+                            <img src="#{userBean.postUserPictureUri(userBean.lookId)}"
+                                 alt=""
+                                 style="border-radius: 50%;position:relative;top:-75px;left:10px;border:5px solid white;overflow: hidden;"
+                                 height="250%"/>
+
                         </div>
-                        <div class="aga-Main-Ust-Kullanıcı" style="color:gray;">
-                            @#{item.getTag()}
-                        </div>
-                        <div class="aga-Main-Icerik">
-                            
-                            <p>#{item.bio}</p>
-                        </div>
-                    </div>
-                   <div  style="margin-left:auto">
-                       <h:commandButton rendered="#{userBean.takiplesiyorMu(item.userId)}" class="btn btn-secondary btn-agala" value="Takip ediliyor">
-                           
-                       </h:commandButton>
-                       <h:commandButton rendered="#{!userBean.takiplesiyorMu(item.userId)}" class="btn btn-primary btn-agala" value="Takip et">
-                           
-                       </h:commandButton>
-                       
-                    </div>
+
 
                     </div>
-                     </h:form>
-                    
-                </ui:repeat>
-                
-                <hr></hr>
-                <div style="font-size: 1.5rem;color: darkgray;padding: 15px 15px;font-weight: 600;">
-                    Bulunan Paylaşımlar
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-8 text-left" style="font-size:24px;color:black;font-weight: 600;">
+                                #{userBean.postUserFirstName(userBean.lookId)} #{userBean.postUserLastName(userBean.lookId)} 
+                                <h:outputLabel rendered="#{userBean.postUserisHidden(userBean.lookId) == true}">
+                                    <i class="fas fa-lock"></i>
+                                </h:outputLabel>
+                            </div>
+                            <div class="col-4">
+                                <h:commandButton class="btn btn-primary btn-agala mx-0 mb-0" value="Takip et" rendered="#{userBean.takiplesiyorMu(userBean.lookId)==false}"/>
+                                <h:commandButton class="btn btn-secondary btn-agala mx-0 mb-0" value="Takip ediliyor" rendered="#{userBean.takiplesiyorMu(userBean.lookId)==true}"/>
+                            </div>
+                        </div>
+                        
+
+                        <div class="text-left " style="font-size:16px;color:darkgray;">
+                            @#{userBean.postUserTag(userBean.lookId)}
+                        </div>
+                        <div class="text-left " style="font-size:18px;color:black">
+                            #{userBean.postUserBio(userBean.lookId)}
+                        </div>
+                        <div class="text-left " style="font-size:16px;color:black">
+                            <i class="far fa-calendar-alt"></i>&nbsp; #{userBean.postUserCreateDate(userBean.lookId)} &nbsp;<i
+                                class="fas fa-birthday-cake"></i> &nbsp; #{userBean.postUserBirthDate(userBean.lookId)}
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-6">
+                                <b>#{userBean.postUserFollowingCount(userBean.lookId)}</b> Takip ediliyor
+                            </div>
+                            <div class="col-6">
+                                <b>#{userBean.postUserFollowerCount(userBean.lookId)}</b> Takipçi
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
-                <h:outputText style="font-size:1.2rem; padding:20px 20px;" rendered="#{userBean.postAra() == null or userBean.postAra().size() == 0}" value="Aradığın paylaşımı bulamadık. Üzgünüz ama belki bununla ilgili bir şeyler Agalamak istersin?">
-                    
-                    
-                </h:outputText>
-                <ui:repeat value="#{userBean.postAra()}" var="item">
+                
+                <h:panelGroup rendered="#{userBean.takiplesiyorMu(userBean.lookId) == true or userBean.postUserisHidden(userBean.lookId) == false}">
+                    <ui:repeat value="#{userBean.profilSayfasiPostlariGoster()}" var="item">
                     <h:form>
                     <div class="aga">
                     <div class="aga-Sol">
@@ -146,9 +155,7 @@
                     <div class="aga-Main">
                         <div class="aga-Main-Ust">
                             <div class="aga-Main-Ust-Isim">
-                                 <h:commandLink style="color:black;" action="#{userBean.profilSayfasiGoster(item.userId)}">
-                                    #{userBean.postUserFirstName(item.userId)} #{userBean.postUserLastName(item.userId)}
-                                </h:commandLink>
+                                #{userBean.postUserFirstName(item.userId)} #{userBean.postUserLastName(item.userId)}
                             </div>
                             <div class="aga-Main-Ust-Kullanıcı" style="color:gray;">
                                 @#{userBean.postUserTag(item.userId)}
@@ -181,6 +188,7 @@
 
                         </div>
                         <div class="aga-Main-Action">
+                            
                             <h:panelGroup id="begeniler">
                                 
                             
@@ -243,7 +251,15 @@
                     </div>
                      </h:form>
                 </ui:repeat>
+                    
+                    
+                    
+                </h:panelGroup>
                 
+                <h:outputText style="font-size:1.2rem; padding:20px 20px;text-align: center;" rendered="#{userBean.takiplesiyorMu(userBean.lookId) == false and userBean.postUserisHidden(userBean.lookId) == true}" value="Aga'n hesabını gizlemiş. Lütfen önce onu takip et!">
+                    
+                    
+                </h:outputText>
                 
             </div>
             <div class="right-Panel col-3 d-none d-md-block">
@@ -251,7 +267,7 @@
                     <div class="search">
                         <h:form >
 
-                           <h:inputText pt:required="required" class="search-input" pt:placeholder="Agalarını bul..." value="#{userBean.ara}"></h:inputText> <h:commandLink
+                            <h:inputText pt:required="required" class="search-input" pt:placeholder="Agalarını bul..." value="#{userBean.ara}"></h:inputText> <h:commandLink
                             action="#{userBean.aramaYap()}"
                             class="search-icon">
                                  <i class="fa fa-search"></i>
@@ -260,6 +276,8 @@
                                 
                             </h:commandButton>
                         </h:form>
+                    </div>
+                    <div>
                         <h:form>
                             <ul class="right-Panel-menu">
                                 <li> 

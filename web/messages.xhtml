@@ -93,7 +93,7 @@
                 
                 <ui:repeat value="#{messageBean.mesajAnaSayfaArr(userBean.userId)}" var="item">
                 
-                    <div class="messages-card"> 
+                    <div class="messages-card mb-4" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;"> 
                         
                         <div class="row" style="width:100%;">
                             <h:panelGroup  rendered="#{item.senderId != userBean.userId}">

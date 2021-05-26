@@ -7,6 +7,7 @@ package dao;
 
 import beans.MessageBean;
 import beans.UserBean;
+import java.util.ArrayList;
 
 /**
  *
@@ -33,7 +34,23 @@ public class testClass {
         System.out.println("hmmmm");
         String test = "http://localhost:8080/Agalar/faces/messages_show_message.xhtml?uid=1";
         System.out.println(test.split("uid=")[1]);
-        System.out.println(mb.mesajAnaSayfaArr(2).size());
+        ArrayList<String>dizi = new ArrayList<String>();
+        dizi.add("2021-05-25");
+        dizi.add("asim");
+        dizi.add("2021-05-26");
+        for(int i = 0;i<dizi.size();i++){
+            for(int j = 0;j<dizi.size();j++){
+                
+                if(dizi.get(i).compareTo(dizi.get(j))>0){
+                    String temp = dizi.get(i);
+                    dizi.set(i,dizi.get(j));
+                    dizi.set(j,temp);
+                }
+            }
+        }
+        for(int i = 0;i<dizi.size();i++){
+            System.out.println(dizi.get(i));
+        }
         //System.out.println(mb.mesajiGonder(2,1));
     }
     

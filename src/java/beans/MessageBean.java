@@ -85,7 +85,19 @@ public class MessageBean {
         this.createDate = createDate;
     }
     public ArrayList<MessageBean> mesajAnaSayfaArr(int userid){
-        return MessagesDAO.getDistinctMessage(userid);
+        ArrayList<MessageBean> dizi =  MessagesDAO.getDistinctMessage(userid);
+        
+        for(int i = 0;i<dizi.size();i++){
+            for(int j = 0;j<dizi.size();j++){
+                
+                if(dizi.get(i).createDate.compareTo(dizi.get(j).createDate)>0){
+                    MessageBean temp = dizi.get(i);
+                    dizi.set(i,dizi.get(j));
+                    dizi.set(j,temp);
+                }
+            }
+        }
+        return dizi;
     }
     public String mesajlariGosterSayfasi(int targetid){
         this.receiverId = targetid;

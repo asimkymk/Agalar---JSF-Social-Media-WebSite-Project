@@ -103,7 +103,9 @@
                     <div class="aga-Main">
                         <div class="aga-Main-Ust">
                             <div class="aga-Main-Ust-Isim">
-                                #{userBean.postUserFirstName(item.userId)} #{userBean.postUserLastName(item.userId)}
+                                 <h:commandLink style="color:black;" action="#{userBean.profilSayfasiGoster(item.userId)}">
+                                    #{userBean.postUserFirstName(item.userId)} #{userBean.postUserLastName(item.userId)}
+                                </h:commandLink>
                             </div>
                             <div class="aga-Main-Ust-Kullanıcı" style="color:gray;">
                                 @#{userBean.postUserTag(item.userId)}
