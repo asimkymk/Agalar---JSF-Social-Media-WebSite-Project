@@ -103,18 +103,30 @@
                 
                <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                      <span class="input-group-text">Adınız ve soyadınız</span>
+                      <span class="input-group-text">Adın ve soyadın</span>
                     </div>
                     
                    <h:inputText label="First name" class="form-control" value="#{userBean.firstName}" pt:placeholder=""></h:inputText>
                         <h:inputText label="Last name" class="form-control" value="#{userBean.lastName}"></h:inputText>
                 </div>
                 
-                <div class="input-group flex-nowrap">
+                <div class="input-group flex-nowrap mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="addon-wrapping">@</span>
                     </div>
-                     <h:inputText label="First name" class="form-control" value="#{userBean.tag}" pt:placeholder="Kullanıcı Tag"></h:inputText>
+                     <h:inputText class="form-control" value="#{userBean.tag}" pt:placeholder="Kullanıcı Tag" pt:required="required"></h:inputText>
+              </div>
+                <div class="input-group flex-nowrap mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="addon-wrapping">Biografi</span>
+                    </div>
+                     <h:inputText label="User Bio" class="form-control" value="#{userBean.bio}" pt:placeholder="Kullanıcı Bio"></h:inputText>
+              </div>
+                <div class="input-group flex-nowrap mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="addon-wrapping">Doğum Tarihi</span>
+                    </div>
+                     <h:inputText label="User Birth Date" class="form-control" value="#{userBean.birthDate}" pt:placeholder="Kullanıcı BirthDate"></h:inputText>
               </div>
 
                 

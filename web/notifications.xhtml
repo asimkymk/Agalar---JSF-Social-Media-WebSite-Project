@@ -31,10 +31,10 @@
                                     <h:commandLink action="home.xhtml?faces-redirect=true" class="left-Panel-Link"><i class="fas fa-home"></i>Anasayfa</h:commandLink>
                                 </li>
                                 <li>
-                                     <h:commandLink action="messages.xhtml?faces-redirect=true" class="left-Panel-Link left-Panel-Link-Selected"><i class="fas fa-envelope"></i>Mesajlar</h:commandLink>
+                                     <h:commandLink action="messages.xhtml?faces-redirect=true" class="left-Panel-Link"><i class="fas fa-envelope"></i>Mesajlar</h:commandLink>
                                 </li>
                                 <li>
-                                    <h:commandLink action="notifications.xhtml?faces-redirect=true" class="left-Panel-Link"><i class="fas fa-bell"></i>Bildirimler</h:commandLink>
+                                    <h:commandLink action="notifications.xhtml?faces-redirect=true" class="left-Panel-Link  left-Panel-Link-Selected"><i class="fas fa-bell"></i>Bildirimler</h:commandLink>
                                 </li>
                                 <li>
                                     <h:commandLink action="profile.xhtml?faces-redirect=true" class="left-Panel-Link"><i class="fas fa-user-alt"></i>Profil</h:commandLink>
@@ -97,10 +97,12 @@
                         
                         <div class="row" style="width:100%;">
                             
-                            
-                                    <div class="col-12 text-left">
-                                        <p>#{item.content}</p>
-                                    </div>
+                            <div class="col-2 text-center" style="color:#3383FF;font-size:1.4rem;">
+                                 <i class="fas fa-bell"></i>
+                            </div>
+                            <div class="col-10 text-left">
+                               <p style="font-size:1.2rem;">#{item.content}</p>
+                            </div>
                                
                         </div>
                         

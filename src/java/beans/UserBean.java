@@ -7,7 +7,6 @@ package beans;
 
 import dao.FollowersDAO;
 import dao.LikesDAO;
-import dao.MessagesDAO;
 import dao.NotificationDAO;
 import dao.SavesDAO;
 import dao.UserDAO;
@@ -347,6 +346,7 @@ public class UserBean implements Serializable{
             this.isHidden = false;
             this.activeSucRegister = true;
             this.msgSucRegister = "Başarılı bir şekilde kayıt olundu. Giriş yapabilirsiniz.";
+            this.bildirimGonder(this.userId, "Hesabını başarıyla oluşturdun. Artık Agamla hesabın var.");
             return "login?faces-redirect=true";
         }
         else{
@@ -361,7 +361,22 @@ public class UserBean implements Serializable{
    
 
     public String cikisYap(){
-        
+        this.active= false;
+        this.msg = null;
+        this.activeRegister = false;
+        this.msgRegister = "";
+        this.tag = null;
+        this.userId = -1;
+        this.firstName = null;
+        this.lastName = null;
+        this.birthDate = null;
+        this.sex = null;
+        this.followerCount = -1;
+        this.followingCount = -1;
+        this.profilePictureUri = null;
+        this.coverPictureUri = null;
+        this.isHidden = false;
+        this.activeSucRegister = true;
         return "login?faces-redirect=true";
         
     }
@@ -481,11 +496,12 @@ public class UserBean implements Serializable{
         return "home.xhtml?faces-redirect=true";
         
     }
-    public String gonderiyiBegen(int postId,int activeLikeNumber){
+    public String gonderiyiBegen(int postId,int activeLikeNumber,int targetId){
         
         UserDAO.LikeCountArtir(this.userId, postId, activeLikeNumber);
         HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String url = req.getRequestURL().toString();
+        this.bildirimGonder(targetId, "@"+this.tag + ", gönderini beğendi.");
         return url+"?faces-redirect=true";
 
     }
@@ -534,6 +550,7 @@ public class UserBean implements Serializable{
     }
     
     public int gonderiyiKaydetmisMi(int postId){
+        
         if (SavesDAO.isSaved(userId, postId)) return 1;
         else return -1;
     }
@@ -555,10 +572,11 @@ public class UserBean implements Serializable{
         String url = req.getRequestURL().toString();
         return url+"?faces-redirect=true";
     }
-    public String takipEt(int followingId,int followerCount){
+    public String takipEt(int followingId,int followerCount,int targetId){
         
         boolean durum = FollowersDAO.Follow(this.userId, followingId, this.followingCount,followerCount);
         if(durum){
+            this.bildirimGonder(targetId, "@" + this.tag + ", seni takip etmeye başladı.");
             this.followingCount++;
         }
         HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
@@ -576,9 +594,11 @@ public class UserBean implements Serializable{
         String url = req.getRequestURL().toString();
         return url+"?faces-redirect=true";
     }
-    public ArrayList<NotificationDAO> bildirimleriGoster(int userid){
-        ArrayList<NotificationDAO> bildirimler = new ArrayList<NotificationDAO>();
-        bildirimler = NotificationDAO.getNotifications(userid);
+    public ArrayList<NotificationBean> bildirimleriGoster(int userid){
+        ArrayList<NotificationBean> bildirimler = new ArrayList<NotificationBean>();
+        for(int i = NotificationDAO.getNotifications(userid).size()-1;i>=0;i--){
+            bildirimler.add(NotificationDAO.getNotifications(userid).get(i));
+        }
         return bildirimler;
     }
     public void bildirimGonder(int userid, String content){

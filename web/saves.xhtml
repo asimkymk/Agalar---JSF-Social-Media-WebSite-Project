@@ -153,7 +153,7 @@
                                     
                                 
                                      
-                                    <h:commandLink  id="begenmis" rendered="#{userBean.gonderiyiBegenmemisMi(item.postId) eq 1}" class="aga-Main-Action-Like-Text"  action="#{userBean.gonderiyiBegen(item.postId, item.likeCount)}"><i class="far fa-heart"></i>&nbsp;#{item.likeCount}
+                                     <h:commandLink  id="begenmis" rendered="#{userBean.gonderiyiBegenmemisMi(item.postId) eq 1}" class="aga-Main-Action-Like-Text"  action="#{userBean.gonderiyiBegen(item.postId, item.likeCount,item.userId)}"><i class="far fa-heart"></i>&nbsp;#{item.likeCount}
                                     
                                     <f:ajax render="begeniler" />
                                     </h:commandLink>

@@ -5,6 +5,7 @@
  */
 package dao;
 
+import beans.NotificationBean;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,48 +19,15 @@ import util.DataConnect;
  */
 public class NotificationDAO {
     
-    private int notificationId;
-    private int userId;
-    private String content;
-
-    public NotificationDAO(int notificationId, int userId, String content) {
-        this.notificationId = notificationId;
-        this.userId = userId;
-        this.content = content;
-    }
-
-    public int getNotificationId() {
-        return notificationId;
-    }
-
-    public void setNotificationId(int notificationId) {
-        this.notificationId = notificationId;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-    public static ArrayList<NotificationDAO> getNotifications(int userid){
-       ArrayList<NotificationDAO> bildirimler = new ArrayList<NotificationDAO>();
+    public static ArrayList<NotificationBean> getNotifications(int userid){
+       ArrayList<NotificationBean> bildirimler = new ArrayList<NotificationBean>();
        try {
                 Connection con = DataConnect.getConnection();
                 PreparedStatement ps = con.prepareStatement("Select * from NOTIFICATIONS where USERID = ?");       
                 ps.setInt(1, userid);
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
-                    bildirimler.add(new NotificationDAO(rs.getInt("NOTIFICATIONID"),rs.getInt("USERID"),rs.getString("CONTENT")));
+                    bildirimler.add(new NotificationBean(rs.getInt("NOTIFICATIONID"),rs.getInt("USERID"),rs.getString("CONTENT")));
                 }
                 con.close(); 
         } catch (SQLException ex) {

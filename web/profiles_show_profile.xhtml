@@ -116,7 +116,7 @@
                             
                             <div class="col-4">
                                 <h:form>
-                                <h:commandLink class="btn btn-primary btn-agala mx-0 mb-0"  action="#{userBean.takipEt(userBean.lookId, userBean.postUserFollowerCount(userBean.lookId))}" value="Takip et" rendered="#{userBean.takiplesiyorMu(userBean.lookId)==false}"/>
+                                <h:commandLink class="btn btn-primary btn-agala mx-0 mb-0"  action="#{userBean.takipEt(userBean.lookId, userBean.postUserFollowerCount(userBean.lookId),userBean.lookId)}" value="Takip et" rendered="#{userBean.takiplesiyorMu(userBean.lookId)==false}"/>
                                 <h:commandLink class="btn btn-secondary btn-agala mx-0 mb-0"  action="#{userBean.takipEtme(userBean.lookId, userBean.postUserFollowerCount(userBean.lookId))}" value="Takip ediliyor" rendered="#{userBean.takiplesiyorMu(userBean.lookId)==true}"/>
                                 </h:form>
                             </div>
@@ -206,7 +206,7 @@
                                     
                                 
                                      
-                                    <h:commandLink  id="begenmis" rendered="#{userBean.gonderiyiBegenmemisMi(item.postId) eq 1}" class="aga-Main-Action-Like-Text"  action="#{userBean.gonderiyiBegen(item.postId, item.likeCount)}"><i class="far fa-heart"></i>&nbsp;#{item.likeCount}
+                                     <h:commandLink  id="begenmis" rendered="#{userBean.gonderiyiBegenmemisMi(item.postId) eq 1}" class="aga-Main-Action-Like-Text"  action="#{userBean.gonderiyiBegen(item.postId, item.likeCount,item.userId)}"><i class="far fa-heart"></i>&nbsp;#{item.likeCount}
                                     
                                     <f:ajax render="begeniler" />
                                     </h:commandLink>
