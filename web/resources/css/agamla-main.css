@@ -266,7 +266,7 @@ a:hover {
 }
 
 .Agala-Sec {
-    font-size: 25px;
+    font-size: 1.1rem;
     margin-left: 10px;
 }
 
@@ -274,7 +274,7 @@ a:hover {
     font-size: 1.4rem;
     border-radius: 15px;
     float:right;
-    margin-left:auto;
+    margin-left: auto;
     margin-right: 20px;
     margin-bottom:15px;
 }
@@ -569,6 +569,13 @@ a:hover {
         margin:0;
         width:100%;
         padding:0;
+    }
+    .btn-agala{
+        margin-right:auto;
+        margin-left:0;
+    }
+    .Agala-Sec{
+        font-size:11px;
     }
     body {
     background-color: #F5F6F6;

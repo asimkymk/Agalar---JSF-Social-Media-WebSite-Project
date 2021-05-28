@@ -23,7 +23,7 @@ public class NotificationDAO {
        ArrayList<NotificationBean> bildirimler = new ArrayList<NotificationBean>();
        try {
                 Connection con = DataConnect.getConnection();
-                PreparedStatement ps = con.prepareStatement("Select * from NOTIFICATIONS where USERID = ?");       
+                PreparedStatement ps = con.prepareStatement("Select * from NOTIFICATIONS where USERID = ? ORDER BY NOTIFICATIONID DESC");       
                 ps.setInt(1, userid);
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {

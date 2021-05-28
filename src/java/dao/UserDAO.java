@@ -355,11 +355,13 @@ public class UserDAO {
     }
 
     public static ArrayList<PostBean> postlariFiltrele(int followerId) {
+        ArrayList<PostBean> postlar = PostDAO.getPosts();
         ArrayList<PostBean> postlar1 = new ArrayList<PostBean>();
-        for (int i = PostDAO.getPosts().size() - 1; i >= 0; i--) {
-            if (FollowersDAO.isFollowing(followerId, PostDAO.getPosts().get(i).getUserId()) || PostDAO.getPosts().get(i).getUserId() == followerId) {
+        
+        for (int i = 0; i < postlar.size(); i++) {
+            if (FollowersDAO.isFollowing(followerId, postlar.get(i).getUserId()) || postlar.get(i).getUserId() == followerId) {
 
-                postlar1.add(PostDAO.getPosts().get(i));
+                postlar1.add(postlar.get(i));
             }
         }
         return postlar1;
@@ -492,7 +494,7 @@ public class UserDAO {
         try {
             Connection con = DataConnect.getConnection();
             for (int i = 0; i < postSahipleri.size(); i++) {
-                PreparedStatement ps = con.prepareStatement("Select DISTINCT * from POSTS where CONTENT LIKE ? OR USERID= ?");
+                PreparedStatement ps = con.prepareStatement("Select DISTINCT * from POSTS where CONTENT LIKE ? OR USERID= ? ORDER BY CREATEDATE DESC");
                 ps.setString(1, "%" + search + "%");
                 ps.setInt(2, postSahipleri.get(i));
 
@@ -541,7 +543,7 @@ public class UserDAO {
         if (postSahipleri.size() == 0 || postSahipleri == null) {
             try {
                 Connection con = DataConnect.getConnection();
-                PreparedStatement ps = con.prepareStatement("Select DISTINCT * from POSTS,USERS where POSTS.CONTENT LIKE ?  AND USERS.USERID = POSTS.USERID  AND USERS.ISHIDDEN = False");
+                PreparedStatement ps = con.prepareStatement("Select DISTINCT * from POSTS,USERS where POSTS.CONTENT LIKE ?  AND USERS.USERID = POSTS.USERID  AND USERS.ISHIDDEN = False ORDER BY CREATEDATE DESC");
                 ps.setString(1, "%" + search + "%");
                 ResultSet rs = ps.executeQuery();
                 bulunanlar = new ArrayList<PostBean>();
@@ -605,11 +607,12 @@ public class UserDAO {
         return false;
     }
     public static ArrayList<PostBean> postlariFiltreleUser(int userId){
+        ArrayList<PostBean> postlar = PostDAO.getPosts();
         ArrayList<PostBean> postlar1 = new ArrayList<PostBean>();
-        for (int i = PostDAO.getPosts().size() - 1; i >= 0; i--) {
-            if (PostDAO.getPosts().get(i).getUserId() == userId) {
+        for (int i =  0; i < postlar.size(); i++) {
+            if (postlar.get(i).getUserId() == userId) {
 
-                postlar1.add(PostDAO.getPosts().get(i));
+                postlar1.add(postlar.get(i));
             }
         }
         return postlar1;

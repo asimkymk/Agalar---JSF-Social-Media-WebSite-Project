@@ -87,7 +87,7 @@
             </!-->   
             <div class="main-Panel col-12 col-md-6">
                 <div class="panel-Main-Agala">
-                    <h:form>
+                    <h:form enctype="multipart/form-data">
 
                     <div class="panel-Agala">
                         <div class="panel-Agala-Foto">
@@ -105,8 +105,7 @@
                     </div>
                     <div class="panel-Agala-Gonder">
                         <div class="Agala-Secenekler">
-                            <h:commandLink class="Agala-Sec"><i class="far fa-image"></i></h:commandLink>
-                            <h:commandLink class="Agala-Sec"><i class="fas fa-video"></i></h:commandLink>
+                            <h:inputFile value="#{userBean.doc}" styleClass="Agala-Sec"></h:inputFile>
                             <c:if test="#{not empty userBean.postHata}">
                                 <p style="color:red;margin:0;padding:0;">#{userBean.postHata}</p>
                              </c:if>

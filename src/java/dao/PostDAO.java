@@ -25,7 +25,7 @@ public class PostDAO {
         ArrayList<PostBean> postlar = new ArrayList<PostBean>();
         try {
                 Connection con = DataConnect.getConnection();
-                PreparedStatement ps = con.prepareStatement("Select * from POSTS");
+                PreparedStatement ps = con.prepareStatement("Select * from POSTS ORDER BY CREATEDATE DESC");
                 
                 ResultSet rs = ps.executeQuery();
                 while(rs.next()) {

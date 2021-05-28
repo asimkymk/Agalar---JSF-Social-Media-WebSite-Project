@@ -10,14 +10,17 @@ import dao.LikesDAO;
 import dao.NotificationDAO;
 import dao.SavesDAO;
 import dao.UserDAO;
+import java.io.File;
+import java.io.InputStream;
 import java.io.Serializable;
+import java.nio.file.Files;
 import java.util.ArrayList;
-
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Part;
 
 /**
  *
@@ -25,7 +28,8 @@ import javax.servlet.http.HttpServletRequest;
  */
 @ManagedBean
 @SessionScoped
-public class UserBean implements Serializable{
+public class UserBean implements Serializable {
+
     private static final long serialVersionUID = 1094801825228386363L;
     private boolean active = false;
     private boolean activeRegister = false;
@@ -52,20 +56,33 @@ public class UserBean implements Serializable{
     private String coverPictureUri;
     private boolean isHidden;
     private String postContent;
-    private String postPhotoUri="empty";
-    private String postVideoUri="empty";
+    private String postPhotoUri = "empty";
+    private String postVideoUri = "empty";
     private String postHata;
     private String ara;
     private int lookId;
+    private Part doc = null;
+    private final String uploadTo = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
 
     public int getLookId() {
         return lookId;
     }
 
+    public String getUploadTo() {
+        return uploadTo;
+    }
+
     public void setLookId(int lookId) {
         this.lookId = lookId;
     }
-    
+
+    public Part getDoc() {
+        return doc;
+    }
+
+    public void setDoc(Part doc) {
+        this.doc = doc;
+    }
 
     public String getAra() {
         return ara;
@@ -74,7 +91,7 @@ public class UserBean implements Serializable{
     public void setAra(String ara) {
         this.ara = ara;
     }
-    
+
     public String getPostHata() {
         return postHata;
     }
@@ -82,7 +99,7 @@ public class UserBean implements Serializable{
     public void setPostHata(String postHata) {
         this.postHata = postHata;
     }
-    
+
     public String getPostPhotoUri() {
         return postPhotoUri;
     }
@@ -98,7 +115,7 @@ public class UserBean implements Serializable{
     public void setPostVideoUri(String postVideoUri) {
         this.postVideoUri = postVideoUri;
     }
-    
+
     public String getPostContent() {
         return postContent;
     }
@@ -106,7 +123,6 @@ public class UserBean implements Serializable{
     public void setPostContent(String postContent) {
         this.postContent = postContent;
     }
-    
 
     public boolean isActive() {
         return active;
@@ -151,7 +167,6 @@ public class UserBean implements Serializable{
     public void setMsgRegister(String msgRegister) {
         this.msgRegister = msgRegister;
     }
-    
 
     public void setActive(boolean active) {
         this.active = active;
@@ -284,16 +299,15 @@ public class UserBean implements Serializable{
     public void setIsHidden(boolean isHidden) {
         this.isHidden = isHidden;
     }
-    
-    
+
     public UserBean() {
     }
-    
-    public String girisKontrol(){
-        boolean girisDurum = UserDAO.girisYap(this.email,this.password);
-        if(girisDurum){
+
+    public String girisKontrol() {
+        boolean girisDurum = UserDAO.girisYap(this.email, this.password);
+        if (girisDurum) {
             setIsLogged(true);
-            this.active= false;
+            this.active = false;
             this.msg = "";
             this.activeRegister = false;
             this.msgRegister = "";
@@ -313,23 +327,22 @@ public class UserBean implements Serializable{
             this.activeSucRegister = false;
             this.msgSucRegister = null;
             return "home?faces-redirect=true";
-        }
-        else{
+        } else {
             setIsLogged(false);
-            this.active=true;
+            this.active = true;
             this.activeSucRegister = false;
             this.msgSucRegister = null;
-            this.msg="Hatalı mail veya şifre girişi yapıldı. Lütfen bilgileri kontrol ediniz.";
-            
+            this.msg = "Hatalı mail veya şifre girişi yapıldı. Lütfen bilgileri kontrol ediniz.";
+
             return "login?faces-redirect=true";
         }
     }
-    
-    public String kayitKontrol(){
-        String kayitDurum = UserDAO.kayitOl(this.email,this.tag,this.firstName,this.lastName,this.birthDate,this.sex,this.password,this.isHidden);
-        if(kayitDurum.equals("ok")){
+
+    public String kayitKontrol() {
+        String kayitDurum = UserDAO.kayitOl(this.email, this.tag, this.firstName, this.lastName, this.birthDate, this.sex, this.password, this.isHidden);
+        if (kayitDurum.equals("ok")) {
             setIsLogged(false);
-            this.active= false;
+            this.active = false;
             this.msg = "";
             this.activeRegister = false;
             this.msgRegister = "";
@@ -348,20 +361,18 @@ public class UserBean implements Serializable{
             this.msgSucRegister = "Başarılı bir şekilde kayıt olundu. Giriş yapabilirsiniz.";
             this.bildirimGonder(this.userId, "Hesabını başarıyla oluşturdun. Artık Agamla hesabın var.");
             return "login?faces-redirect=true";
-        }
-        else{
+        } else {
             setIsLogged(false);
-            this.activeRegister=true;
+            this.activeRegister = true;
             //this.msgRegister="";
-            this.msgRegister= kayitDurum;
-            
+            this.msgRegister = kayitDurum;
+
             return "register?faces-redirect=true";
         }
     }
-   
 
-    public String cikisYap(){
-        this.active= false;
+    public String cikisYap() {
+        this.active = false;
         this.msg = null;
         this.activeRegister = false;
         this.msgRegister = "";
@@ -378,7 +389,7 @@ public class UserBean implements Serializable{
         this.isHidden = false;
         this.activeSucRegister = true;
         return "login?faces-redirect=true";
-        
+
     }
 
     public String getMsgRegister1() {
@@ -396,214 +407,278 @@ public class UserBean implements Serializable{
     public void setMsgRegister2(String msgRegister2) {
         this.msgRegister2 = msgRegister2;
     }
-    public void hataliMailFormatiGirisi(){
+
+    public void hataliMailFormatiGirisi() {
         this.active = true;
-        this.msg="Hatalı mail formatı girdiniz. Lütfen mail adresini kontrol ediniz.";
-        
+        this.msg = "Hatalı mail formatı girdiniz. Lütfen mail adresini kontrol ediniz.";
+
     }
-    public void hataliMailFormatiGirisiRegister(){
+
+    public void hataliMailFormatiGirisiRegister() {
         this.activeRegister = true;
-        this.msgRegister="Hatalı mail formatı girdiniz. Lütfen mail adresini kontrol ediniz.";
-        
+        this.msgRegister = "Hatalı mail formatı girdiniz. Lütfen mail adresini kontrol ediniz.";
+
     }
-    public void hataliBirthDateGrisiRegister(){
+
+    public void hataliBirthDateGrisiRegister() {
         this.activeRegister = true;
-        this.msgRegister1 ="Doğum tarihi uygun formatta değil. (GG.AA.YYYY).";
-        
+        this.msgRegister1 = "Doğum tarihi uygun formatta değil. (GG.AA.YYYY).";
+
     }
-    public void hataliParolaUzunluguRegister(){
+
+    public void hataliParolaUzunluguRegister() {
         this.activeRegister = true;
-        this.msgRegister2 ="Parolanızın uzunluğu en az 8 en fazla 20 karakter olmalıdır.";
-        
+        this.msgRegister2 = "Parolanızın uzunluğu en az 8 en fazla 20 karakter olmalıdır.";
+
     }
-    public ArrayList<PostBean> postlariGoster(){
+
+    public ArrayList<PostBean> postlariGoster() {
         return UserDAO.postlariFiltrele(this.userId);
     }
-    public ArrayList<PostBean> kendipostlarimiGoster(){
+
+    public ArrayList<PostBean> kendipostlarimiGoster() {
         return UserDAO.postlariFiltreleUser(this.userId);
     }
-    public ArrayList<PostBean> profilSayfasiPostlariGoster(){
+
+    public ArrayList<PostBean> profilSayfasiPostlariGoster() {
         return UserDAO.postlariFiltreleUser(this.lookId);
     }
-    public String postUserPictureUri(int userid){
+
+    public String postUserPictureUri(int userid) {
         return UserDAO.getProfilePictureUri(userid);
-        
+
     }
-    public String postUserCoverUri(int userid){
+
+    public String postUserCoverUri(int userid) {
         return UserDAO.getCoverPictureUri(userid);
-        
+
     }
-    public int postUserFollowerCount(int userid){
+
+    public int postUserFollowerCount(int userid) {
         return UserDAO.getFollowersCount(userid);
-        
+
     }
-    public int postUserFollowingCount(int userid){
+
+    public int postUserFollowingCount(int userid) {
         return UserDAO.getFollowingCount(userid);
-        
+
     }
-    
-    public String postUserFirstName(int userid){
+
+    public String postUserFirstName(int userid) {
         return UserDAO.getFirstName(userid);
-        
+
     }
-    public String postUserBio(int userid){
+
+    public String postUserBio(int userid) {
         return UserDAO.getBio(userid);
-        
+
     }
-    public String postUserCreateDate(int userid){
+
+    public String postUserCreateDate(int userid) {
         return UserDAO.getCreateDate(userid);
-        
+
     }
-    public String postUserBirthDate(int userid){
+
+    public String postUserBirthDate(int userid) {
         return UserDAO.getBirthDate(userid);
-        
+
     }
-    public String postUserLastName(int userid){
+
+    public String postUserLastName(int userid) {
         return UserDAO.getLastName(userid);
-        
+
     }
-    public boolean postUserisHidden(int userid){
+
+    public boolean postUserisHidden(int userid) {
         return UserDAO.getIsHidden(userid);
-        
+
     }
-    public String postUserTag(int userid){
+
+    public String postUserTag(int userid) {
         return UserDAO.getTag(userid);
-        
+
     }
-    public String profilSayfasiGoster(int id){
-        if(id == this.userId){
+
+    public String profilSayfasiGoster(int id) {
+        if (id == this.userId) {
             return "profile?faces-redirect=true";
-        }
-        else{
-             this.lookId = id;
+        } else {
+            this.lookId = id;
             return "profiles_show_profile?faces-redirect=true";
         }
-       
+
     }
-    public String postGonder(){
-        
-        String durum = UserDAO.postOlustur(this.userId, this.postContent, this.postPhotoUri, this.postVideoUri);
-        if (durum.equals("ok")){
-            
-            this.postContent ="";
-            this.postPhotoUri = "empty";
-            this.postVideoUri = "empty";
-            this.postHata = "";
-        }
-        else{
-            this.postHata = durum;
+
+  
+
+    public String postGonder() {
+        try {
+            if (this.doc != null) {
+                InputStream input = doc.getInputStream();
+                this.postPhotoUri = uploadTo +"imgs/postPictures/" + doc.getSubmittedFileName();
+                
+                File f = new File(this.postPhotoUri);
+                Files.copy(input, f.toPath());
+                this.postPhotoUri ="imgs/postPictures/" + doc.getSubmittedFileName();
+
+            }
+            String durum = UserDAO.postOlustur(this.userId, this.postContent, this.postPhotoUri, this.postVideoUri);
+            if (durum.equals("ok")) {
+
+                this.postContent = "";
+                this.postPhotoUri = "empty";
+                this.postVideoUri = "empty";
+                this.postHata = "";
+                this.doc = null;
+            } else {
+                this.postHata = durum;
+            }
+            return "home.xhtml?faces-redirect=true";
+        } catch (Exception e) {
+                System.out.println(e.getMessage());
         }
         return "home.xhtml?faces-redirect=true";
-        
+
     }
-    public String gonderiyiBegen(int postId,int activeLikeNumber,int targetId){
-        
+
+    public String gonderiyiBegen(int postId, int activeLikeNumber, int targetId) {
+
         UserDAO.LikeCountArtir(this.userId, postId, activeLikeNumber);
         HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String url = req.getRequestURL().toString();
-        this.bildirimGonder(targetId, "@"+this.tag + ", gönderini beğendi.");
-        return url+"?faces-redirect=true";
+        if (targetId != this.userId) {
+            this.bildirimGonder(targetId, "@" + this.tag + ", gönderini beğendi.");
+        }
+        return url + "?faces-redirect=true";
 
     }
-    public String gonderiyiBegenme(int postId,int activeLikeNumber){
-        
+
+    public String gonderiyiBegenme(int postId, int activeLikeNumber) {
+
         UserDAO.LikeCountAzalt(this.userId, postId, activeLikeNumber);
         HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String url = req.getRequestURL().toString();
-        return url+"?faces-redirect=true";
+        return url + "?faces-redirect=true";
     }
-    public int gonderiyiBegenmisMi(int postId){
-        if (LikesDAO.isLiked(userId, postId)) return 1;
-        else return -1;
-    }
-    public int gonderiyiBegenmemisMi(int postId){
-        if(LikesDAO.isLiked(userId, postId))return -1;
-        else return 1;
-    }
-    public ArrayList<UserBean> kullaniciAra(){
-        return UserDAO.kullaniciyiAra(userId, this.ara);
-        
-    }
-    public ArrayList<PostBean> postAra(){
-        ArrayList<Integer>uids = new ArrayList<Integer>();
-        for(int i = 0;i<UserDAO.kullaniciyiAra(userId, this.ara).size();i++){
-            if(!UserDAO.kullaniciyiAra(userId, this.ara).get(i).isHidden) uids.add(UserDAO.kullaniciyiAra(userId, this.ara).get(i).getUserId());
+
+    public int gonderiyiBegenmisMi(int postId) {
+        if (LikesDAO.isLiked(userId, postId)) {
+            return 1;
+        } else {
+            return -1;
         }
-        ArrayList<PostBean> postlar=new ArrayList<PostBean>();
-        for(int i = UserDAO.postuAra(this.userId, this.ara, uids).size()-1;i>=0;i--){
-            postlar.add(UserDAO.postuAra(this.userId, this.ara, uids).get(i));
+    }
+
+    public int gonderiyiBegenmemisMi(int postId) {
+        if (LikesDAO.isLiked(userId, postId)) {
+            return -1;
+        } else {
+            return 1;
+        }
+    }
+
+    public ArrayList<UserBean> kullaniciAra() {
+        return UserDAO.kullaniciyiAra(userId, this.ara);
+
+    }
+
+    public ArrayList<PostBean> postAra() {
+        ArrayList<UserBean> userids = UserDAO.kullaniciyiAra(userId, this.ara);
+        ArrayList<Integer> uids = new ArrayList<Integer>();
+        for (int i = 0; i < userids.size(); i++) {
+            if (!userids.get(i).isHidden) {
+                uids.add(userids.get(i).getUserId());
+            }
+        }
+        ArrayList<PostBean> posts = UserDAO.postuAra(this.userId, this.ara, uids);
+        ArrayList<PostBean> postlar = new ArrayList<PostBean>();
+        for (int i = 0; i < posts.size(); i++) {
+            postlar.add(posts.get(i));
         }
         return postlar;
-        
+
     }
-    public String aramaYap(){
-        
+
+    public String aramaYap() {
+
         return "search.xhtml?faces-redirect=true";
     }
-    public boolean takiplesiyorMu(int searchId){
+
+    public boolean takiplesiyorMu(int searchId) {
         return FollowersDAO.isFollowing(userId, searchId);
-        
+
     }
-    
-    public ArrayList<PostBean> kaydedilenPostlariListele(){
+
+    public ArrayList<PostBean> kaydedilenPostlariListele() {
         return SavesDAO.getSavedPosts(this.userId);
     }
-    
-    public int gonderiyiKaydetmisMi(int postId){
-        
-        if (SavesDAO.isSaved(userId, postId)) return 1;
-        else return -1;
+
+    public int gonderiyiKaydetmisMi(int postId) {
+
+        if (SavesDAO.isSaved(userId, postId)) {
+            return 1;
+        } else {
+            return -1;
+        }
     }
-    public int gonderiyiKaydetmemisMi(int postId){
-        if(SavesDAO.isSaved(userId, postId))return -1;
-        else return 1;
+
+    public int gonderiyiKaydetmemisMi(int postId) {
+        if (SavesDAO.isSaved(userId, postId)) {
+            return -1;
+        } else {
+            return 1;
+        }
     }
-    public String gonderiyiKaydet(int postId){
-        
+
+    public String gonderiyiKaydet(int postId) {
+
         UserDAO.postKaydet(this.userId, postId);
         HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String url = req.getRequestURL().toString();
-        return url+"?faces-redirect=true";
+        return url + "?faces-redirect=true";
     }
-    public String gonderiyiKaydetme(int postId){
-        
+
+    public String gonderiyiKaydetme(int postId) {
+
         UserDAO.postKaydetme(this.userId, postId);
         HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String url = req.getRequestURL().toString();
-        return url+"?faces-redirect=true";
+        return url + "?faces-redirect=true";
     }
-    public String takipEt(int followingId,int followerCount,int targetId){
-        
-        boolean durum = FollowersDAO.Follow(this.userId, followingId, this.followingCount,followerCount);
-        if(durum){
+
+    public String takipEt(int followingId, int followerCount, int targetId) {
+
+        boolean durum = FollowersDAO.Follow(this.userId, followingId, this.followingCount, followerCount);
+        if (durum) {
             this.bildirimGonder(targetId, "@" + this.tag + ", seni takip etmeye başladı.");
             this.followingCount++;
         }
         HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String url = req.getRequestURL().toString();
-        return url+"?faces-redirect=true";
+        return url + "?faces-redirect=true";
 
     }
-    public String takipEtme(int followingId,int followerCount){
-        
-        boolean durum = FollowersDAO.unFollow(this.userId, followingId, this.followingCount,followerCount);
-        if(durum){
+
+    public String takipEtme(int followingId, int followerCount) {
+
+        boolean durum = FollowersDAO.unFollow(this.userId, followingId, this.followingCount, followerCount);
+        if (durum) {
             this.followingCount--;
         }
         HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String url = req.getRequestURL().toString();
-        return url+"?faces-redirect=true";
+        return url + "?faces-redirect=true";
     }
-    public ArrayList<NotificationBean> bildirimleriGoster(int userid){
-        ArrayList<NotificationBean> bildirimler = new ArrayList<NotificationBean>();
-        for(int i = NotificationDAO.getNotifications(userid).size()-1;i>=0;i--){
-            bildirimler.add(NotificationDAO.getNotifications(userid).get(i));
-        }
+
+    public ArrayList<NotificationBean> bildirimleriGoster(int userid) {
+        ArrayList<NotificationBean> bildirimler = NotificationDAO.getNotifications(userid);
+
         return bildirimler;
     }
-    public void bildirimGonder(int userid, String content){
+
+    public void bildirimGonder(int userid, String content) {
         boolean durum = NotificationDAO.addNotifications(userid, content);
-        if(durum){
+        if (durum) {
             System.out.println("bildirim gonderildi");
         }
     }

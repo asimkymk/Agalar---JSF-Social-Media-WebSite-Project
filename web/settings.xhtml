@@ -106,29 +106,44 @@
                       <span class="input-group-text">Adın ve soyadın</span>
                     </div>
                     
-                   <h:inputText label="First name" class="form-control" value="#{userBean.firstName}" pt:placeholder=""></h:inputText>
-                        <h:inputText label="Last name" class="form-control" value="#{userBean.lastName}"></h:inputText>
+                   <h:inputText label="Adın" class="form-control" value="#{userBean.firstName}" pt:placeholder=""></h:inputText>
+                        <h:inputText label="Soyadın" class="form-control" value="#{userBean.lastName}"></h:inputText>
                 </div>
                 
                 <div class="input-group flex-nowrap mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="addon-wrapping">@</span>
                     </div>
-                     <h:inputText class="form-control" value="#{userBean.tag}" pt:placeholder="Kullanıcı Tag" pt:required="required"></h:inputText>
+                     <h:inputText class="form-control" value="#{userBean.tag}" pt:placeholder="Kullanıcı Adı" pt:required="required"></h:inputText>
               </div>
                 <div class="input-group flex-nowrap mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="addon-wrapping">Biografi</span>
                     </div>
-                     <h:inputText label="User Bio" class="form-control" value="#{userBean.bio}" pt:placeholder="Kullanıcı Bio"></h:inputText>
+                     <h:inputText label="User Bio" class="form-control" value="#{userBean.bio}" pt:placeholder="Kullanıcı Biografi"></h:inputText>
               </div>
                 <div class="input-group flex-nowrap mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="addon-wrapping">Doğum Tarihi</span>
                     </div>
-                     <h:inputText label="User Birth Date" class="form-control" value="#{userBean.birthDate}" pt:placeholder="Kullanıcı BirthDate"></h:inputText>
+                     <h:inputText label="User Birth Date" class="form-control" value="#{userBean.birthDate}" pt:placeholder="Kullanıcı Doğum Tarihi"></h:inputText>
+              </div>
+                <div class="input-group flex-nowrap mb-3">
+                   <div class="form-group">
+                        <label for="exampleFormControlFile1">Profil Fotoğrafın</label>
+                        <h:inputFile class="form-control-file" id="pp"></h:inputFile>
+                        <img src="#{userBean.profilePictureUri}" style = "width:60%; margin-top:10px;"></img>
+                  </div>
+              </div>
+                <div class="input-group flex-nowrap mb-3">
+                   <div class="form-group">
+                        <label for="exampleFormControlFile1">Kapak Fotoğrafın</label>
+                        <h:inputFile class="form-control-file" required="true" id="cp"></h:inputFile>
+                        <img src="#{userBean.coverPictureUri}"  style = "width:80%; margin-top:10px;"></img>
+                  </div>
               </div>
 
+                
                 
             </div>
             <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">dsds</div>
