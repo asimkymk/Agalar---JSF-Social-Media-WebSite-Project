@@ -135,11 +135,16 @@
                         </div>
 
                         <div class="row mt-3">
-                            <div class="col-6">
+                            <div class="col-sm-12 col-md-4 text-center">
                                 <b>#{userBean.postUserFollowingCount(userBean.lookId)}</b> Takip ediliyor
                             </div>
-                            <div class="col-6">
+                            <div class="col-sm-12 col-md-4 text-center">
                                 <b>#{userBean.postUserFollowerCount(userBean.lookId)}</b> Takipçi
+                            </div>
+                            <div class="col-sm-12 col-md-4 text-center">
+                                <h:form>
+                                <h:commandLink class="btn btn-primary "  action="#{messageBean.mesajlariGosterSayfasi(userBean.lookId)}" value="Mesaj gönder"/>
+                                </h:form>
                             </div>
                         </div>
                     </div>

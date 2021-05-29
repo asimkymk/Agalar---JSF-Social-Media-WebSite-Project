@@ -15,6 +15,7 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -513,14 +514,26 @@ public class UserBean implements Serializable {
 
     public String postGonder() {
         try {
-            if (this.doc != null) {
+             if(this.doc.getInputStream() == null || this.doc.getSubmittedFileName() == null || this.doc.getSubmittedFileName().equals("")){
+                 this.postPhotoUri = "empty";
+            }
+            else{
                 InputStream input = doc.getInputStream();
-                this.postPhotoUri = uploadTo +"imgs/postPictures/" + doc.getSubmittedFileName();
-                
-                File f = new File(this.postPhotoUri);
-                Files.copy(input, f.toPath());
-                this.postPhotoUri ="imgs/postPictures/" + doc.getSubmittedFileName();
+                if(doc.getSubmittedFileName().endsWith(".png") || doc.getSubmittedFileName().endsWith("gif") || doc.getSubmittedFileName().endsWith("jpeg") || doc.getSubmittedFileName().endsWith("jpg") ||doc.getSubmittedFileName().endsWith("svg")){
+                    Random rand = new Random();
+                    String dosyaIsmi = this.tag + "_" + String.valueOf(this.userId) + "_" + String.valueOf(rand.nextInt(9999999)) + "_"+doc.getSubmittedFileName();
+                    this.postPhotoUri = uploadTo +"imgs/postPictures/" + dosyaIsmi;
 
+                    File f = new File(this.postPhotoUri);
+                    Files.copy(input, f.toPath());
+                    this.postPhotoUri ="imgs/postPictures/" + dosyaIsmi;
+                }
+                else{
+                    this.postPhotoUri = "empty";
+                    this.postHata = "Dosya yüklemede sadece resim uzantıları yükleyebilirsiniz.";
+                    return "home.xhtml?faces-redirect=true";
+                }
+                
             }
             String durum = UserDAO.postOlustur(this.userId, this.postContent, this.postPhotoUri, this.postVideoUri);
             if (durum.equals("ok")) {

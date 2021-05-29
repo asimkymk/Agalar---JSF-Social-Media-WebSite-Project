@@ -1,7 +1,7 @@
-Fri May 28 05:11:12 EET 2021 : Apache Derby Network Server - 10.9.1.0 - (1344872) started and ready to accept connections on port 1527
+Sat May 29 03:16:58 EET 2021 : Apache Derby Network Server - 10.9.1.0 - (1344872) started and ready to accept connections on port 1527
 ----------------------------------------------------------------
-Fri May 28 05:11:12 EET 2021:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.9.1.0 - (1344872): instance a816c00e-0179-b0bd-61f2-ffff874dfd26 
+Sat May 29 03:16:58 EET 2021:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.9.1.0 - (1344872): instance a816c00e-0179-b57b-29ab-ffff874dfd26 
 on database directory C:\Users\asimk\Documents\Agalar\agalar  with class loader sun.misc.Launcher$AppClassLoader@49476842 
 Loaded from file:/C:/Users/asimk/GlassFish_Server/javadb/lib/derby.jar
 java.vendor=Oracle Corporation
@@ -9,8 +9,3 @@ java.runtime.version=1.8.0_291-b10
 user.dir=C:\Users\asimk\GlassFish_Server\javadb
 derby.system.home=C:\Users\asimk\Documents\Agalar
 Database Class Loader started - derby.database.classpath=''
-----------------------------------------------------------------
-Fri May 28 06:29:56 EET 2021: Shutting down Derby engine
-----------------------------------------------------------------
-Fri May 28 06:29:56 EET 2021:
-Shutting down instance a816c00e-0179-b0bd-61f2-ffff874dfd26 on database directory C:\Users\asimk\Documents\Agalar\agalar with class loader sun.misc.Launcher$AppClassLoader@49476842 
