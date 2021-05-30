@@ -5,6 +5,7 @@
  */
 package dao;
 
+import beans.CommentBean;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,77 +20,15 @@ import util.DataConnect;
  */
 public class CommentsDAO {
     
-    private int commentId;
-    private int postId;
-    private int userId;
-    private String content;
-    private int likeCount;
-    private String createDate;
-
-    public CommentsDAO(int commentId, int postId, int userId, String content, int likeCount, String createDate) {
-        this.commentId = commentId;
-        this.postId = postId;
-        this.userId = userId;
-        this.content = content;
-        this.likeCount = likeCount;
-        this.createDate = createDate;
-    }
-
-    public int getCommentId() {
-        return commentId;
-    }
-
-    public void setCommentId(int commentId) {
-        this.commentId = commentId;
-    }
-
-    public int getPostId() {
-        return postId;
-    }
-
-    public void setPostId(int postId) {
-        this.postId = postId;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public int getLikeCount() {
-        return likeCount;
-    }
-
-    public void setLikeCount(int likeCount) {
-        this.likeCount = likeCount;
-    }
-
-    public String getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(String createDate) {
-        this.createDate = createDate;
-    }
     
     
     
-   public static ArrayList<CommentsDAO> getComments(int postid){
-       ArrayList<CommentsDAO> commentlar = new ArrayList<CommentsDAO>();
+    
+   public static ArrayList<CommentBean> getComments(int postid){
+       ArrayList<CommentBean> commentlar = new ArrayList<CommentBean>();
        try {
                 Connection con = DataConnect.getConnection();
-                PreparedStatement ps = con.prepareStatement("Select * from COMMENTS where POSTID = ?");       
+                PreparedStatement ps = con.prepareStatement("Select * from COMMENTS where POSTID = ? ORDER BY CREATEDATE DESC");       
                 ps.setInt(1, postid);
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
@@ -121,7 +60,11 @@ public class CommentsDAO {
                             }
                         }
                     }
-                    commentlar.add(new CommentsDAO(rs.getInt("COMMENTID"),rs.getInt("POSTID"),rs.getInt("USERID"),rs.getString("CONTENT"),rs.getInt("LIKECOUNT"),tarih));
+                     String photouri = rs.getString("PHOTOURI");
+                    if (photouri.equals("empty")){
+                        photouri = null;
+                    }
+                    commentlar.add(new CommentBean(rs.getInt("COMMENTID"),rs.getInt("POSTID"),rs.getInt("USERID"),rs.getString("CONTENT"),rs.getInt("LIKECOUNT"),photouri,tarih));
                 }
                 con.close(); 
         } catch (SQLException ex) {

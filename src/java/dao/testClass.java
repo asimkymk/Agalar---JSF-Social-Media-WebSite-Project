@@ -5,6 +5,7 @@
  */
 package dao;
 
+import beans.CommentBean;
 import beans.MessageBean;
 import beans.UserBean;
 import java.util.ArrayList;
@@ -16,14 +17,9 @@ import java.util.ArrayList;
 public class testClass {
     public static void main(String[] args) {
    
-        UserBean ub = new UserBean();
-        ub.setUserId(2);
-        ub.setAra("asd");
-        ub.setEmail("emremre@gmail.com");
-        ub.setPassword("Kanarya10");
-        ub.girisKontrol();
-        ub.bildirimGonder(2,"asimkaymak sizi takip etmeye basladi");
-        //System.out.println(mb.mesajiGonder(2,1));
+        
+        CommentBean mb = new CommentBean();
+        System.out.println(mb.yorumlariCek(46).size());
     }
     
 }

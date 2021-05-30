@@ -5,9 +5,11 @@
  */
 package beans;
 
+import dao.CommentsLikesDAO;
 import dao.FollowersDAO;
 import dao.LikesDAO;
 import dao.NotificationDAO;
+import dao.PostDAO;
 import dao.SavesDAO;
 import dao.UserDAO;
 import java.io.File;
@@ -62,6 +64,7 @@ public class UserBean implements Serializable {
     private String postHata;
     private String ara;
     private int lookId;
+    private int postLookId;
     private Part doc = null;
     private final String uploadTo = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
 
@@ -69,6 +72,14 @@ public class UserBean implements Serializable {
         return lookId;
     }
 
+    public int getPostLookId() {
+        return postLookId;
+    }
+
+    public void setPostLookId(int postLookId) {
+        this.postLookId = postLookId;
+    }
+    
     public String getUploadTo() {
         return uploadTo;
     }
@@ -693,6 +704,48 @@ public class UserBean implements Serializable {
         boolean durum = NotificationDAO.addNotifications(userid, content);
         if (durum) {
             System.out.println("bildirim gonderildi");
+        }
+    }
+    public String postGoster(int postid){
+        this.postLookId = postid;
+        return "post?faces-redirect=true";
+    }
+     public PostBean postGosterAnaPost(){
+        return PostDAO.getPost(this.postLookId);
+    }
+     public String yorumuBegen(int commentId, int targetId) {
+
+        UserDAO.yorumLikeCountArtir(this.userId, commentId);
+        HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        String url = req.getRequestURL().toString();
+        if (targetId != this.userId) {
+            this.bildirimGonder(targetId, "@" + this.tag + ", yorumunu beğendi.");
+        }
+        return url + "?faces-redirect=true";
+
+    }
+
+    public String yorumuBegenme(int commentId) {
+
+        UserDAO.yorumLikeCountAzalt(this.userId, commentId);
+        HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        String url = req.getRequestURL().toString();
+        return url + "?faces-redirect=true";
+    }
+
+    public int yorumuBegenmisMi(int commentId) {
+        if (CommentsLikesDAO.isLiked(userId, commentId)) {
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+
+    public int yorumuBegenmemisMi(int commentId) {
+        if (CommentsLikesDAO.isLiked(userId, commentId)) {
+            return -1;
+        } else {
+            return 1;
         }
     }
 }

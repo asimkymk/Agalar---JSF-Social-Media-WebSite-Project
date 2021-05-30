@@ -72,5 +72,58 @@ public class PostDAO {
         
         return postlar;
     }
+    
+    public static PostBean getPost(int postid){
+        PostBean post = new PostBean();
+        
+        try {
+                Connection con = DataConnect.getConnection();
+                PreparedStatement ps = con.prepareStatement("Select * from POSTS where POSTID = ? ORDER BY CREATEDATE DESC");
+                ps.setInt(1, postid);
+                ResultSet rs = ps.executeQuery();
+                while(rs.next()) {
+                    String tarih = rs.getString("CREATEDATE");
+                    tarih = tarih.substring(0,16);
+                    String bugun = String.valueOf(new Timestamp(System.currentTimeMillis()));
+                    if(tarih.substring(0,10).equals(bugun.substring(0,10))){
+                        if(tarih.substring(11,13).equals(bugun.substring(11,13))){
+                            tarih = String.valueOf(Integer.valueOf(bugun.substring(14,16)) - Integer.valueOf(tarih.substring(14,16))) + " dk";
+                        }
+                        else{
+                           if(Integer.valueOf(bugun.substring(11,13)) - Integer.valueOf(tarih.substring(11,13)) == 1 && Integer.valueOf(bugun.substring(14,16)) < Integer.valueOf(tarih.substring(14,16))){
+
+                                tarih = String.valueOf(Integer.valueOf(bugun.substring(14,16)) - Integer.valueOf(tarih.substring(14,16)) + 60) + " dk";
+                            
+                            }
+                            else{
+                                if(Integer.valueOf(bugun.substring(14,16)) > Integer.valueOf(tarih.substring(14,16))){
+                                    tarih = String.valueOf(Integer.valueOf(bugun.substring(11,13)) - Integer.valueOf(tarih.substring(11,13))) + " saat " + String.valueOf(Integer.valueOf(bugun.substring(14,16)) - Integer.valueOf(tarih.substring(14,16))) + " dk";
+                                }
+                                else{
+                                    if(Integer.valueOf(bugun.substring(14,16)) - Integer.valueOf(tarih.substring(14,16)) == 0){
+                                        tarih = String.valueOf(Integer.valueOf(bugun.substring(11,13)) - Integer.valueOf(tarih.substring(11,13))) + " saat";
+                                    }
+                                    else{
+                                        tarih = String.valueOf(Integer.valueOf(bugun.substring(11,13)) - Integer.valueOf(tarih.substring(11,13)) - 1) + " saat " + String.valueOf(Integer.valueOf(bugun.substring(14,16)) - Integer.valueOf(tarih.substring(14,16)) + 60) + " dk";
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    String photouri = rs.getString("PHOTOURI");
+                    if (photouri.equals("empty")){
+                        photouri = null;
+                    }
+                    post = new PostBean(rs.getInt("USERID"),rs.getInt("POSTID"),rs.getString("CONTENT"),rs.getInt("LIKECOUNT"),rs.getInt("COMMENTCOUNT"),tarih,photouri,rs.getString("VIDEOURI"));
+                   
+                }
+                DataConnect.close(con);
+                 
+        } catch (SQLException ex) {
+                System.out.println("Giriş hatası");
+        }
+        
+        return post;
+    }
    
 }

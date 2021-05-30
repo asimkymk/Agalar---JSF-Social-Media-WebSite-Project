@@ -88,7 +88,7 @@ a:hover {
     text-align: center;
     font-size: 1.5rem;
     padding: 13px;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .left-Panel-Link:hover {
@@ -98,7 +98,7 @@ a:hover {
     text-decoration: none !important;
     font-size: 1.5rem;
     padding: 13px;
-    font-weight: 600;
+    font-weight: 500;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.09), 0 2px 1px rgba(0, 0, 0, 0);
 }
 
@@ -294,6 +294,7 @@ a:hover {
     margin-bottom: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.09), 0 2px 1px rgba(0, 0, 0, 0.0);
 }
+
 
 /*
         .aga:hover {

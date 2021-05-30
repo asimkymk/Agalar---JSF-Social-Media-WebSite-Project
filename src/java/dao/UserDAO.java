@@ -388,6 +388,7 @@ public class UserDAO {
         }
 
     }
+    
 
     public static boolean LikeCountArtir(int userId, int postId, int activeLikeCount) {
 
@@ -434,6 +435,91 @@ public class UserDAO {
             return false;
         }
         return false;
+    }
+    public static boolean CommentCountArtir( int postId) {
+
+        
+        try {
+            Connection con = DataConnect.getConnection();
+            PreparedStatement ps = con.prepareStatement("UPDATE POSTS SET COMMENTCOUNT = COMMENTCOUNT + 1 where POSTID = ?");
+            ps.setInt(1, postId);
+            ps.executeUpdate();
+            con.close();
+            return true;
+        } catch (SQLException ex) {
+
+            return false;
+        }
+    }
+
+   
+    
+    //DUZELT
+    public static boolean yorumLikeCountArtir(int userId, int commentId) {
+
+        if (!CommentsLikesDAO.isLiked(userId, commentId)) {
+            boolean durum = CommentsLikesDAO.Like(userId, commentId);
+            if (durum) {
+                try {
+                    Connection con = DataConnect.getConnection();
+                    PreparedStatement ps = con.prepareStatement("UPDATE COMMENTS SET LIKECOUNT = LIKECOUNT + 1 where COMMENTID = ?");
+                    ps.setInt(1, commentId);
+                    ps.executeUpdate();
+                    con.close();
+                    return true;
+                } catch (SQLException ex) {
+
+                    return false;
+                }
+
+            }
+            return false;
+        }
+        return false;
+    }
+
+    public static boolean yorumLikeCountAzalt(int userId, int commentId) {
+        if (CommentsLikesDAO.isLiked(userId, commentId)) {
+            boolean durum = CommentsLikesDAO.unLike(userId, commentId);
+            if (durum) {
+                try {
+                    Connection con = DataConnect.getConnection();
+                    PreparedStatement ps = con.prepareStatement("UPDATE COMMENTS SET LIKECOUNT = LIKECOUNT - 1 WHERE COMMENTID = ?");
+                    ps.setInt(1, commentId);
+                    ps.executeUpdate();
+                    con.close();
+                    return true;
+                } catch (SQLException ex) {
+
+                    return false;
+                }
+
+            }
+            return false;
+        }
+        return false;
+    }
+    public static String yorumOlustur(int postId, int userid, String content, String photoUri) {
+        try {
+            Connection con = DataConnect.getConnection();
+            PreparedStatement ps = con.prepareStatement("INSERT INTO COMMENTS (POSTID,USERID,CONTENT,LIKECOUNT,CREATEDATE,PHOTOURI) VALUES(?,?,?,0,?,?)");
+            ps.setInt(1, postId);
+            ps.setInt(2, userid);
+            ps.setString(3,content);
+            
+            //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy.HH.mm.ss");
+            //LocalDateTime now = LocalDateTime.now();
+            //String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date());
+            ps.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
+            ps.setString(5, photoUri);
+
+            ps.executeUpdate();
+            DataConnect.close(con);
+            return "ok";
+        } catch (SQLException ex) {
+            return ex.getMessage();
+        }
+
     }
 
     public static boolean mesajlasmisMı(int firstid, int secondid) {
