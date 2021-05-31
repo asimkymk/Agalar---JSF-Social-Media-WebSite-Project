@@ -313,6 +313,8 @@ a:hover {
     margin: 8em auto;
   }
 }
+
+.navbar-brand {float:none;}
 .row-main{
     padding:15px 0 0 0;
     width:75%;
@@ -725,6 +727,45 @@ a:hover {
         font-size:1.15rem;
         font-family: 'Nunito';
         text-align: center;
+        
+    }
+}
+@media (max-width: 992px) {
+    .navbar-collapse {
+        position: fixed;
+        top: 50px;
+        left: 0;
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-bottom: 15px;
+        width: 65%;
+        height: 100%;
+        z-index:1;
+    }
+    .main-Panel {
+        margin-top:50px !important;
+    }
+
+    .navbar-collapse.collapsing {
+        left: -65%;
+        transition: height 0s ease;
+        z-index:1;
+    }
+
+    .navbar-collapse.show {
+        left: 0;
+        transition: left 300ms ease-in-out;
+        z-index:1;
+    }
+
+    .navbar-toggler.collapsed ~ .navbar-collapse {
+        transition: left 500ms ease-in-out;
+        z-index:1;
+    }
+    .nav-link{
+        margin-top: 15px !important;
+        text-align: start !important;
+        padding-left: 20px !important;
     }
 }
 

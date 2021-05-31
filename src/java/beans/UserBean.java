@@ -418,6 +418,7 @@ public class UserBean implements Serializable {
             this.isHidden = UserDAO.getIsHidden(this.userId);
             this.activeSucRegister = false;
             this.msgSucRegister = null;
+            this.ara = null;
             return "home?faces-redirect=true";
         } else {
             setIsLogged(false);
