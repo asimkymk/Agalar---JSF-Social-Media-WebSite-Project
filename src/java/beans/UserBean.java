@@ -982,9 +982,16 @@ public class UserBean implements Serializable {
     }
     public String sifreyiGuncelle(){
         if(activePassword.equals(this.password)){
-            
-            if(newPassword.equals(this.newPasswordAgain)){
-                String durum = UserDAO.profilSifreGuncelle(userId, newPassword);
+            if(newPassword.length()<= 20 && newPassword.length()>=8){
+                this.SifreDurum = -1;
+                this.sifreHata = "Şifreniz 8 veya 20 karakter uzunluğu aralığında olmalıdır.";
+            }
+            else if(newPasswordAgain.length()<= 20 && newPasswordAgain.length()>=8){
+                this.SifreDurum = -1;
+                this.sifreHata = "Şifreniz 8 veya 20 karakter uzunluğu aralığında olmalıdır.";
+            }
+            else if(newPassword.equals(this.newPasswordAgain)){
+                String durum = UserDAO.profilSifreGuncelle(userId, newPassword,this.isHidden);
                 if(durum.equals("ok")){
                     this.SifreDurum = 1;
                     this.sifreHata = "Şifreniz başarıyla güncellendi!";

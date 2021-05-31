@@ -158,14 +158,14 @@
                 <div class="input-group flex-nowrap mb-3">
                    <div class="form-group">
                         <label for="exampleFormControlFile1">Profil Fotoğrafın</label>
-                        <h:inputFile class="form-control-file" id="pp" value="#{userBean.profileDoc}"></h:inputFile>
-                        <img src="#{userBean.profilePictureUri}" style = "width:60%; margin-top:10px;"></img>
+                        <h:inputFile class="form-control-file btn" id="pp" value="#{userBean.profileDoc}"></h:inputFile>
+                        <img src="#{userBean.profilePictureUri}" class="btn" style = "width:60%; margin-top:10px;"></img>
                   </div>
               </div>
                 <div class="input-group flex-nowrap mb-3">
                    <div class="form-group">
                         <label for="exampleFormControlFile1">Kapak Fotoğrafın</label>
-                        <h:inputFile class="form-control-file" required="true" id="cp" value="#{userBean.coverDoc}"></h:inputFile>
+                        <h:inputFile class="form-control-file btn" required="true" id="cp" value="#{userBean.coverDoc}"></h:inputFile>
                         <img src="#{userBean.coverPictureUri}"  style = "width:80%; margin-top:10px;"></img>
                   </div>
               </div>
@@ -225,6 +225,18 @@
                     </div>
                     <h:inputSecret class="form-control" value="#{userBean.newPasswordAgain}" pt:placeholder="Yeni Şifre Tekrar" pt:required="required"></h:inputSecret>
               </div>
+                 <div class="input-group flex-nowrap mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="addon-wrapping">Gizli Hesap</span>
+                    </div>
+                   <h:selectBooleanCheckbox id="Hidden" class="sex-item" style="margin-left:2rem;color:darkgray;font-size:1rem;" value="#{userBean.isHidden}" >
+                                    </h:selectBooleanCheckbox>
+              </div>
+                 
+                 
+                 
+                 
+                 
             <div class="text-center">
                
                 
@@ -246,7 +258,7 @@
                                 </div>
                          </h:panelGroup>
                 
-                         <h:commandButton class="btn btn-primary" value ="Şifreyi Güncelle" action ="#{userBean.sifreyiGuncelle()}">
+                         <h:commandButton class="btn btn-primary" value ="Güncelle" action ="#{userBean.sifreyiGuncelle()}">
                              
                          </h:commandButton>
                          

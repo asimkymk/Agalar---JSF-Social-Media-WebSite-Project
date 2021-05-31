@@ -195,6 +195,7 @@ a:hover {
   -webkit-transition: opacity 0.3s 0s, visibility 0s 0.3s;
   -moz-transition: opacity 0.3s 0s, visibility 0s 0.3s;
   transition: opacity 0.3s 0s, visibility 0s 0.3s;
+  z-index: 1;
 }
 .cd-popup.is-visible {
   opacity: 1;

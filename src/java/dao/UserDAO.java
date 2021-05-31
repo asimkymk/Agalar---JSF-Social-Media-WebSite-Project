@@ -725,13 +725,14 @@ public class UserDAO {
         }
 
     }
-    public static String profilSifreGuncelle(int userId,String password){
+    public static String profilSifreGuncelle(int userId,String password,boolean isHidden){
         
         try {
             Connection con = DataConnect.getConnection();
-            PreparedStatement ps = con.prepareStatement("UPDATE USERS SET PASSWORD = ? WHERE USERID = ?");
+            PreparedStatement ps = con.prepareStatement("UPDATE USERS SET PASSWORD = ?, ISHIDDEN = ? WHERE USERID = ?");
             ps.setString(1,password);
-            ps.setInt(2,userId);
+            ps.setBoolean(2, isHidden);
+            ps.setInt(3,userId);
             ps.executeUpdate();
             con.close();
             return "ok";
