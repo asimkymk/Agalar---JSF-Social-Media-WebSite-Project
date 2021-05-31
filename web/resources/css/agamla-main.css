@@ -10,6 +10,11 @@ body {
     font-size:16px;
 }
 
+.navbar-mobile{
+    display:none;
+}
+
+
 a {
     color: darkgray;
 
@@ -712,6 +717,14 @@ a:hover {
     font-size:11px;
     }
     
-    
+    .navbar-mobile{
+        display:flex;
+        font-family: 'Nunito';
+    }
+    .navbar-nav{
+        font-size:1.15rem;
+        font-family: 'Nunito';
+        text-align: center;
+    }
 }
 
