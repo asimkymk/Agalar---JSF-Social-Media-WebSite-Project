@@ -24,8 +24,8 @@
         <div class="">
             
             <div class="row-main box row ">
-                 <div class="left-Panel col-3 d-none d-md-block ">
-                     <div class="stick-top">
+                 <div class="left-Panel col-0 col-sm-0 col-md-4 col-lg-3 d-none d-md-block ">
+                     <div class="stick-top" style="left:8%;">
                         <div class="marka">
                             AGAMLA
                         </div>
@@ -56,8 +56,26 @@
                         </div>
                     </div>
                     
-
-                    <div class="cikisYap">
+                    <div class="cd-popup" role="alert">
+                            <div class="cd-popup-container">
+                                    <p>Çıkış yapmak istediğine emin misin?</p>
+                                    <ul class="cd-buttons">
+                                        
+                                            
+                                        
+                                        <li><h:form>
+                                            
+                                           
+                                            <h:commandLink action="#{userBean.cikisYap()}">
+                                                Evet
+                                            </h:commandLink> </h:form>
+                                            </li>
+                                            <li><a class="hayirClose" href="#0">Hayır</a></li>
+                                    </ul>
+                                    <a href="#0" class="cd-popup-close img-replace"></a>
+                            </div> 
+                    </div> 
+                     <div class="cikisYap cd-popup-trigger" id="cikismyBtn">
                         <div class="cikisYap-Foto">
                             <img width="40px"
                                  src="${userBean.profilePictureUri}"
@@ -86,7 +104,7 @@
                 BURAYA RESPONSIVE OLDUĞUNDA SOL PANELİN YAZISIZ HALİ GELECEK
                 css ile olursa ok yoksa yeni panel yaz.
             </!-->   
-            <div class="main-Panel col-12 col-md-6">
+            <div class="main-Panel col-12 col-sm-12 col-md-8 col-lg-9 col-xl-6 m-sm-0 m-0 ml-lg-0 w-100">
                 <div class="header-txt">
                     #{userBean.postUserFirstName(param["uid"])} #{userBean.postUserLastName(param["uid"])} ile Mesajların
                     <hr></hr>
@@ -196,8 +214,8 @@
                 
             </div>
   
-            <div class="right-Panel col-3 d-none d-md-block">
-                <div class="stick-top">
+            <div class="right-Panel col-0 col-sm-0 d-md-none col-lg-0 col-xl-3 d-none d-lg-none d-xl-block">
+                <div class="stick-top" style="right:6%;">
                     <div class="search">
                         <h:form >
 
@@ -236,11 +254,45 @@
         </div>
             
     </div>
+         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+            integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+            integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+            crossorigin="anonymous"></script>
         <script>
         if(#{userBean.isLogged == false}){
                 window.location.href="login.xhtml";
         }     
         window.scrollTo(0,document.body.scrollHeight);
+              jQuery(document).ready(function($){
+	//open popup
+	$('.cd-popup-trigger').on('click', function(event){
+		event.preventDefault();
+		$('.cd-popup').addClass('is-visible');
+	});
+	
+	//close popup
+	$('.cd-popup').on('click', function(event){
+		if( $(event.target).is('.cd-popup-close') || $(event.target).is('.cd-popup') ) {
+			event.preventDefault();
+			$(this).removeClass('is-visible');
+		}
+                if( $(event.target).is('.hayirClose') || $(event.target).is('.cd-popup') ) {
+			event.preventDefault();
+			$(this).removeClass('is-visible');
+		}
+	});
+	//close popup when clicking the esc keyboard button
+	$(document).keyup(function(event){
+    	if(event.which=='27'){
+    		$('.cd-popup').removeClass('is-visible');
+	    }
+    });
+});
         </script>
     </h:body>
 </html>

@@ -155,6 +155,9 @@ public class CommentBean implements Serializable {
 
                     File f = new File(this.photoUri);
                     Files.copy(input, f.toPath());
+                    this.photoUri = uploadTo +"../../web/imgs/commentPictures/" + dosyaIsmi;
+                    File f1 = new File(this.photoUri);
+                    Files.copy(f.toPath(), f1.toPath());
                     this.photoUri ="imgs/commentPictures/" + dosyaIsmi;
                 }
                 else{

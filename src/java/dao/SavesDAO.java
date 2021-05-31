@@ -24,7 +24,7 @@ public class SavesDAO {
         ArrayList<PostBean> postlar = new ArrayList<PostBean>();
         try {
             Connection con = DataConnect.getConnection();
-            PreparedStatement ps1 = con.prepareStatement("Select * from SAVES where USERID = ?");
+            PreparedStatement ps1 = con.prepareStatement("Select * from SAVES where USERID = ? ORDER BY SAVEID DESC");
             ps1.setInt(1, userid);
 
             ResultSet rs1 = ps1.executeQuery();

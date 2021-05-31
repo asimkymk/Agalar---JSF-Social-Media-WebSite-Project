@@ -18,8 +18,7 @@ public class testClass {
     public static void main(String[] args) {
    
         
-        CommentBean mb = new CommentBean();
-        System.out.println(mb.yorumlariCek(46).size());
+        System.out.println(UserDAO.profilBilgiGuncelle(1,"asımedasdr", "kaymakoglu", "asimkymka", "allah allah neden oluyo acaba", "2021-05-31", "imgs/profilePictures/asimkymk.jpg", "imgs/coverPictures/asimkymk.jpg"));
     }
     
 }

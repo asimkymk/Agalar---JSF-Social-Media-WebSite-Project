@@ -576,7 +576,7 @@ public class UserDAO {
 
     public static ArrayList<PostBean> postuAra(int userId, String search, ArrayList<Integer> postSahipleri) {
 
-        ArrayList<PostBean> bulunanlar = null;
+        ArrayList<PostBean> bulunanlar = new ArrayList<PostBean>();
         try {
             Connection con = DataConnect.getConnection();
             for (int i = 0; i < postSahipleri.size(); i++) {
@@ -585,7 +585,7 @@ public class UserDAO {
                 ps.setInt(2, postSahipleri.get(i));
 
                 ResultSet rs = ps.executeQuery();
-                bulunanlar = new ArrayList<PostBean>();
+                
                 while (rs.next()) {
                     String tarih = rs.getString("CREATEDATE");
                     tarih = tarih.substring(0, 16);
@@ -702,6 +702,43 @@ public class UserDAO {
             }
         }
         return postlar1;
+    }
+    public static String profilBilgiGuncelle(int userId, String firstName, String lastName,String tag,String bio,String birthDate,String profilePictureUri,String coverPictureUri){
+        
+        try {
+            Connection con = DataConnect.getConnection();
+            PreparedStatement ps = con.prepareStatement("UPDATE USERS SET FIRSTNAME = ?, LASTNAME = ?, TAG = ?, BIO = ?, BIRTHDATE = ?, PROFILEPICTUREURI = ?, COVERPICTUREURI = ? WHERE USERID = ?");
+            ps.setString(1,firstName);
+            ps.setString(2, lastName);
+            ps.setString(3,tag);
+            ps.setString(4,bio);
+            ps.setString(5,birthDate);
+            ps.setString(6, profilePictureUri);
+            ps.setString(7,coverPictureUri);
+            ps.setInt(8,userId);
+            ps.executeUpdate();
+            con.close();
+            return "ok";
+        } catch (SQLException ex) {
+
+            return "error";
+        }
+
+    }
+    public static String profilSifreGuncelle(int userId,String password){
+        
+        try {
+            Connection con = DataConnect.getConnection();
+            PreparedStatement ps = con.prepareStatement("UPDATE USERS SET PASSWORD = ? WHERE USERID = ?");
+            ps.setString(1,password);
+            ps.setInt(2,userId);
+            ps.executeUpdate();
+            con.close();
+            return "ok";
+        } catch (SQLException ex) {
+
+            return "error";
+        }
     }
 
 }
