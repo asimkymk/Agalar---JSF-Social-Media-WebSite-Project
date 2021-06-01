@@ -200,10 +200,11 @@ a:hover {
   -webkit-transition: opacity 0.3s 0s, visibility 0s 0.3s;
   -moz-transition: opacity 0.3s 0s, visibility 0s 0.3s;
   transition: opacity 0.3s 0s, visibility 0s 0.3s;
-  z-index: 1;
+  z-index: 5 !important;
 }
 .cd-popup.is-visible {
   opacity: 1;
+  z-index: 5 !important;
   visibility: visible;
   -webkit-transition: opacity 0.3s 0s, visibility 0s 0s;
   -moz-transition: opacity 0.3s 0s, visibility 0s 0s;
@@ -212,6 +213,7 @@ a:hover {
 
 .cd-popup-container {
   position: relative;
+  z-index: 5 !important;
   width: 90%;
   max-width: 400px;
   margin: 4em auto;
@@ -235,16 +237,19 @@ a:hover {
 }
 .cd-popup-container p {
   padding: 3em 1em;
+  z-index: 5 !important;
 }
 .cd-popup-container .cd-buttons:after {
   content: "";
   display: table;
   clear: both;
+  z-index: 5 !important;
 }
 .cd-popup-container .cd-buttons li {
   float: left;
   width: 50%;
   list-style: none;
+  z-index: 5 !important;
 }
 .cd-popup-container .cd-buttons a {
   display: block;
@@ -254,18 +259,22 @@ a:hover {
   color: #FFF;
   -webkit-transition: background-color 0.2s;
   -moz-transition: background-color 0.2s;
+  z-index: 5 !important;
   transition: background-color 0.2s;
 }
 .cd-popup-container .cd-buttons li:first-child a {
   background: #3383FF;
   border-radius: 0 0 0 .25em;
+  z-index: 5 !important;
 }
 .no-touch .cd-popup-container .cd-buttons li:first-child a:hover {
   background-color: #0056b3;
+  z-index: 5 !important;
 }
 .cd-popup-container .cd-buttons li:last-child a {
   background: #b6bece;
   border-radius: 0 0 .25em 0;
+  z-index: 5 !important;
 }
 .no-touch .cd-popup-container .cd-buttons li:last-child a:hover {
   background-color: #c5ccd8;
@@ -275,6 +284,7 @@ a:hover {
   top: 8px;
   right: 8px;
   width: 30px;
+  z-index: 5 !important;
   height: 30px;
 }
 .cd-popup-container .cd-popup-close::before, .cd-popup-container .cd-popup-close::after {
@@ -282,6 +292,7 @@ a:hover {
   position: absolute;
   top: 12px;
   width: 14px;
+  z-index: 5 !important;
   height: 3px;
   background-color: #8f9cb5;
 }
@@ -292,6 +303,7 @@ a:hover {
   -o-transform: rotate(45deg);
   transform: rotate(45deg);
   left: 8px;
+  z-index: 5 !important;
 }
 .cd-popup-container .cd-popup-close::after {
   -webkit-transform: rotate(-45deg);
@@ -300,6 +312,7 @@ a:hover {
   -o-transform: rotate(-45deg);
   transform: rotate(-45deg);
   right: 8px;
+  z-index: 5 !important;
 }
 .is-visible .cd-popup-container {
   -webkit-transform: translateY(0);
@@ -307,10 +320,12 @@ a:hover {
   -ms-transform: translateY(0);
   -o-transform: translateY(0);
   transform: translateY(0);
+  z-index: 5 !important;
 }
 @media only screen and (min-width: 1170px) {
   .cd-popup-container {
     margin: 8em auto;
+    z-index: 5 !important;
   }
 }
 

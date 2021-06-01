@@ -132,7 +132,7 @@
 
                     <div class="cikisYap cd-popup-trigger" id="cikismyBtn">
                         <div class="cikisYap-Foto">
-                            <img width="40px"
+                            <img width="40px" height="40px"
                                  src="${userBean.profilePictureUri}"
                                  alt="profilResim" style="border-radius: 20px;"/>
                         </div>
@@ -180,7 +180,7 @@
 
                                     <div class="col-2 text-center">
                                         <img src="#{userBean.postUserPictureUri(item.senderId)}"
-                                             width="60px" style="border-radius: 30px;" alt=""/>
+                                             width="60px" height="60px" style="border-radius: 30px;" alt=""/>
                                     </div>
                                     <div class="col-6 text-left">
                                         <div class="aga-Main-Ust-Isim">
@@ -202,7 +202,7 @@
                                 <h:panelGroup  rendered="#{item.receiverId != userBean.userId}">
                                     <div class="col-2 text-center">
                                         <img src="#{userBean.postUserPictureUri(item.receiverId)}"
-                                             width="60px" style="border-radius: 30px;" alt=""/>
+                                             width="60px" height="60px" style="border-radius: 30px;" alt=""/>
                                     </div>
                                     <div class="col-6 text-left">
                                         <div class="aga-Main-Ust-Isim">

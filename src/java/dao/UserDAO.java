@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import util.DataConnect;
 
 /**
@@ -92,6 +93,7 @@ public class UserDAO {
         }
 
     }
+
     public static String sifreUnuttum(String email, String tag) {
 
         try {
@@ -203,8 +205,9 @@ public class UserDAO {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-
-                return rs.getString("BIRTHDATE");
+                SimpleDateFormat sdf = new SimpleDateFormat(
+                        "dd.MM.yyyy");
+                return sdf.format(rs.getDate("BIRTHDATE"));
             }
         } catch (SQLException ex) {
             System.out.println("Giriş hatası");
@@ -243,8 +246,9 @@ public class UserDAO {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-
-                return rs.getString("CREATEDATE");
+                SimpleDateFormat sdf = new SimpleDateFormat(
+                        "dd.MM.yyyy");
+                return sdf.format(rs.getDate("CREATEDATE"));
             }
         } catch (SQLException ex) {
             System.out.println("Giriş hatası");
@@ -376,7 +380,7 @@ public class UserDAO {
     public static ArrayList<PostBean> postlariFiltrele(int followerId) {
         ArrayList<PostBean> postlar = PostDAO.getPosts();
         ArrayList<PostBean> postlar1 = new ArrayList<PostBean>();
-        
+
         for (int i = 0; i < postlar.size(); i++) {
             if (FollowersDAO.isFollowing(followerId, postlar.get(i).getUserId()) || postlar.get(i).getUserId() == followerId) {
 
@@ -407,7 +411,6 @@ public class UserDAO {
         }
 
     }
-    
 
     public static boolean LikeCountArtir(int userId, int postId, int activeLikeCount) {
 
@@ -455,9 +458,9 @@ public class UserDAO {
         }
         return false;
     }
-    public static boolean CommentCountArtir( int postId) {
 
-        
+    public static boolean CommentCountArtir(int postId) {
+
         try {
             Connection con = DataConnect.getConnection();
             PreparedStatement ps = con.prepareStatement("UPDATE POSTS SET COMMENTCOUNT = COMMENTCOUNT + 1 where POSTID = ?");
@@ -471,8 +474,6 @@ public class UserDAO {
         }
     }
 
-   
-    
     //DUZELT
     public static boolean yorumLikeCountArtir(int userId, int commentId) {
 
@@ -518,14 +519,15 @@ public class UserDAO {
         }
         return false;
     }
+
     public static String yorumOlustur(int postId, int userid, String content, String photoUri) {
         try {
             Connection con = DataConnect.getConnection();
             PreparedStatement ps = con.prepareStatement("INSERT INTO COMMENTS (POSTID,USERID,CONTENT,LIKECOUNT,CREATEDATE,PHOTOURI) VALUES(?,?,?,0,?,?)");
             ps.setInt(1, postId);
             ps.setInt(2, userid);
-            ps.setString(3,content);
-            
+            ps.setString(3, content);
+
             //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy.HH.mm.ss");
             //LocalDateTime now = LocalDateTime.now();
             //String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date());
@@ -604,7 +606,7 @@ public class UserDAO {
                 ps.setInt(2, postSahipleri.get(i));
 
                 ResultSet rs = ps.executeQuery();
-                
+
                 while (rs.next()) {
                     String tarih = rs.getString("CREATEDATE");
                     tarih = tarih.substring(0, 16);
@@ -643,7 +645,6 @@ public class UserDAO {
             System.out.println("Giriş hatası");
             return bulunanlar;
         }
-        
 
         if (postSahipleri.size() == 0 || postSahipleri == null) {
             try {
@@ -694,7 +695,8 @@ public class UserDAO {
         }
         return bulunanlar;
     }
-    public static boolean postKaydet(int userId ,int postId) {
+
+    public static boolean postKaydet(int userId, int postId) {
 
         if (!SavesDAO.isSaved(userId, postId)) {
             boolean durum = SavesDAO.Save(userId, postId);
@@ -706,15 +708,16 @@ public class UserDAO {
     public static boolean postKaydetme(int userId, int postId) {
         if (SavesDAO.isSaved(userId, postId)) {
             boolean durum = SavesDAO.unSave(userId, postId);
-            
+
             return durum;
         }
         return false;
     }
-    public static ArrayList<PostBean> postlariFiltreleUser(int userId){
+
+    public static ArrayList<PostBean> postlariFiltreleUser(int userId) {
         ArrayList<PostBean> postlar = PostDAO.getPosts();
         ArrayList<PostBean> postlar1 = new ArrayList<PostBean>();
-        for (int i =  0; i < postlar.size(); i++) {
+        for (int i = 0; i < postlar.size(); i++) {
             if (postlar.get(i).getUserId() == userId) {
 
                 postlar1.add(postlar.get(i));
@@ -722,19 +725,20 @@ public class UserDAO {
         }
         return postlar1;
     }
-    public static String profilBilgiGuncelle(int userId, String firstName, String lastName,String tag,String bio,String birthDate,String profilePictureUri,String coverPictureUri){
-        
+
+    public static String profilBilgiGuncelle(int userId, String firstName, String lastName, String tag, String bio, String birthDate, String profilePictureUri, String coverPictureUri) {
+
         try {
             Connection con = DataConnect.getConnection();
             PreparedStatement ps = con.prepareStatement("UPDATE USERS SET FIRSTNAME = ?, LASTNAME = ?, TAG = ?, BIO = ?, BIRTHDATE = ?, PROFILEPICTUREURI = ?, COVERPICTUREURI = ? WHERE USERID = ?");
-            ps.setString(1,firstName);
+            ps.setString(1, firstName);
             ps.setString(2, lastName);
-            ps.setString(3,tag);
-            ps.setString(4,bio);
-            ps.setString(5,birthDate);
+            ps.setString(3, tag);
+            ps.setString(4, bio);
+            ps.setString(5, birthDate);
             ps.setString(6, profilePictureUri);
-            ps.setString(7,coverPictureUri);
-            ps.setInt(8,userId);
+            ps.setString(7, coverPictureUri);
+            ps.setInt(8, userId);
             ps.executeUpdate();
             con.close();
             return "ok";
@@ -744,14 +748,15 @@ public class UserDAO {
         }
 
     }
-    public static String profilSifreGuncelle(int userId,String password,boolean isHidden){
-        
+
+    public static String profilSifreGuncelle(int userId, String password, boolean isHidden) {
+
         try {
             Connection con = DataConnect.getConnection();
             PreparedStatement ps = con.prepareStatement("UPDATE USERS SET PASSWORD = ?, ISHIDDEN = ? WHERE USERID = ?");
-            ps.setString(1,password);
+            ps.setString(1, password);
             ps.setBoolean(2, isHidden);
-            ps.setInt(3,userId);
+            ps.setInt(3, userId);
             ps.executeUpdate();
             con.close();
             return "ok";
@@ -762,7 +767,3 @@ public class UserDAO {
     }
 
 }
-
-    
-
-
