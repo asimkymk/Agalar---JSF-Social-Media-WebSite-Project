@@ -489,7 +489,37 @@ public class UserBean implements Serializable {
             return "register?faces-redirect=true";
         }
     }
+    public String sifremiUnuttum() {
+        String kayitDurum = UserDAO.sifreUnuttum(email, tag);
+        if (!kayitDurum.equals("hata")) {
+            setIsLogged(false);
+            this.active = false;
+            this.msg = "";
+            this.activeRegister = false;
+            this.msgRegister = "";
+            this.tag = null;
+            this.userId = -1;
+            this.firstName = null;
+            this.lastName = null;
+            this.birthDate = null;
+            this.sex = null;
+            this.followerCount = -1;
+            this.followingCount = -1;
+            this.profilePictureUri = null;
+            this.coverPictureUri = null;
+            this.isHidden = false;
+            this.activeSucRegister = true;
+            this.msgSucRegister = "Şifreniz bulundu. Lütfen şifrenizi değiştirmeyi unutmayın. Şifre : " + kayitDurum;
+            return "login?faces-redirect=true";
+        } else {
+            setIsLogged(false);
+            this.activeRegister = true;
+            //this.msgRegister="";
+            this.msgRegister = "Eşleşmeyen bilgiler girildi. Lütfen gerekli bilgileri tekrar kontrol ediniz.";
 
+            return "forgot_password?faces-redirect=true";
+        }
+    }
    
 
     public String getMsgRegister1() {

@@ -18,7 +18,7 @@ public class testClass {
     public static void main(String[] args) {
    
         
-        System.out.println(UserDAO.profilBilgiGuncelle(1,"asımedasdr", "kaymakoglu", "asimkymka", "allah allah neden oluyo acaba", "2021-05-31", "imgs/profilePictures/asimkymk.jpg", "imgs/coverPictures/asimkymk.jpg"));
+        System.out.println(UserDAO.sifreUnuttum("kaymakasm@gmail.com", "asimkymk"));
     }
     
 }

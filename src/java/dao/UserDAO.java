@@ -92,6 +92,25 @@ public class UserDAO {
         }
 
     }
+    public static String sifreUnuttum(String email, String tag) {
+
+        try {
+            Connection con = DataConnect.getConnection();
+            PreparedStatement ps = con.prepareStatement("Select * from USERS where EMAIL = ? and TAG = ?");
+            ps.setString(1, email);
+            ps.setString(2, tag);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getString("PASSWORD");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Giriş hatası");
+            return "hata";
+        }
+        return "hata";
+    }
 
     public static int getUserId(String email, String password) {
 
