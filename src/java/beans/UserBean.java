@@ -60,7 +60,6 @@ public class UserBean implements Serializable {
     private boolean isHidden;
     private String postContent;
     private String postPhotoUri = "empty";
-    private String postVideoUri = "empty";
     private String postHata;
     private String ara;
     private int lookId;
@@ -200,14 +199,9 @@ public class UserBean implements Serializable {
         this.postPhotoUri = postPhotoUri;
     }
 
-    public String getPostVideoUri() {
-        return postVideoUri;
-    }
+    
 
-    public void setPostVideoUri(String postVideoUri) {
-        this.postVideoUri = postVideoUri;
-    }
-
+   
     public String getPostContent() {
         return postContent;
     }
@@ -671,12 +665,11 @@ public class UserBean implements Serializable {
                 }
                 
             }
-            String durum = UserDAO.postOlustur(this.userId, this.postContent, this.postPhotoUri, this.postVideoUri);
+            String durum = UserDAO.postOlustur(this.userId, this.postContent, this.postPhotoUri);
             if (durum.equals("ok")) {
 
                 this.postContent = "";
                 this.postPhotoUri = "empty";
-                this.postVideoUri = "empty";
                 this.postHata = "";
                 this.doc = null;
             } else {
