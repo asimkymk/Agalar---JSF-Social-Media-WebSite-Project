@@ -412,16 +412,16 @@ public class UserDAO {
 
     }
 
-    public static boolean LikeCountArtir(int userId, int postId, int activeLikeCount) {
+    public static boolean LikeCountArtir(int userId, int postId) {
 
         if (!LikesDAO.isLiked(userId, postId)) {
             boolean durum = LikesDAO.Like(userId, postId);
             if (durum) {
                 try {
                     Connection con = DataConnect.getConnection();
-                    PreparedStatement ps = con.prepareStatement("UPDATE POSTS SET LIKECOUNT = ? where POSTID = ?");
-                    ps.setInt(1, ++activeLikeCount);
-                    ps.setInt(2, postId);
+                    PreparedStatement ps = con.prepareStatement("UPDATE POSTS SET LIKECOUNT = LIKECOUNT + 1 where POSTID = ?");
+                    
+                    ps.setInt(1, postId);
                     ps.executeUpdate();
                     con.close();
                     return true;
@@ -436,15 +436,15 @@ public class UserDAO {
         return false;
     }
 
-    public static boolean LikeCountAzalt(int userId, int postId, int activeLikeCount) {
+    public static boolean LikeCountAzalt(int userId, int postId) {
         if (LikesDAO.isLiked(userId, postId)) {
             boolean durum = LikesDAO.unLike(userId, postId);
             if (durum) {
                 try {
                     Connection con = DataConnect.getConnection();
-                    PreparedStatement ps = con.prepareStatement("UPDATE POSTS SET LIKECOUNT = ? WHERE POSTID = ?");
-                    ps.setInt(1, --activeLikeCount);
-                    ps.setInt(2, postId);
+                    PreparedStatement ps = con.prepareStatement("UPDATE POSTS SET LIKECOUNT = LIKECOUNT - 1 WHERE POSTID = ?");
+                    
+                    ps.setInt(1, postId);
                     ps.executeUpdate();
                     con.close();
                     return true;

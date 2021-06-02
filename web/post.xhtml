@@ -209,7 +209,7 @@
 
 
                                         <div class="aga-Main-Action-Like" id="guncelle">
-                                            <h:commandLink id="begenmemis" rendered="#{userBean.gonderiyiBegenmisMi(userBean.postLookId) eq 1}" class="aga-Main-Action-Like-Text" style="color:#0056b3;" action="#{userBean.gonderiyiBegenme(userBean.postLookId, userBean.postGosterAnaPost().likeCount)}">
+                                            <h:commandLink id="begenmemis" rendered="#{userBean.gonderiyiBegenmisMi(userBean.postLookId) eq 1}" class="aga-Main-Action-Like-Text" style="color:#0056b3;" action="#{userBean.gonderiyiBegenme(userBean.postLookId)}">
 
 
                                                 <i class="fas fa-heart"></i>&nbsp;#{userBean.postGosterAnaPost().likeCount}
@@ -219,7 +219,7 @@
 
 
 
-                                            <h:commandLink  id="begenmis" rendered="#{userBean.gonderiyiBegenmemisMi(userBean.postLookId) eq 1}" class="aga-Main-Action-Like-Text"  action="#{userBean.gonderiyiBegen(userBean.postLookId, userBean.postGosterAnaPost().likeCount,userBean.postGosterAnaPost().userId)}"><i class="far fa-heart"></i>&nbsp;#{userBean.postGosterAnaPost().likeCount}
+                                            <h:commandLink  id="begenmis" rendered="#{userBean.gonderiyiBegenmemisMi(userBean.postLookId) eq 1}" class="aga-Main-Action-Like-Text"  action="#{userBean.gonderiyiBegen(userBean.postLookId,userBean.postGosterAnaPost().userId)}"><i class="far fa-heart"></i>&nbsp;#{userBean.postGosterAnaPost().likeCount}
 
                                                 <f:ajax render="begeniler" />
                                             </h:commandLink>
@@ -286,7 +286,7 @@
                             </div>
                             <div class="panel-Agala-Gonder">
                                 <div class="Agala-Secenekler">
-                                    <h:inputFile value="#{commentBean.doc}" styleClass="btn"></h:inputFile>
+                                    <h:inputFile value="#{commentBean.doc}" styleClass="btn" style="margin:0;padding:0;width: 60%;"></h:inputFile>
                                     <c:if test="#{not empty commentBean.postHata}">
                                         <p style="color:red;margin:0;padding:0;">#{commentBean.postHata}</p>
                                     </c:if>

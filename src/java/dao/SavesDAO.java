@@ -21,58 +21,57 @@ import util.DataConnect;
 public class SavesDAO {
 
     public static ArrayList<PostBean> getSavedPosts(int userid) {
-        ArrayList<PostBean> postlar = new ArrayList<PostBean>();
+         ArrayList<PostBean> postlar = new ArrayList<PostBean>();
         try {
-            Connection con = DataConnect.getConnection();
-            PreparedStatement ps1 = con.prepareStatement("Select * from SAVES where USERID = ? ORDER BY SAVEID DESC");
-            ps1.setInt(1, userid);
-
-            ResultSet rs1 = ps1.executeQuery();
-            while (rs1.next()) {
-                PreparedStatement ps = con.prepareStatement("Select * from POSTS where POSTID = ?");
-                ps.setInt(1, rs1.getInt("POSTID"));
+                Connection con = DataConnect.getConnection();
+                PreparedStatement ps = con.prepareStatement("SELECT DISTINCT * FROM POSTS INNER JOIN SAVES ON POSTS.POSTID=SAVES.POSTID WHERE SAVES.USERID = ? ORDER BY SAVES.SAVEID DESC");
+                ps.setInt(1,userid);
                 ResultSet rs = ps.executeQuery();
-                if (rs.next()) {
+                while(rs.next()) {
                     String tarih = rs.getString("CREATEDATE");
-                    tarih = tarih.substring(0, 16);
+                    tarih = tarih.substring(0,16);
                     String bugun = String.valueOf(new Timestamp(System.currentTimeMillis()));
-                    if (tarih.substring(0, 10).equals(bugun.substring(0, 10))) {
-                        if (tarih.substring(11, 13).equals(bugun.substring(11, 13))) {
-                            tarih = String.valueOf(Integer.valueOf(bugun.substring(14, 16)) - Integer.valueOf(tarih.substring(14, 16))) + " dk";
-                        } else {
-                            if (Integer.valueOf(bugun.substring(11, 13)) - Integer.valueOf(tarih.substring(11, 13)) == 1 && Integer.valueOf(bugun.substring(14, 16)) < Integer.valueOf(tarih.substring(14, 16))) {
+                    if(tarih.substring(0,10).equals(bugun.substring(0,10))){
+                        if(tarih.substring(11,13).equals(bugun.substring(11,13))){
+                            tarih = String.valueOf(Integer.valueOf(bugun.substring(14,16)) - Integer.valueOf(tarih.substring(14,16))) + " dk";
+                        }
+                        else{
+                           if(Integer.valueOf(bugun.substring(11,13)) - Integer.valueOf(tarih.substring(11,13)) == 1 && Integer.valueOf(bugun.substring(14,16)) < Integer.valueOf(tarih.substring(14,16))){
 
-                                tarih = String.valueOf(Integer.valueOf(bugun.substring(14, 16)) - Integer.valueOf(tarih.substring(14, 16)) + 60) + " dk";
-
-                            } else {
-                                if (Integer.valueOf(bugun.substring(14, 16)) > Integer.valueOf(tarih.substring(14, 16))) {
-                                    tarih = String.valueOf(Integer.valueOf(bugun.substring(11, 13)) - Integer.valueOf(tarih.substring(11, 13))) + " saat " + String.valueOf(Integer.valueOf(bugun.substring(14, 16)) - Integer.valueOf(tarih.substring(14, 16))) + " dk";
-                                } else {
-                                    if (Integer.valueOf(bugun.substring(14, 16)) - Integer.valueOf(tarih.substring(14, 16)) == 0) {
-                                        tarih = String.valueOf(Integer.valueOf(bugun.substring(11, 13)) - Integer.valueOf(tarih.substring(11, 13))) + " saat";
-                                    } else {
-                                        tarih = String.valueOf(Integer.valueOf(bugun.substring(11, 13)) - Integer.valueOf(tarih.substring(11, 13)) - 1) + " saat " + String.valueOf(Integer.valueOf(bugun.substring(14, 16)) - Integer.valueOf(tarih.substring(14, 16)) + 60) + " dk";
+                                tarih = String.valueOf(Integer.valueOf(bugun.substring(14,16)) - Integer.valueOf(tarih.substring(14,16)) + 60) + " dk";
+                            
+                            }
+                            else{
+                                if(Integer.valueOf(bugun.substring(14,16)) > Integer.valueOf(tarih.substring(14,16))){
+                                    tarih = String.valueOf(Integer.valueOf(bugun.substring(11,13)) - Integer.valueOf(tarih.substring(11,13))) + " saat " + String.valueOf(Integer.valueOf(bugun.substring(14,16)) - Integer.valueOf(tarih.substring(14,16))) + " dk";
+                                }
+                                else{
+                                    if(Integer.valueOf(bugun.substring(14,16)) - Integer.valueOf(tarih.substring(14,16)) == 0){
+                                        tarih = String.valueOf(Integer.valueOf(bugun.substring(11,13)) - Integer.valueOf(tarih.substring(11,13))) + " saat";
+                                    }
+                                    else{
+                                        tarih = String.valueOf(Integer.valueOf(bugun.substring(11,13)) - Integer.valueOf(tarih.substring(11,13)) - 1) + " saat " + String.valueOf(Integer.valueOf(bugun.substring(14,16)) - Integer.valueOf(tarih.substring(14,16)) + 60) + " dk";
                                     }
                                 }
                             }
                         }
                     }
                     String photouri = rs.getString("PHOTOURI");
-                    if (photouri.equals("empty")) {
+                    if (photouri.equals("empty")){
                         photouri = null;
                     }
-                    postlar.add(new PostBean(rs.getInt("USERID"), rs.getInt("POSTID"), rs.getString("CONTENT"), rs.getInt("LIKECOUNT"), rs.getInt("COMMENTCOUNT"), tarih, photouri, rs.getString("VIDEOURI")));
-
+                    postlar.add(new PostBean(rs.getInt("USERID"),rs.getInt("POSTID"),rs.getString("CONTENT"),rs.getInt("LIKECOUNT"),rs.getInt("COMMENTCOUNT"),tarih,photouri,rs.getString("VIDEOURI")));
+                   
                 }
-
-            }
-            DataConnect.close(con);
-
+                DataConnect.close(con);
+                 
         } catch (SQLException ex) {
-            System.out.println("Giriş hatası");
+                System.out.println("Giriş hatası");
         }
-
+        
         return postlar;
+        
+    
     }
     public static boolean Save(int userId, int postId){
         

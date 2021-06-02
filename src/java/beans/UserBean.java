@@ -563,7 +563,7 @@ public class UserBean implements Serializable {
     }
 
     public ArrayList<PostBean> postlariGoster() {
-        return UserDAO.postlariFiltrele(this.userId);
+        return PostDAO.homeSayfasiPostlariGetir(this.userId);
     }
 
     public ArrayList<PostBean> kendipostlarimiGoster() {
@@ -690,9 +690,9 @@ public class UserBean implements Serializable {
 
     }
 
-    public String gonderiyiBegen(int postId, int activeLikeNumber, int targetId) {
+    public String gonderiyiBegen(int postId, int targetId) {
 
-        UserDAO.LikeCountArtir(this.userId, postId, activeLikeNumber);
+        UserDAO.LikeCountArtir(this.userId, postId);
         HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String url = req.getRequestURL().toString();
         if (targetId != this.userId) {
@@ -702,9 +702,9 @@ public class UserBean implements Serializable {
 
     }
 
-    public String gonderiyiBegenme(int postId, int activeLikeNumber) {
+    public String gonderiyiBegenme(int postId) {
 
-        UserDAO.LikeCountAzalt(this.userId, postId, activeLikeNumber);
+        UserDAO.LikeCountAzalt(this.userId, postId);
         HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String url = req.getRequestURL().toString();
         return url + "?faces-redirect=true";

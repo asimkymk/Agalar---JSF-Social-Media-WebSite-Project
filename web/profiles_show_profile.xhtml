@@ -280,7 +280,7 @@
 
 
                                                 <div class="aga-Main-Action-Like" id="guncelle">
-                                                    <h:commandLink id="begenmemis" rendered="#{userBean.gonderiyiBegenmisMi(item.postId) eq 1}" class="aga-Main-Action-Like-Text" style="color:#0056b3;" action="#{userBean.gonderiyiBegenme(item.postId, item.likeCount)}">
+                                                    <h:commandLink id="begenmemis" rendered="#{userBean.gonderiyiBegenmisMi(item.postId) eq 1}" class="aga-Main-Action-Like-Text" style="color:#0056b3;" action="#{userBean.gonderiyiBegenme(item.postId)}">
 
 
                                                         <i class="fas fa-heart"></i>&nbsp;#{item.likeCount}
@@ -290,7 +290,7 @@
 
 
 
-                                                    <h:commandLink  id="begenmis" rendered="#{userBean.gonderiyiBegenmemisMi(item.postId) eq 1}" class="aga-Main-Action-Like-Text"  action="#{userBean.gonderiyiBegen(item.postId, item.likeCount,item.userId)}"><i class="far fa-heart"></i>&nbsp;#{item.likeCount}
+                                                    <h:commandLink  id="begenmis" rendered="#{userBean.gonderiyiBegenmemisMi(item.postId) eq 1}" class="aga-Main-Action-Like-Text"  action="#{userBean.gonderiyiBegen(item.postId,item.userId)}"><i class="far fa-heart"></i>&nbsp;#{item.likeCount}
 
                                                         <f:ajax render="begeniler" />
                                                     </h:commandLink>
