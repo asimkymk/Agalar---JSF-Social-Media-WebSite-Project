@@ -151,7 +151,7 @@
 
                         </div>
                         <div class="cikisYap-Cikis">
-                            ...
+                            <i class="fa fa-sign-out" aria-hidden="true"></i>
                         </div>
 
                     </div>
@@ -214,6 +214,13 @@
 
                                             <f:validateRegex pattern="^([0-2][0-9]|(3)[0-1])(.)(((0)[0-9])|((1)[0-2]))(.)\d{4}$" />
                                         </h:inputText>
+                                    </div>
+                                    <div class="input-group flex-nowrap mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="addon-wrapping">Gizli Hesap</span>
+                                        </div>
+                                        <h:selectBooleanCheckbox id="Hidden" class="sex-item" style="margin-left:2rem;color:darkgray;font-size:1rem;" value="#{userBean.isHidden}" >
+                                        </h:selectBooleanCheckbox>
                                     </div>
                                     <div class="input-group flex-nowrap mb-3">
                                         <div class="form-group">
@@ -285,13 +292,7 @@
                                         </div>
                                         <h:inputSecret class="form-control" value="#{userBean.newPasswordAgain}" pt:placeholder="Yeni Şifre Tekrar" pt:required="required"></h:inputSecret>
                                     </div>
-                                    <div class="input-group flex-nowrap mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="addon-wrapping">Gizli Hesap</span>
-                                        </div>
-                                        <h:selectBooleanCheckbox id="Hidden" class="sex-item" style="margin-left:2rem;color:darkgray;font-size:1rem;" value="#{userBean.isHidden}" >
-                                        </h:selectBooleanCheckbox>
-                                    </div>
+                                    
 
 
 
@@ -318,7 +319,7 @@
                                             </div>
                                         </h:panelGroup>
 
-                                        <h:commandButton class="btn btn-primary" value ="Güncelle" action ="#{userBean.sifreyiGuncelle()}">
+                                        <h:commandButton class="btn btn-primary" value ="Şifreyi Güncelle" action ="#{userBean.sifreyiGuncelle()}">
 
                                         </h:commandButton>
 

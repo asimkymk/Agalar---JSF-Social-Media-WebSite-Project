@@ -938,7 +938,7 @@ public class UserBean implements Serializable {
         
         try{
            if(coverFotosunuGuncelle() && profilFotosunuGuncelle()){
-               String durum = UserDAO.profilBilgiGuncelle(this.userId,this.firstName,this.lastName,this.tag,this.bio,this.birthDate,this.profilePictureUri,this.coverPictureUri);
+               String durum = UserDAO.profilBilgiGuncelle(this.userId,this.firstName,this.lastName,this.tag,this.bio,this.birthDate,this.profilePictureUri,this.coverPictureUri,this.isHidden);
                if(durum.equals("ok")){
                    this.active = false;
                     this.msg = null;
@@ -1015,7 +1015,7 @@ public class UserBean implements Serializable {
                 this.sifreHata = "Şifreniz 8 veya 20 karakter uzunluğu aralığında olmalıdır.";
             }
             else if(newPassword.equals(this.newPasswordAgain)){
-                String durum = UserDAO.profilSifreGuncelle(userId, newPassword,this.isHidden);
+                String durum = UserDAO.profilSifreGuncelle(userId, newPassword);
                 if(durum.equals("ok")){
                     this.SifreDurum = 1;
                     this.sifreHata = "Şifreniz başarıyla güncellendi!";

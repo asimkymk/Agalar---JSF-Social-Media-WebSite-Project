@@ -22,9 +22,8 @@ public class PostBean implements Serializable{
     private int commentCount;
     private String createDate;
     private String photoUrl;
-    private String videoUrl;
 
-    public PostBean(int userId, int postId, String content, int likeCount, int commentCount, String createDate, String photoUrl, String videoUrl) {
+    public PostBean(int userId, int postId, String content, int likeCount, int commentCount, String createDate, String photoUrl) {
         this.userId = userId;
         this.postId = postId;
         this.content = content;
@@ -32,7 +31,6 @@ public class PostBean implements Serializable{
         this.commentCount = commentCount;
         this.createDate = createDate;
         this.photoUrl = photoUrl;
-        this.videoUrl = videoUrl;
     }
 
     public int getUserId() {
@@ -91,13 +89,7 @@ public class PostBean implements Serializable{
         this.photoUrl = photoUrl;
     }
 
-    public String getVideoUrl() {
-        return videoUrl;
-    }
-
-    public void setVideoUrl(String videoUrl) {
-        this.videoUrl = videoUrl;
-    }
+  
     
     /**
      * Creates a new instance of PostBean

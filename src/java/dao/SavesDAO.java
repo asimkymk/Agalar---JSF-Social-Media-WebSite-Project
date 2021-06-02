@@ -60,7 +60,7 @@ public class SavesDAO {
                     if (photouri.equals("empty")){
                         photouri = null;
                     }
-                    postlar.add(new PostBean(rs.getInt("USERID"),rs.getInt("POSTID"),rs.getString("CONTENT"),rs.getInt("LIKECOUNT"),rs.getInt("COMMENTCOUNT"),tarih,photouri,rs.getString("VIDEOURI")));
+                    postlar.add(new PostBean(rs.getInt("USERID"),rs.getInt("POSTID"),rs.getString("CONTENT"),rs.getInt("LIKECOUNT"),rs.getInt("COMMENTCOUNT"),tarih,photouri));
                    
                 }
                 DataConnect.close(con);

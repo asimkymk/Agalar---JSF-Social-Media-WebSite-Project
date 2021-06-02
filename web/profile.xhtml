@@ -113,7 +113,7 @@
                             </h:form>
                         </div>
                     </div>
-                    <div class="cd-popup" role="alert">
+                     <div class="cd-popup" role="alert">
                         <div class="cd-popup-container">
                             <p>Çıkış yapmak istediğine emin misin?</p>
                             <ul class="cd-buttons">
@@ -135,7 +135,7 @@
 
                     <div class="cikisYap cd-popup-trigger" id="cikismyBtn">
                         <div class="cikisYap-Foto">
-                            <img width="40px"
+                            <img width="40px" height="40px"
                                  src="${userBean.profilePictureUri}"
                                  alt="profilResim" style="border-radius: 20px;"/>
                         </div>
@@ -149,7 +149,7 @@
 
                         </div>
                         <div class="cikisYap-Cikis">
-                            ...
+                            <i class="fa fa-sign-out" aria-hidden="true"></i>
                         </div>
 
                     </div>
@@ -175,9 +175,9 @@
                                      width="100%" style="border-radius: 20px;"/></div>
                             <div class="container" style="height: 50px;">
                                 <img src="#{userBean.profilePictureUri}"
-                                     alt="" class="photoPost"
+                                     alt="" class="photoPost pofil-resim"
                                      style="border-radius: 50%;position:relative;top:-75px;left:10px;border:5px solid white;overflow: hidden;background-size: cover; "
-                                     height="250%"/>
+                                     height="250%" width="20%"/>
 
                             </div>
 
@@ -187,6 +187,9 @@
                             <div class="row">
                                 <div class="col-8 text-left" style="font-size:24px;color:black;font-weight: 600;">
                                     #{userBean.firstName} #{userBean.lastName}
+                                    <h:outputLabel rendered="#{userBean.isHidden == true}">
+                                        <i class="fas fa-lock"></i>
+                                    </h:outputLabel>
                                 </div>
                                 <div class="col-4">
                                     <h:form>

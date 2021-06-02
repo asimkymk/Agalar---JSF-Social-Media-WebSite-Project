@@ -61,7 +61,7 @@ public class PostDAO {
                     if (photouri.equals("empty")){
                         photouri = null;
                     }
-                    postlar.add(new PostBean(rs.getInt("USERID"),rs.getInt("POSTID"),rs.getString("CONTENT"),rs.getInt("LIKECOUNT"),rs.getInt("COMMENTCOUNT"),tarih,photouri,rs.getString("VIDEOURI")));
+                    postlar.add(new PostBean(rs.getInt("USERID"),rs.getInt("POSTID"),rs.getString("CONTENT"),rs.getInt("LIKECOUNT"),rs.getInt("COMMENTCOUNT"),tarih,photouri));
                    
                 }
                 DataConnect.close(con);
@@ -114,7 +114,7 @@ public class PostDAO {
                     if (photouri.equals("empty")){
                         photouri = null;
                     }
-                    post = new PostBean(rs.getInt("USERID"),rs.getInt("POSTID"),rs.getString("CONTENT"),rs.getInt("LIKECOUNT"),rs.getInt("COMMENTCOUNT"),tarih,photouri,rs.getString("VIDEOURI"));
+                    post = new PostBean(rs.getInt("USERID"),rs.getInt("POSTID"),rs.getString("CONTENT"),rs.getInt("LIKECOUNT"),rs.getInt("COMMENTCOUNT"),tarih,photouri);
                    
                 }
                 DataConnect.close(con);
@@ -133,7 +133,7 @@ public class PostDAO {
         ArrayList<PostBean> postlar = new ArrayList<PostBean>();
         try {
                 Connection con = DataConnect.getConnection();
-                PreparedStatement ps = con.prepareStatement("SELECT DISTINCT POSTS.POSTID, POSTS.USERID, POSTS.CONTENT, POSTS.LIKECOUNT, POSTS.COMMENTCOUNT, POSTS.CREATEDATE, POSTS.PHOTOURI, POSTS.VIDEOURI FROM POSTS INNER JOIN FOLLOWERS ON POSTS.USERID=FOLLOWERS.FOLLOWINGID WHERE FOLLOWERS.FOLLOWERID = ? OR POSTS.USERID = ? ORDER BY CREATEDATE DESC");
+                PreparedStatement ps = con.prepareStatement("SELECT DISTINCT POSTS.POSTID, POSTS.USERID, POSTS.CONTENT, POSTS.LIKECOUNT, POSTS.COMMENTCOUNT, POSTS.CREATEDATE, POSTS.PHOTOURI FROM POSTS LEFT JOIN FOLLOWERS ON POSTS.USERID=FOLLOWERS.FOLLOWINGID WHERE FOLLOWERS.FOLLOWERID = ? OR POSTS.USERID = ? ORDER BY CREATEDATE DESC");
                 ps.setInt(1,userId);
                 ps.setInt(2,userId);
                 ResultSet rs = ps.executeQuery();
@@ -170,7 +170,7 @@ public class PostDAO {
                     if (photouri.equals("empty")){
                         photouri = null;
                     }
-                    postlar.add(new PostBean(rs.getInt("USERID"),rs.getInt("POSTID"),rs.getString("CONTENT"),rs.getInt("LIKECOUNT"),rs.getInt("COMMENTCOUNT"),tarih,photouri,rs.getString("VIDEOURI")));
+                    postlar.add(new PostBean(rs.getInt("USERID"),rs.getInt("POSTID"),rs.getString("CONTENT"),rs.getInt("LIKECOUNT"),rs.getInt("COMMENTCOUNT"),tarih,photouri));
                    
                 }
                 DataConnect.close(con);

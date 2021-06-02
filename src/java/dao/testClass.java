@@ -18,7 +18,7 @@ public class testClass {
     public static void main(String[] args) {
    
         
-        System.out.println(UserDAO.sifreUnuttum("kaymakasm@gmail.com", "asimkymk"));
+        System.out.println(UserDAO.postOlustur(1, "DENEMEEE", "EMPTY"));
     }
     
 }

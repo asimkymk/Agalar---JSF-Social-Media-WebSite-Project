@@ -635,7 +635,7 @@ public class UserDAO {
                     if (photouri.equals("empty")) {
                         photouri = null;
                     }
-                    bulunanlar.add(new PostBean(rs.getInt("USERID"), rs.getInt("POSTID"), rs.getString("CONTENT"), rs.getInt("LIKECOUNT"), rs.getInt("COMMENTCOUNT"), tarih, photouri, rs.getString("VIDEOURI")));
+                    bulunanlar.add(new PostBean(rs.getInt("USERID"), rs.getInt("POSTID"), rs.getString("CONTENT"), rs.getInt("LIKECOUNT"), rs.getInt("COMMENTCOUNT"), tarih, photouri));
 
                 }
             }
@@ -681,7 +681,7 @@ public class UserDAO {
                     if (photouri.equals("empty")) {
                         photouri = null;
                     }
-                    bulunanlar.add(new PostBean(rs.getInt("USERID"), rs.getInt("POSTID"), rs.getString("CONTENT"), rs.getInt("LIKECOUNT"), rs.getInt("COMMENTCOUNT"), tarih, photouri, rs.getString("VIDEOURI")));
+                    bulunanlar.add(new PostBean(rs.getInt("USERID"), rs.getInt("POSTID"), rs.getString("CONTENT"), rs.getInt("LIKECOUNT"), rs.getInt("COMMENTCOUNT"), tarih, photouri));
 
                 }
 
@@ -725,11 +725,11 @@ public class UserDAO {
         return postlar1;
     }
 
-    public static String profilBilgiGuncelle(int userId, String firstName, String lastName, String tag, String bio, String birthDate, String profilePictureUri, String coverPictureUri) {
+    public static String profilBilgiGuncelle(int userId, String firstName, String lastName, String tag, String bio, String birthDate, String profilePictureUri, String coverPictureUri,boolean isHidden) {
 
         try {
             Connection con = DataConnect.getConnection();
-            PreparedStatement ps = con.prepareStatement("UPDATE USERS SET FIRSTNAME = ?, LASTNAME = ?, TAG = ?, BIO = ?, BIRTHDATE = ?, PROFILEPICTUREURI = ?, COVERPICTUREURI = ? WHERE USERID = ?");
+            PreparedStatement ps = con.prepareStatement("UPDATE USERS SET FIRSTNAME = ?, LASTNAME = ?, TAG = ?, BIO = ?, BIRTHDATE = ?, PROFILEPICTUREURI = ?, COVERPICTUREURI = ?, ISHIDDEN = ? WHERE USERID = ?");
             ps.setString(1, firstName);
             ps.setString(2, lastName);
             ps.setString(3, tag);
@@ -737,7 +737,8 @@ public class UserDAO {
             ps.setString(5, birthDate);
             ps.setString(6, profilePictureUri);
             ps.setString(7, coverPictureUri);
-            ps.setInt(8, userId);
+            ps.setBoolean(8, isHidden);
+            ps.setInt(9, userId);
             ps.executeUpdate();
             con.close();
             return "ok";
@@ -748,14 +749,13 @@ public class UserDAO {
 
     }
 
-    public static String profilSifreGuncelle(int userId, String password, boolean isHidden) {
+    public static String profilSifreGuncelle(int userId, String password) {
 
         try {
             Connection con = DataConnect.getConnection();
-            PreparedStatement ps = con.prepareStatement("UPDATE USERS SET PASSWORD = ?, ISHIDDEN = ? WHERE USERID = ?");
+            PreparedStatement ps = con.prepareStatement("UPDATE USERS SET PASSWORD = ? WHERE USERID = ?");
             ps.setString(1, password);
-            ps.setBoolean(2, isHidden);
-            ps.setInt(3, userId);
+            ps.setInt(2, userId);
             ps.executeUpdate();
             con.close();
             return "ok";
