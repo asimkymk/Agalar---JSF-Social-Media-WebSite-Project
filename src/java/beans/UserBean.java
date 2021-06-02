@@ -641,8 +641,11 @@ public class UserBean implements Serializable {
 
     public String postGonder() {
         try {
-             if(this.doc.getInputStream() == null || this.doc.getSubmittedFileName() == null || this.doc.getSubmittedFileName().equals("")){
-                 this.postPhotoUri = "empty";
+            if(this.doc == null){
+                this.postPhotoUri = "empty";
+            }
+            else if(this.doc.getInputStream() == null || this.doc.getSubmittedFileName() == null || this.doc.getSubmittedFileName().equals("")){
+                this.postPhotoUri = "empty";
             }
             else{
                 InputStream input = doc.getInputStream();
@@ -662,8 +665,7 @@ public class UserBean implements Serializable {
                     this.postPhotoUri = "empty";
                     this.postHata = "Dosya yüklemede sadece resim uzantıları yükleyebilirsiniz.";
                     return "home.xhtml?faces-redirect=true";
-                }
-                
+                }  
             }
             String durum = UserDAO.postOlustur(this.userId, this.postContent, this.postPhotoUri);
             if (durum.equals("ok")) {
@@ -869,8 +871,13 @@ public class UserBean implements Serializable {
     }
     public boolean profilFotosunuGuncelle(){
         try{
-            if(this.profileDoc.getInputStream() == null || this.profileDoc.getSubmittedFileName() == null || this.profileDoc.getSubmittedFileName().equals("")){
-                 return true;
+            if(this.profileDoc == null){
+                this.profilePictureUri = UserDAO.getProfilePictureUri(userId);
+                return true;
+            }
+            else if(this.profileDoc.getInputStream() == null || this.profileDoc.getSubmittedFileName() == null || this.profileDoc.getSubmittedFileName().equals("")){
+                this.profilePictureUri = UserDAO.getProfilePictureUri(userId);
+                return true;
             }
             else{
                 InputStream input = profileDoc.getInputStream();
@@ -902,8 +909,13 @@ public class UserBean implements Serializable {
     }
     public boolean coverFotosunuGuncelle(){
         try{
-            if(this.coverDoc.getInputStream() == null || this.coverDoc.getSubmittedFileName() == null || this.coverDoc.getSubmittedFileName().equals("")){
-                 return true;
+            if(this.coverDoc == null){
+                this.coverPictureUri = UserDAO.getCoverPictureUri(userId);
+                return true;
+            }
+            else if(this.coverDoc.getInputStream() == null || this.coverDoc.getSubmittedFileName() == null || this.coverDoc.getSubmittedFileName().equals("")){
+                this.coverPictureUri = UserDAO.getCoverPictureUri(userId);
+                return true;
             }
             else{
                 InputStream input = coverDoc.getInputStream();
@@ -937,9 +949,11 @@ public class UserBean implements Serializable {
         
         
         try{
-           if(coverFotosunuGuncelle() && profilFotosunuGuncelle()){
+           if(coverFotosunuGuncelle() || profilFotosunuGuncelle()){
                String durum = UserDAO.profilBilgiGuncelle(this.userId,this.firstName,this.lastName,this.tag,this.bio,this.birthDate,this.profilePictureUri,this.coverPictureUri,this.isHidden);
                if(durum.equals("ok")){
+                   this.coverDoc = null;
+                   this.profileDoc = null;
                    this.active = false;
                     this.msg = null;
                     this.profileDocHata = null;
@@ -995,6 +1009,7 @@ public class UserBean implements Serializable {
            }
         }
         catch(Exception e){
+            this.profileDocHata = "catch";
             return "settings.xhtml?faces-redirect=true";
         }
         

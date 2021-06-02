@@ -143,7 +143,10 @@ public class CommentBean implements Serializable {
          HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String url = req.getRequestURL().toString();
         try {
-             if(this.doc.getInputStream() == null || this.doc.getSubmittedFileName() == null || this.doc.getSubmittedFileName().equals("")){
+            if(this.doc == null){
+                this.photoUri = "empty";
+            }
+            else if(this.doc.getInputStream() == null || this.doc.getSubmittedFileName() == null || this.doc.getSubmittedFileName().equals("")){
                  this.photoUri = "empty";
             }
             else{

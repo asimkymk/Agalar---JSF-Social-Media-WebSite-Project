@@ -18,7 +18,14 @@ public class testClass {
     public static void main(String[] args) {
    
         
-        System.out.println(UserDAO.postOlustur(1, "DENEMEEE", "EMPTY"));
+        UserBean ub = new UserBean();
+        ub.setEmail("kaymakasm@gmail.com");
+        ub.setPassword("Kanarya10");
+        ub.girisKontrol();
+        ub.setPostContent("Sa");
+        ub.postGonder();
+        
+        
     }
     
 }
