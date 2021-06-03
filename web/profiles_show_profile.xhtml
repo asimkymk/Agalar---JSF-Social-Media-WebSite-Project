@@ -9,7 +9,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
 
-        <title>Agamla | #{userBean.tag}'nin Profili</title>
+        <title>Agamla | #{userBean.postUserTag(userBean.lookId)}'nin Profili</title>
         <link href='resources/css/bootstrap.min.css' rel='stylesheet' type='text/css'/>
         <script src="https://kit.fontawesome.com/41f4fd74e6.js" crossorigin="anonymous"></script>
         <script src="https://unpkg.com/ionicons@5.5.1/dist/ionicons.js"></script>
@@ -174,7 +174,7 @@
                                 <img src="#{userBean.postUserCoverUri(userBean.lookId)}" alt=""
                                      width="100%" style="border-radius: 20px;" class="photoPost"/></div>
                             <div class="container" style="height: 50px;">
-                                 <img src="#{userBean.profilePictureUri}"
+                                <img src="#{userBean.postUserPictureUri(userBean.lookId)}"
                                      alt="" class="photoPost pofil-resim"
                                      style="border-radius: 50%;position:relative;top:-75px;left:10px;border:5px solid white;overflow: hidden;background-size: cover; "
                                      height="250%" width="20%"/>

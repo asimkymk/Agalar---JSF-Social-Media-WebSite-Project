@@ -65,8 +65,8 @@ public class UserBean implements Serializable {
     private int lookId;
     private int postLookId;
     private Part doc = null;
-    private Part profileDoc = null;
-    private Part coverDoc = null;
+    private Part profileDoc;
+    private Part coverDoc;
     private String profileDocHata;
     private String coverDocHata;
     private final String uploadTo = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
@@ -913,7 +913,7 @@ public class UserBean implements Serializable {
                 this.coverPictureUri = UserDAO.getCoverPictureUri(userId);
                 return true;
             }
-            else if(this.coverDoc.getInputStream() == null || this.coverDoc.getSubmittedFileName() == null || this.coverDoc.getSubmittedFileName().equals("")){
+            else if(this.coverDoc.getInputStream() == null  || this.coverDoc.getSubmittedFileName() == null || this.coverDoc.getSubmittedFileName().equals("")){
                 this.coverPictureUri = UserDAO.getCoverPictureUri(userId);
                 return true;
             }
@@ -949,7 +949,7 @@ public class UserBean implements Serializable {
         
         
         try{
-           if(coverFotosunuGuncelle() || profilFotosunuGuncelle()){
+           if(coverFotosunuGuncelle() && profilFotosunuGuncelle()){
                String durum = UserDAO.profilBilgiGuncelle(this.userId,this.firstName,this.lastName,this.tag,this.bio,this.birthDate,this.profilePictureUri,this.coverPictureUri,this.isHidden);
                if(durum.equals("ok")){
                    this.coverDoc = null;
@@ -1021,11 +1021,11 @@ public class UserBean implements Serializable {
     }
     public String sifreyiGuncelle(){
         if(activePassword.equals(this.password)){
-            if(newPassword.length()<= 20 && newPassword.length()>=8){
+            if(newPassword.length()> 20 || newPassword.length()<8){
                 this.SifreDurum = -1;
                 this.sifreHata = "Şifreniz 8 veya 20 karakter uzunluğu aralığında olmalıdır.";
             }
-            else if(newPasswordAgain.length()<= 20 && newPasswordAgain.length()>=8){
+            else if(newPasswordAgain.length()> 20 && newPasswordAgain.length()<8){
                 this.SifreDurum = -1;
                 this.sifreHata = "Şifreniz 8 veya 20 karakter uzunluğu aralığında olmalıdır.";
             }
