@@ -18,7 +18,7 @@ body {
 a {
     color: darkgray;
 
-}
+}      
 
 a:hover {
     text-decoration: none;
@@ -91,7 +91,7 @@ a:hover {
 
 .left-Panel-Link {
     text-align: center;
-    font-size: 1.5rem;
+    font-size: max(3vw,18px) !important;
     padding: 13px;
     font-weight: 500;
 }
@@ -101,10 +101,12 @@ a:hover {
     border-radius: 20px;
     text-align: center;
     text-decoration: none !important;
-    font-size: 1.5rem;
     padding: 13px;
     font-weight: 500;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.09), 0 2px 1px rgba(0, 0, 0, 0);
+}
+.nav-link{
+    font-size: max(3vw,18px) !important;
 }
 
 .left-Panel-Link-Selected {
@@ -722,6 +724,15 @@ a:hover {
         width:100%;
         padding:0;
     }
+    .left-Panel-Link{
+        font-size: 14px;
+    }
+    .left-Panel-Link-Selected{
+        font-size: 14px;
+    }
+    .left-Panel-Link:hover{
+        font-size: 14px;
+    }
     .btn-agala{
         margin-right:auto;
         margin-left:0;
@@ -780,6 +791,7 @@ a:hover {
     .nav-link{
         margin-top: 15px !important;
         text-align: start !important;
+        font-size: 11px !important;
         padding-left: 20px !important;
     }
     .pofil-resim{

@@ -648,7 +648,7 @@ public class UserDAO {
         if (postSahipleri.size() == 0 || postSahipleri == null) {
             try {
                 Connection con = DataConnect.getConnection();
-                PreparedStatement ps = con.prepareStatement("Select DISTINCT * from POSTS,USERS where POSTS.CONTENT LIKE ?  AND USERS.USERID = POSTS.USERID  AND USERS.ISHIDDEN = False ORDER BY CREATEDATE DESC");
+                PreparedStatement ps = con.prepareStatement("Select DISTINCT POSTS.POSTID, POSTS.USERID, POSTS.CONTENT, POSTS.LIKECOUNT, POSTS.COMMENTCOUNT, POSTS.CREATEDATE, POSTS.PHOTOURI from POSTS,USERS where POSTS.CONTENT LIKE ?  AND USERS.ISHIDDEN = False ORDER BY POSTS.CREATEDATE DESC");
                 ps.setString(1, "%" + search + "%");
                 ResultSet rs = ps.executeQuery();
                 bulunanlar = new ArrayList<PostBean>();

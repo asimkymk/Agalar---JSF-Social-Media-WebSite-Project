@@ -28,19 +28,19 @@
                 <a class="navbar-brand marka mx-auto" style="color:#3383FF; font-size:1.7rem;letter-spacing:0.3rem;" href="#">AGAMLA</a>
 
                 <div class="collapse navbar-collapse " style="background-color:#f5f6f6 !important;" id="navbarCollapse">
-                    <div class="search" style="margin-top:20px !important;">
-                        <h:form >
+                     <div class="search">
+                            <h:form >
 
-                            <h:inputText pt:required="required" class="search-input" pt:placeholder="Agalarını bul..." value="#{userBean.ara}"></h:inputText> <h:link
-                                outcome="#{userBean.aramaYap()}"
-                                class="search-icon">
-                                <i class="fa fa-search"></i>
-                            </h:link>
-                            <h:commandButton action="#{userBean.aramaYap()}" style="display:none;">
+                                <h:inputText pt:required="required" class="search-input" pt:placeholder="Agalarını bul..." value="#{userBean.ara}"></h:inputText> <h:commandLink
+                                    action="#{userBean.aramaYap()}"
+                                    class="search-icon">
+                                    <i class="fa fa-search"></i>
+                                </h:commandLink>
+                                <h:commandButton action="#{userBean.aramaYap()}" style="display:none;">
 
-                            </h:commandButton>
-                        </h:form>
-                    </div>
+                                </h:commandButton>
+                            </h:form>
+                        </div>
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
                             <h:link outcome="home.xhtml?faces-redirect=true" class=" nav-link left-Panel-Link"><i class="fas fa-home"></i>&nbsp;&nbsp;&nbsp;&nbsp;Anasayfa</h:link>
