@@ -1,3 +1,12 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 07.Haz.2021, 03:54:41
+    Author     : asimk
+*/
 * {
     padding: 0;
     margin: 0;
@@ -725,13 +734,13 @@ a:hover {
         padding:0;
     }
     .left-Panel-Link{
-        font-size: 14px;
+        font-size: max(1vw,12pt);
     }
     .left-Panel-Link-Selected{
-        font-size: 14px;
+        font-size: max(1vw,12pt);
     }
     .left-Panel-Link:hover{
-        font-size: 14px;
+        font-size: max(1vw,12pt);
     }
     .btn-agala{
         margin-right:auto;
@@ -764,7 +773,7 @@ a:hover {
         padding-left: 15px;
         padding-right: 15px;
         padding-bottom: 15px;
-        width: 65%;
+        width: 60%;
         height: 100%;
         z-index:1;
     }
@@ -773,7 +782,7 @@ a:hover {
     }
 
     .navbar-collapse.collapsing {
-        left: -65%;
+        left: -60%;
         transition: height 0s ease;
         z-index:1;
     }
@@ -791,7 +800,7 @@ a:hover {
     .nav-link{
         margin-top: 15px !important;
         text-align: start !important;
-        font-size: 11px !important;
+        font-size: max(1vw,12pt);
         padding-left: 20px !important;
     }
     .pofil-resim{
@@ -799,4 +808,5 @@ a:hover {
         height: 250%;
     }
 }
+
 
