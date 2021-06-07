@@ -91,7 +91,7 @@ a:hover {
 
 .left-Panel-Link {
     text-align: center;
-    font-size: max(3vw,18px) !important;
+    font-size: 1.5rem;
     padding: 13px;
     font-weight: 500;
 }
@@ -106,7 +106,7 @@ a:hover {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.09), 0 2px 1px rgba(0, 0, 0, 0);
 }
 .nav-link{
-    font-size: max(3vw,18px) !important;
+    font-size: 1.5rem;
 }
 
 .left-Panel-Link-Selected {
